@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>Каталог велосипедов</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Номер</th>
+            <th>VIN</th>
+            <th>Статус</th>
+            <th>Комментарий</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!--Цикл foreach по всем велосипедам-->
+        <tr th:each="bike : ${bikes}">
+            <td th:text="${bike.id}"/>
+            <td th:text="${bike.number}"/>
+            <td th:text="${bike.VIN}"/>
+            <td th:text="${bike.status}"/>
+            <td th:text="${bike.comment}"/>
+            <td>
+                <a th:href="@{'/bikes/show/' + ${bike.id}}" th:text="Просмотреть"/>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <span th:text="${'Всего велосипедов ' + bikes.size()}"/>
+    <br>
+</div>
+
+</body>
+</html>
