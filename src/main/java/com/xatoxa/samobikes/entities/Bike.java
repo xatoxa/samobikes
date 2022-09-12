@@ -1,9 +1,6 @@
 package com.xatoxa.samobikes.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "bikes")
@@ -11,6 +8,14 @@ public class Bike {
     @Id
     @Column(name = "id")
     private Integer id;
+
+    @OneToOne(mappedBy = "bike", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private Part part;
+
+    public void setPart(Part part) {
+        this.part = part;
+    }
 
     @Column(name = "number")
     private Integer number;
@@ -27,6 +32,7 @@ public class Bike {
     @Column(name = "qr_code")
     private String qr_code;
 
+    //Construct
     public Bike() {
     }
 
@@ -39,6 +45,7 @@ public class Bike {
         this.qr_code = qr_code;
     }
 
+    //getters, setters
     public Integer getId() {
         return id;
     }

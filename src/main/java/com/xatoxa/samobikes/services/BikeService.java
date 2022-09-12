@@ -1,6 +1,7 @@
 package com.xatoxa.samobikes.services;
 
 import com.xatoxa.samobikes.entities.Bike;
+import com.xatoxa.samobikes.entities.Part;
 import com.xatoxa.samobikes.repositories.BikeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,14 +26,13 @@ public class BikeService {
     }
 
     public void add(Bike bike){
+        Part part = new Part();
+        part.setBike(bike);
+        bike.setPart(part);
         bikeRepository.save(bike);
     }
 
     public void deleteById(Integer id){
         bikeRepository.deleteById(id);
-    }
-
-    public void insertOrUpdate(Bike bike){
-        bikeRepository.save(bike);
     }
 }
