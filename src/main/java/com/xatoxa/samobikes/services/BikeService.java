@@ -19,4 +19,8 @@ public class BikeService {
     public List<Bike> getAllBikes(){
         return bikeRepository.findAll();
     }
+
+    public void add(Bike bike){
+        bikeRepository.save(bike);
+    }
 }

@@ -10,6 +10,7 @@
 
 <body>
 <div class="container">
+    <!--Таблица всех велосипедов-->
     <table class="table table-hover">
         <thead>
         <tr>
@@ -36,6 +37,44 @@
     </table>
     <span th:text="${'Всего велосипедов ' + bikes.size()}"/>
     <br>
+    <!--Форма добавления велосипеда-->
+    <form th:action="@{/bikes/add}"
+          th:object="${bike}" method="post" class="form-vertical">
+
+        <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <input th:field="*{id}" placeholder="ID" class="form-control"/>
+        </div>
+
+        <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <input th:field="*{number}" placeholder="Номер (4-хзначный)" class="form-control"/>
+        </div>
+
+        <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <input th:field="*{VIN}" placeholder="VIN (буквы латиницей)" class="form-control"/>
+        </div>
+
+        <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <select th:field="*{status}" required>
+                <option value="true" selected>Работает</option>
+                <option value="false">Сломан</option>
+            </select>
+        </div>
+
+        <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <input th:field="*{comment}" placeholder="О состоянии вело" class="form-control"/>
+        </div>
+
+        <div style="margin-top: 10px" class="form-group">
+            <div class="col-sm-6 controls">
+                <button type="submit" class="btn btn-primary">Добавить</button>
+            </div>
+        </div>
+    </form>
 </div>
 
 </body>
