@@ -20,7 +20,19 @@ public class BikeService {
         return bikeRepository.findAll();
     }
 
+    public Bike getById(Integer id){
+        return bikeRepository.getReferenceById(id);
+    }
+
     public void add(Bike bike){
+        bikeRepository.save(bike);
+    }
+
+    public void deleteById(Integer id){
+        bikeRepository.deleteById(id);
+    }
+
+    public void insertOrUpdate(Bike bike){
         bikeRepository.save(bike);
     }
 }

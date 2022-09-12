@@ -10,9 +10,15 @@
 
 <body>
 
-<span th:text="${'ID: ' + product.id}"/>
-<span th:text="${'Title: ' + product.title}"/>
-<span th:text="${'Price: ' + product.price}"/>
+<span th:text="${'ID: ' + bike.id}"/>
+<span th:text="${'Номер: ' + bike.number}"/>
+<span th:text="${'VIN: ' + bike.VIN}"/>
+<span th:text="${bike.status == true ? 'Работает' : 'Сломан'}"/>
+<span th:text="${'Комментарий: ' + bike.comment}"/>
+
+<!--Добавить сюда ссылки "изменить" и удалить как в bikes-->
+
+
 
 </body>
 </html>

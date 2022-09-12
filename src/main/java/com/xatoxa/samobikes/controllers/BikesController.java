@@ -5,10 +5,7 @@ import com.xatoxa.samobikes.services.BikeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,9 +27,36 @@ public class BikesController {
         return "bikes";
     }
 
-    @PostMapping("/add")
+    @GetMapping("/show/{id}")
+    public String showOneBike(Model model, @PathVariable(value = "id") Integer id){
+        Bike bike = bikeService.getById(id);
+        model.addAttribute("bike", bike);
+        return "bike-page";
+    }
+
+    @GetMapping("/add")
+    public String showAddBikeForm(Model model){
+        Bike bike = new Bike();
+        model.addAttribute("bike", bike);
+        return "bike-edit";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String showEditBikeForm(Model model, @PathVariable(value = "id") Integer id){
+        Bike bike = bikeService.getById(id);
+        model.addAttribute("bike", bike);
+        return "bike-edit";
+    }
+
+    @PostMapping("/edit")
     public String addBike (@ModelAttribute(value = "bike") Bike bike){
         bikeService.add(bike);
+        return "redirect:/bikes";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteBike(@PathVariable(value = "id") Integer id){
+        bikeService.deleteById(id);
         return "redirect:/bikes";
     }
 }
