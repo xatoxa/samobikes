@@ -13,10 +13,6 @@ public class Bike {
     @PrimaryKeyJoinColumn
     private Part part;
 
-    public void setPart(Part part) {
-        this.part = part;
-    }
-
     @Column(name = "number")
     private Integer number;
 
@@ -52,6 +48,15 @@ public class Bike {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+
+    public void setPart(Part part) {
+        this.part = part;
+    }
+
+    public Part getPart() {
+        return part;
     }
 
     public Integer getNumber() {
@@ -92,5 +97,10 @@ public class Bike {
 
     public void setQr_code(String qr_code) {
         this.qr_code = qr_code;
+    }
+
+    //methods
+    public void checkWorks(){
+
     }
 }

@@ -1,6 +1,7 @@
 package com.xatoxa.samobikes.entities;
 
 import javax.persistence.*;
+import java.lang.reflect.Field;
 
 @Entity
 @Table(name = "parts")
@@ -99,10 +100,6 @@ public class Part {
 
     public void setId_bike(Integer id_bike) {
         this.id_bike = id_bike;
-    }
-
-    public void setBike(Bike bike) {
-        this.bike = bike;
     }
 
     public boolean isF_wheel() {
@@ -231,5 +228,34 @@ public class Part {
 
     public void setSteering_wheel(boolean steering_wheel) {
         this.steering_wheel = steering_wheel;
+    }
+
+    public Bike getBike() {
+        return bike;
+    }
+
+    public void setBike(Bike bike) {
+        this.bike = bike;
+    }
+
+
+    //methods
+    public void setAllTrue(){
+        this.f_wheel = true;
+        this.r_wheel = true;
+        this.f_brake = true;
+        this.r_brake = true;
+        this.f_tyre = true;
+        this.r_tyre = true;
+        this.chain = true;
+        this.saddle = true;
+        this.crank = true;
+        this.gears = true;
+        this.l_pedal = true;
+        this.r_pedal = true;
+        this.cassete = true;
+        this.chain_wheel = true;
+        this.bot_bracket = true;
+        this.steering_wheel = true;
     }
 }

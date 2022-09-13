@@ -17,4 +17,10 @@ public class PartService {
     public void add (Part part){
         partRepository.save(part);
     }
+
+    public Part getById(Integer id){
+        return partRepository.getReferenceById(id);
+    }
+
+
 }

@@ -30,7 +30,9 @@ public class BikeController {
     @GetMapping("/show/{id}")
     public String showOneBike(Model model, @PathVariable(value = "id") Integer id){
         Bike bike = bikeService.getById(id);
+        Part part = bike.getPart();
         model.addAttribute("bike", bike);
+        model.addAttribute("part", part);
         return "bike-page";
     }
 
