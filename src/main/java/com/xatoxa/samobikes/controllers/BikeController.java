@@ -23,6 +23,7 @@ public class BikeController {
     public String showBikes(Model model){
         Bike bike = new Bike();
         model.addAttribute("bikes" ,bikeService.getAllBikes());
+        model.addAttribute("broken_bikes", bikeService.getBrokenBikes());
         model.addAttribute("bike", bike);
         return "bikes";
     }
@@ -52,6 +53,7 @@ public class BikeController {
 
     @PostMapping("/edit")
     public String addBike (@ModelAttribute(value = "bike") Bike bike){
+        //добавить проверку на совпадающий id, если да, редирект обратно
         bikeService.add(bike);
         return "redirect:/bikes";
     }

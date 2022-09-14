@@ -21,13 +21,16 @@ public class BikeService {
         return bikeRepository.findAll();
     }
 
+    public List<Bike> getBrokenBikes(){
+        return bikeRepository.findByStatus(false);
+    }
+
     public Bike getById(Integer id){
         return bikeRepository.getReferenceById(id);
     }
 
     public void add(Bike bike){
         Part part = new Part();
-        part.setBike(bike);
         bike.setPart(part);
         bikeRepository.save(bike);
     }
