@@ -31,6 +31,7 @@ public class BikeService {
 
     public void add(Bike bike){
         Part part = new Part();
+        part.setId_bike(bike.getId());
         bike.setPart(part);
         bikeRepository.save(bike);
     }

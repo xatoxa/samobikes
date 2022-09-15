@@ -54,6 +54,7 @@ public class BikeController {
     @PostMapping("/edit")
     public String addBike (@ModelAttribute(value = "bike") Bike bike){
         //добавить проверку на совпадающий id, если да, редирект обратно
+        //добавить проверку на заполненные значения id, number, VIN
         bikeService.add(bike);
         return "redirect:/bikes";
     }

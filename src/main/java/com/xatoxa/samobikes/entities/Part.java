@@ -11,7 +11,6 @@ public class Part {
     private Integer id_bike;
 
     @OneToOne
-    @MapsId
     @JoinColumn(name = "id_bike")
     private Bike bike;
 

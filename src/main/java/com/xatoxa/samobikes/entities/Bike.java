@@ -10,7 +10,6 @@ public class Bike {
     private Integer id;
 
     @OneToOne(mappedBy = "bike", cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
     private Part part;
 
     @Column(name = "number")
