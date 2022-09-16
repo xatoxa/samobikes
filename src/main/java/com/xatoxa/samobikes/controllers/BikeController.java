@@ -3,7 +3,6 @@ package com.xatoxa.samobikes.controllers;
 import com.xatoxa.samobikes.entities.Bike;
 import com.xatoxa.samobikes.entities.Part;
 import com.xatoxa.samobikes.services.BikeService;
-import com.xatoxa.samobikes.services.PartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,6 +31,7 @@ public class BikeController {
     public String showOneBike(Model model, @PathVariable(value = "id") Integer id){
         Bike bike = bikeService.getById(id);
         Part part = bike.getPart();
+        bike.checkWorks();
         model.addAttribute("bike", bike);
         model.addAttribute("part", part);
         return "bike-page";
@@ -52,10 +52,10 @@ public class BikeController {
     }
 
     @PostMapping("/edit")
-    public String addBike (@ModelAttribute(value = "bike") Bike bike){
+    public String saveBike (@ModelAttribute(value = "bike") Bike bike){
         //добавить проверку на совпадающий id, если да, редирект обратно
         //добавить проверку на заполненные значения id, number, VIN
-        bikeService.add(bike);
+        bikeService.save(bike);
         return "redirect:/bikes";
     }
 

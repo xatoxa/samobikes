@@ -101,6 +101,6 @@ public class Bike {
 
     //methods
     public void checkWorks(){
-
+        this.status = this.part.checkWork();
     }
 }

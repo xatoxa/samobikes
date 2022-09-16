@@ -2,23 +2,48 @@ package com.xatoxa.samobikes.controllers;
 
 import com.xatoxa.samobikes.entities.Bike;
 import com.xatoxa.samobikes.entities.Part;
+import com.xatoxa.samobikes.services.BikeService;
 import com.xatoxa.samobikes.services.PartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/parts")
 public class PartController {
     private PartService partService;
+    private BikeService bikeService;
 
     @Autowired
     public void setPartService (PartService partService){
         this.partService = partService;
     }
+
+    @Autowired
+    public void setBikeService (BikeService bikeService){
+        this.bikeService = bikeService;
+    }
+
+
+    @GetMapping("/edit/{id_bike}")
+    public String showEditPartForm(Model model, @PathVariable(value = "id_bike") Integer id){
+        Part part = partService.getById(id);
+        model.addAttribute("part", part);
+        return "part-edit";
+    }
+
+    @PostMapping("/edit")
+    public String editPart (Model model, @ModelAttribute(value = "part") Part part){
+        partService.add(part);
+        Bike bike = part.getBike();
+        bike.checkWorks();
+        bikeService.save(bike);
+        model.addAttribute("part", part);
+        model.addAttribute("bike", bike);
+        return "bike-page";
+    }
+
 
     @GetMapping("/fine/{id_bike}")
     public String setAllTrue(Model model, @PathVariable(value = "id_bike")Integer id) {
