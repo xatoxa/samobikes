@@ -52,7 +52,6 @@ public class Bike {
 
     public void setPart(Part part) {
         this.part = part;
-        part.setBike(this);
     }
 
     public Part getPart() {

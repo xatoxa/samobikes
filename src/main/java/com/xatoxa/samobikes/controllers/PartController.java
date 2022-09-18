@@ -35,7 +35,7 @@ public class PartController {
 
     @PostMapping("/edit")
     public String editPart (Model model, @ModelAttribute(value = "part") Part part){
-        partService.add(part);
+        partService.save(part);
         Bike bike = part.getBike();
         bike.checkWorks();
         bikeService.save(bike);
@@ -51,7 +51,8 @@ public class PartController {
         part.setAllTrue();
         Bike bike = part.getBike();
         bike.setStatus(true);
-        partService.add(part);
+        bikeService.save(bike);
+        partService.save(part);
         model.addAttribute("bike", bike);
         model.addAttribute("part", part);
         return "bike-page";

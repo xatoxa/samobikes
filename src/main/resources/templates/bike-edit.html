@@ -20,6 +20,11 @@
                 <input th:field="*{id}" placeholder="ID" class="form-control"/>
             </div>
 
+            <!--неизменяемая часть-->
+            <div style="margin-bottom: 25px" class="input-group">
+                <input th:field="*{part}"  hidden/>
+            </div>
+
             <div style="margin-bottom: 25px" class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                 <input th:field="*{number}" placeholder="Номер (4-хзначный)" class="form-control"/>

@@ -32,6 +32,7 @@ public class BikeController {
         Bike bike = bikeService.getById(id);
         Part part = bike.getPart();
         bike.checkWorks();
+        bikeService.save(bike);
         model.addAttribute("bike", bike);
         model.addAttribute("part", part);
         return "bike-page";
