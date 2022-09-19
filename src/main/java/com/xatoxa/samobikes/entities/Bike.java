@@ -40,6 +40,16 @@ public class Bike {
         this.qr_code = qr_code;
     }
 
+    public Bike(Integer id, Part part, Integer number, String VIN, boolean status, String comment, String qr_code) {
+        this.id = id;
+        this.part = part;
+        this.number = number;
+        this.VIN = VIN;
+        this.status = status;
+        this.comment = comment;
+        this.qr_code = qr_code;
+    }
+
     //getters, setters
     public Integer getId() {
         return id;
