@@ -1,7 +1,6 @@
 package com.xatoxa.samobikes.entities;
 
 import javax.persistence.*;
-import java.lang.reflect.Field;
 
 @Entity
 @Table(name = "parts")
@@ -11,7 +10,6 @@ public class Part {
     private Integer id_bike;
 
     @OneToOne
-    @MapsId
     @JoinColumn(name = "id_bike")
     private Bike bike;
 
@@ -75,6 +73,30 @@ public class Part {
                 boolean r_tyre, boolean chain, boolean saddle, boolean crank, boolean gears, boolean l_pedal,
                 boolean r_pedal, boolean cassete, boolean chain_wheel, boolean bot_bracket, boolean steering_wheel) {
         this.id_bike = id_bike;
+        this.f_wheel = f_wheel;
+        this.r_wheel = r_wheel;
+        this.f_brake = f_brake;
+        this.r_brake = r_brake;
+        this.f_tyre = f_tyre;
+        this.r_tyre = r_tyre;
+        this.chain = chain;
+        this.saddle = saddle;
+        this.crank = crank;
+        this.gears = gears;
+        this.l_pedal = l_pedal;
+        this.r_pedal = r_pedal;
+        this.cassete = cassete;
+        this.chain_wheel = chain_wheel;
+        this.bot_bracket = bot_bracket;
+        this.steering_wheel = steering_wheel;
+    }
+
+    public Part(Integer id_bike, Bike bike, boolean f_wheel, boolean r_wheel, boolean f_brake, boolean r_brake,
+                boolean f_tyre, boolean r_tyre, boolean chain, boolean saddle, boolean crank, boolean gears,
+                boolean l_pedal, boolean r_pedal, boolean cassete, boolean chain_wheel, boolean bot_bracket,
+                boolean steering_wheel) {
+        this.id_bike = id_bike;
+        this.bike = bike;
         this.f_wheel = f_wheel;
         this.r_wheel = r_wheel;
         this.f_brake = f_brake;
@@ -257,5 +279,27 @@ public class Part {
         this.chain_wheel = true;
         this.bot_bracket = true;
         this.steering_wheel = true;
+    }
+
+
+    public boolean checkWork(){
+        if (!this.f_wheel) return false;
+        if (!this.r_wheel) return false;
+        if (!this.f_brake) return false;
+        if (!this.r_brake) return false;
+        if (!this.f_tyre) return false;
+        if (!this.r_tyre) return false;
+        if (!this.chain) return false;
+        if (!this.saddle) return false;
+        if (!this.crank) return false;
+        if (!this.gears) return false;
+        if (!this.l_pedal) return false;
+        if (!this.r_pedal) return false;
+        if (!this.cassete) return false;
+        if (!this.chain_wheel) return false;
+        if (!this.bot_bracket) return false;
+        if (!this.steering_wheel) return false;
+
+        return true;
     }
 }

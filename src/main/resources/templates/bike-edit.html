@@ -11,7 +11,9 @@
 </head>
 <body>
     <!--Если на страничку прилетает id, то редактирование, иначе добавление-->
+
     <h1  th:text="${bike.id == null ? 'Добавление велосипеда' : 'Изменение велосипеда ' + bike.id}"/></h1>
+
     <div class="container">
         <!--Форма редактирования велосипеда-->
         <form th:action="@{/bikes/edit}"
@@ -21,6 +23,7 @@
                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                 <input th:field="*{id}" placeholder="ID" class="form-control"/>
             </div>
+
 
             <div  class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>

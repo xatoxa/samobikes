@@ -10,7 +10,6 @@ public class Bike {
     private Integer id;
 
     @OneToOne(mappedBy = "bike", cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
     private Part part;
 
     @Column(name = "number")
@@ -101,6 +100,6 @@ public class Bike {
 
     //methods
     public void checkWorks(){
-
+        this.status = this.part.checkWork();
     }
 }

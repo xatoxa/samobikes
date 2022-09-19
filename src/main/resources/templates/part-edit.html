@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Редактор запчастей</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+<body>
+<h3 th:text="${'Изменение состояния запчастей велосипеда ' + part.id_bike}"/>
+<div class="container">
+  <!--Форма редактирования запчастей-->
+  <form th:action="@{/parts/edit}"
+        th:object="${part}" method="post" class="form-vertical">
+
+    <!--Неизменяемые части part-->
+    <div style="margin-bottom: 25px" class="input-group">
+      <input th:field="*{id_bike}" class="form-control" hidden/>
+    </div>
+    <div style="margin-bottom: 25px" class="input-group">
+      <input th:field="*{bike}" class="form-control" hidden/>
+    </div>
+
+    <!--Селекты. Названия полей запишу в комментарии.-->
+    <div style="margin-bottom: 25px" class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+      <!--Переднее колесо-->
+      <select th:field="*{f_wheel}" required>
+        <option value="true">Работает</option>
+        <option value="false">Сломан</option>
+      </select>
+    </div>
+
+    <div style="margin-bottom: 25px" class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+      <!--Заднее колесо-->
+      <select th:field="*{r_wheel}" required>
+        <option value="true">Работает</option>
+        <option value="false">Сломан</option>
+      </select>
+    </div>
+
+    <div style="margin-bottom: 25px" class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+      <!--Передний тормоз-->
+      <select th:field="*{f_brake}" required>
+        <option value="true">Работает</option>
+        <option value="false">Сломан</option>
+      </select>
+    </div>
+
+    <div style="margin-bottom: 25px" class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+      <!--Задний тормоз-->
+      <select th:field="*{r_brake}" required>
+        <option value="true">Работает</option>
+        <option value="false">Сломан</option>
+      </select>
+    </div>
+
+    <div style="margin-bottom: 25px" class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+      <!--Передняя покрышка/камера-->
+      <select th:field="*{f_tyre}" required>
+        <option value="true">Работает</option>
+        <option value="false">Сломан</option>
+      </select>
+    </div>
+
+    <div style="margin-bottom: 25px" class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+      <!--Задняя покрышка/камера-->
+      <select th:field="*{r_tyre}" required>
+        <option value="true">Работает</option>
+        <option value="false">Сломан</option>
+      </select>
+    </div>
+
+    <div style="margin-bottom: 25px" class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+      <!--Цепь-->
+      <select th:field="*{chain}" required>
+        <option value="true">Работает</option>
+        <option value="false">Сломан</option>
+      </select>
+    </div>
+
+    <div style="margin-bottom: 25px" class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+      <!--Седло/Подседельный штырь-->
+      <select th:field="*{saddle}" required>
+        <option value="true">Работает</option>
+        <option value="false">Сломан</option>
+      </select>
+    </div>
+
+    <div style="margin-bottom: 25px" class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+      <!--Шатуны-->
+      <select th:field="*{crank}" required>
+        <option value="true">Работает</option>
+        <option value="false">Сломан</option>
+      </select>
+    </div>
+
+    <div style="margin-bottom: 25px" class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+      <!--Переключатель передач-->
+      <select th:field="*{gears}" required>
+        <option value="true">Работает</option>
+        <option value="false">Сломан</option>
+      </select>
+    </div>
+
+    <div style="margin-bottom: 25px" class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+      <!--Левая педаль-->
+      <select th:field="*{l_pedal}" required>
+        <option value="true">Работает</option>
+        <option value="false">Сломан</option>
+      </select>
+    </div>
+
+    <div style="margin-bottom: 25px" class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+      <!--Правая педаль-->
+      <select th:field="*{r_pedal}" required>
+        <option value="true">Работает</option>
+        <option value="false">Сломан</option>
+      </select>
+    </div>
+
+    <div style="margin-bottom: 25px" class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+      <!--Кассета/Трещотка-->
+      <select th:field="*{cassete}" required>
+        <option value="true">Работает</option>
+        <option value="false">Сломан</option>
+      </select>
+    </div>
+
+    <div style="margin-bottom: 25px" class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+      <!--Передние звёзды-->
+      <select th:field="*{chain_wheel}" required>
+        <option value="true">Работает</option>
+        <option value="false">Сломан</option>
+      </select>
+    </div>
+
+    <div style="margin-bottom: 25px" class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+      <!--Каретка-->
+      <select th:field="*{bot_bracket}" required>
+        <option value="true">Работает</option>
+        <option value="false">Сломан</option>
+      </select>
+    </div>
+
+    <div style="margin-bottom: 25px" class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+      <!--Руль/Вынос/Грипсы-->
+      <select th:field="*{steering_wheel}" required>
+        <option value="true">Работает</option>
+        <option value="false">Сломан</option>
+      </select>
+    </div>
+
+    <div style="margin-top: 10px" class="form-group">
+      <div class="col-sm-6 controls">
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+      </div>
+    </div>
+  </form>
+</div>
+</body>
+</html>

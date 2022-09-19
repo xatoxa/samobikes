@@ -14,7 +14,7 @@ public class PartService {
         this.partRepository = partRepository;
     }
 
-    public void add (Part part){
+    public void save (Part part){
         partRepository.save(part);
     }
 
