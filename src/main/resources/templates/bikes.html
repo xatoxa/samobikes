@@ -3,18 +3,17 @@
 <head>
     <meta charset="utf-8"/>
     <title>Каталог велосипедов</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre&display=swap" rel="stylesheet"><!-- ссылка на шрифт -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <link media="all" rel="stylesheet" type="text/css" th:href="@{/css/style_bikes.css}"> <!-- ссылка на css всегда должна быть самой последней -->
 </head>
 
 <body>
 <div class="container">
-
-    <span th:text="${'Всего: ' + bikes.size()}"/>
-    <br>
-    <!--ИСПРАВИТЬ-->
-    <span th:text="${'Сломано: ' + bikes.size()}"/>
+    <H1>Каталог велосипедов</H1>
+    
     <br>
     <!--Таблица всех велосипедов-->
     <table class="table table-hover">
@@ -25,6 +24,7 @@
             <th>VIN</th>
             <th>Статус</th>
             <th>Комментарий</th>
+            <th class="thBut">Кликай куда надо</th>
         </tr>
         </thead>
         <tbody>
@@ -35,16 +35,21 @@
             <td th:text="${bike.VIN}"/>
             <td th:text="${bike.status == true ? 'Работает' : 'Сломан'}"/>
             <td th:text="${bike.comment}"/>
-            <td>
-                <a th:href="@{'/bikes/show/' + ${bike.id}}" th:text="Просмотреть"/>
-                <a th:href="@{'/bikes/edit/' + ${bike.id}}" th:text="Изменить"/>
-                <a th:href="@{'/bikes/delete/' + ${bike.id}}" th:text="Удалить"/>
+            <td style="text-align: center;">
+                <button type="submit" class="btn"><a  th:href="@{'/bikes/show/' + ${bike.id}}" th:text="Просмотреть" /></button>
+                <button type="submit" class="btn"><a  th:href="@{'/bikes/edit/' + ${bike.id}}" th:text="Изменить"/></button>
+                <button  type="submit" class="btn"><a  th:href="@{'/bikes/delete/' + ${bike.id}}" th:text="Удалить"/></button>
             </td>
         </tr>
         </tbody>
     </table>
     <br>
-    <a th:href="@{'/bikes/add/'}" th:text="Добавить"/>
+    <span th:text="${'Всего: ' + bikes.size()}"/>
+    <br>
+    <!--ИСПРАВИТЬ-->
+    <span th:text="${'Сломано: ' + bikes.size()}"/><br>
+
+    <button type="submit" class="btn"><a  th:href="@{'/bikes/add/'}" th:text="Добавить"/></button>
 </div>
 
 </body>
