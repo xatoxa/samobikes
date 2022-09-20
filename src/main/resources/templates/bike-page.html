@@ -11,6 +11,9 @@
 </head>
 
 <body>
+<div class="homeBut">
+    <button class="home"><a class="home" th:href="@{'/bikes'}" th:text="'На главную'"/></button>
+</div>
 <div class="header">
     <span th:text="${'ID: ' + bike.id}"/><br>
     <span th:text="${'Номер: ' + bike.number}"/><br>
@@ -22,28 +25,93 @@
 <!--Добавить сюда ссылки "изменить" и удалить как в bikes-->
 
 <br>
-
-<span th:text="${'Переднее колесо: '} + ${part.f_wheel == true ? 'Работает' : 'Сломано'}"/><br><hr>
-<span th:text="${'Заднее колесо: '} + ${part.r_wheel == true ? 'Работает' : 'Сломано'}"/><br><hr>
-<span th:text="${'Передний тормоз: '} + ${part.f_brake == true ? 'Работает' : 'Сломано'}"/><br><hr>
-<span th:text="${'Задний тормоз: '} + ${part.r_brake == true ? 'Работает' : 'Сломано'}"/><br><hr>
-<span th:text="${'Передняя покрышка/камера: '} + ${part.f_tyre == true ? 'Работает' : 'Сломано'}"/><br><hr>
-<span th:text="${'Задняя покрышка/камера: '} + ${part.r_tyre == true ? 'Работает' : 'Сломано'}"/><br><hr>
-<span th:text="${'Цепь: '} + ${part.chain == true ? 'Работает' : 'Сломано'}"/><br><hr>
-<span th:text="${'Седло/Подседельный штырь: '} + ${part.saddle == true ? 'Работает' : 'Сломано'}"/><br><hr>
-<span th:text="${'Шатуны: '} + ${part.crank == true ? 'Работает' : 'Сломано'}"/><br><hr>
-<span th:text="${'Левая педаль: '} + ${part.l_pedal == true ? 'Работает' : 'Сломано'}"/><br><hr>
-<span th:text="${'Правая педаль: '} + ${part.r_pedal == true ? 'Работает' : 'Сломано'}"/><br><hr>
-<span th:text="${'Передние звёзды: '} + ${part.chain_wheel == true ? 'Работает' : 'Сломано'}"/><br><hr>
-<span th:text="${'Переключатель передач: '} + ${part.gears == true ? 'Работает' : 'Сломано'}"/><br><hr>
-<span th:text="${'Кассета/Трещотка: '} + ${part.cassete == true ? 'Работает' : 'Сломано'}"/><br><hr>
-<span th:text="${'Каретка: '} + ${part.bot_bracket == true ? 'Работает' : 'Сломано'}"/><br><hr>
-<span th:text="${'Руль/Вынос/Грипсы: '} + ${part.steering_wheel == true ? 'Работает' : 'Сломано'}"/>
-
+<div class="parts">
+    <span th:text="${'Переднее колесо: '} + ${part.f_wheel == true ? 'Работает' : 'Сломано'}"/>
+    <span class="tooltip"><img src="../../css/img/logo.png">
+        <span class="tooltiptext"><img class="plcImg" src="../../css/img/logo.png"></span>
+    </span>
+    <br><hr>
+    <span th:text="${'Заднее колесо: '} + ${part.r_wheel == true ? 'Работает' : 'Сломано'}"/>
+    <span class="tooltip"><img src="../../css/img/logo.png">
+        <span class="tooltiptext"><img class="plcImg" src="../../css/img/logo.png"></span>
+    </span>
+    <br><hr>
+    <span th:text="${'Передний тормоз: '} + ${part.f_brake == true ? 'Работает' : 'Сломано'}"/>
+    <span class="tooltip"><img src="../../css/img/logo.png">
+        <span class="tooltiptext"><img class="plcImg" src="../../css/img/logo.png"></span>
+    </span>
+    <br><hr>
+    <span th:text="${'Задний тормоз: '} + ${part.r_brake == true ? 'Работает' : 'Сломано'}"/>
+    <span class="tooltip"><img src="../../css/img/logo.png">
+        <span class="tooltiptext"><img class="plcImg" src="../../css/img/logo.png"></span>
+    </span>
+    <br><hr>
+    <span th:text="${'Передняя покрышка/камера: '} + ${part.f_tyre == true ? 'Работает' : 'Сломано'}"/>
+    <span class="tooltip"><img src="../../css/img/logo.png">
+        <span class="tooltiptext"><img class="plcImg" src="../../css/img/logo.png"></span>
+    </span>
+    <br><hr>
+    <span th:text="${'Задняя покрышка/камера: '} + ${part.r_tyre == true ? 'Работает' : 'Сломано'}"/>
+    <span class="tooltip"><img src="../../css/img/logo.png">
+        <span class="tooltiptext"><img class="plcImg" src="../../css/img/logo.png"></span>
+    </span>
+    <br><hr>
+    <span th:text="${'Цепь: '} + ${part.chain == true ? 'Работает' : 'Сломано'}"/>
+    <span class="tooltip"><img src="../../css/img/logo.png">
+        <span class="tooltiptext"><img class="plcImg" src="../../css/img/logo.png"></span>
+    </span>
+    <br><hr>
+    <span th:text="${'Седло/Подседельный штырь: '} + ${part.saddle == true ? 'Работает' : 'Сломано'}"/>
+    <span class="tooltip"><img src="../../css/img/logo.png">
+        <span class="tooltiptext"><img class="plcImg" src="../../css/img/logo.png"></span>
+    </span>
+    <br><hr>
+    <span th:text="${'Шатуны: '} + ${part.crank == true ? 'Работает' : 'Сломано'}"/>
+    <span class="tooltip"><img src="../../css/img/logo.png">
+        <span class="tooltiptext"><img class="plcImg" src="../../css/img/logo.png"></span>
+    </span>
+    <br><hr>
+    <span th:text="${'Левая педаль: '} + ${part.l_pedal == true ? 'Работает' : 'Сломано'}"/>
+    <span class="tooltip"><img src="../../css/img/logo.png">
+        <span class="tooltiptext"><img class="plcImg" src="../../css/img/logo.png"></span>
+    </span>
+    <br><hr>
+    <span th:text="${'Правая педаль: '} + ${part.r_pedal == true ? 'Работает' : 'Сломано'}"/>
+    <span class="tooltip"><img src="../../css/img/logo.png">
+        <span class="tooltiptext"><img class="plcImg" src="../../css/img/logo.png"></span>
+    </span>
+    <br><hr>
+    <span th:text="${'Передние звёзды: '} + ${part.chain_wheel == true ? 'Работает' : 'Сломано'}"/>
+    <span class="tooltip"><img src="../../css/img/logo.png">
+        <span class="tooltiptext"><img class="plcImg" src="../../css/img/logo.png"></span>
+    </span>
+    <br><hr>
+    <span th:text="${'Переключатель передач: '} + ${part.gears == true ? 'Работает' : 'Сломано'}"/>
+    <span class="tooltip"><img src="../../css/img/logo.png">
+        <span class="tooltiptext"><img class="plcImg" src="../../css/img/logo.png"></span>
+    </span>
+    <br><hr>
+    <span th:text="${'Кассета/Трещотка: '} + ${part.cassete == true ? 'Работает' : 'Сломано'}"/>
+    <span class="tooltip"><img src="../../css/img/logo.png">
+        <span class="tooltiptext"><img class="plcImg" src="../../css/img/logo.png"></span>
+    </span>
+    <br><hr>
+    <span th:text="${'Каретка: '} + ${part.bot_bracket == true ? 'Работает' : 'Сломано'}"/>
+    <span class="tooltip"><img src="../../css/img/logo.png">
+        <span class="tooltiptext"><img class="plcImg" src="../../css/img/logo.png"></span>
+    </span>
+    <br><hr>
+    <span th:text="${'Руль/Вынос/Грипсы: '} + ${part.steering_wheel == true ? 'Работает' : 'Сломано'}"/>
+    <span class="tooltip"><img src="../../css/img/logo.png">
+        <span class="tooltiptext"><img class="plcImg" src="../../css/img/logo.png"></span>
+    </span>
+</div>
 <!--Добавить кнопку/ссылку "Изменить", которая откроет новую страницу с формой и селектами по запчастям-->
 <br>
-<button><a th:href="@{'/parts/fine/' + ${part.id_bike}}" th:text="'Все части работают'"/></button>
-<a th:href="@{'/parts/edit/' + ${part.id_bike}}" th:text="'Изменить'"/>
-
+    <div>
+        <button><a th:href="@{'/parts/fine/' + ${part.id_bike}}" th:text="'Все части работают'"/></button>
+        <button><a th:href="@{'/parts/edit/' + ${part.id_bike}}" th:text="'Изменить'"/></button>
+    </div>
+<!--'bikes/show' + ${bike.id}-->
 </body>
 </html>

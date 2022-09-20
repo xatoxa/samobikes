@@ -37,9 +37,9 @@
             <td th:text="${bike.status == true ? 'Работает' : 'Сломан'}"/>
             <td th:text="${bike.comment}"/>
             <td style="text-align: center;">
-                <button type="submit" class="btn"><a  th:href="@{'/bikes/show/' + ${bike.id}}" th:text="Просмотреть" /></button>
-                <button type="submit" class="btn"><a  th:href="@{'/bikes/edit/' + ${bike.id}}" th:text="Изменить"/></button>
-                <button  type="submit" class="btn"><a  th:href="@{'/bikes/delete/' + ${bike.id}}" th:text="Удалить"/></button>
+                <button type="submit" class="btn btnTab"><a  th:href="@{'/bikes/show/' + ${bike.id}}" th:text="Просмотреть" /></button>
+                <button type="submit" class="btn btnTab"><a  th:href="@{'/bikes/edit/' + ${bike.id}}" th:text="Изменить"/></button>
+                <button  type="submit" class="btn btnTab"><a  th:href="@{'/bikes/delete/' + ${bike.id}}" th:text="Удалить"/></button>
             </td>
         </tr>
         </tbody>
@@ -49,8 +49,9 @@
     <br>
     <!--ИСПРАВИТЬ-->
     <span th:text="${'Сломано: ' + bikes.size()}"/><br>
-
-    <button type="submit" class="btn"><a  th:href="@{'/bikes/add/'}" th:text="Добавить"/></button>
+    <div class="divBtn">
+        <button type="submit" class="btn add"><a th:href="@{'/bikes/add/'}" th:text="Добавить" class="aAdd" /></button>
+    </div>
 </div>
 
 </body>

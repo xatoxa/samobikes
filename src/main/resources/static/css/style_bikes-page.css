@@ -24,6 +24,7 @@ button:hover{
 }
 a{
 	color: rgb(254,12,106);
+	text-decoration: none;
 }
 hr{
 	color: rgb(254,12,106);
@@ -35,4 +36,64 @@ hr{
 	border: 2px solid rgb(254,12,106);
 	text-align: center;
 	color: rgb(254,12,106);
+}
+.homeBut{
+	text-align: center;
+}
+.home{
+	background: rgb(254,12,106);
+	color: white;
+	width: 50%;
+}
+.parts{
+	width: 50%;
+}
+img{
+	height: 20px;
+}
+.logo{
+	float: right;
+}
+.tooltip {
+  position: relative;
+  float: right;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 250px;
+  background-color: #555;
+  color: #fff;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: -370%;
+  left: 450%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.tooltiptext{
+	text-align: center;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 47%;
+  left: -2%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555  transparent transparent transparent;
+  transform: rotate(90deg)
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+.plcImg{
+	height: 200px;
 }

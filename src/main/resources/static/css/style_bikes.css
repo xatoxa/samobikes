@@ -23,6 +23,7 @@ td:hover{
 }
 a{
 	color: rgb(254,12,106);
+	text-decoration: none;
 }
 table{
 	width: 100%;
@@ -54,5 +55,19 @@ button{
 	margin-bottom: 2%;
 }
 button:hover{
+	border: 2px solid white;
+	box-shadow: 0 0 0 0.2rem rgba(225, 225, 225, 0.6);
+}
+.add{
+	background: rgb(254,12,106);
+}
+.add:hover{
+	border: 2px solid rgb(254,12,106);
 	box-shadow: 0 0 0 0.2rem rgba(254, 51, 96, 0.4);
+}
+.aAdd{
+	color: white;
+}
+.divBtn{
+	text-align: center;
 }

@@ -6,6 +6,12 @@ body{
     font-family: 'Averia Serif Libre', cursive;
     
 }
+select{
+	background-repeat:no-repeat;
+    background-attachment:fixed;
+    background-position:center;
+    font-family: 'Averia Serif Libre', cursive;
+}
 .input-group{
 	margin-top: 30px;
 	text-align: center;
