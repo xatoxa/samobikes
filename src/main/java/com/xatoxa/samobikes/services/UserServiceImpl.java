@@ -75,6 +75,10 @@ public class UserServiceImpl implements UserService{
         userRepository.deleteById(id);
     }
 
+    public boolean isUsernameUnique(String username){
+        return userRepository.findOneByUsername(username) == null;
+    }
+
     public void save(User user){
         encodePassword(user);
         userRepository.save(user);

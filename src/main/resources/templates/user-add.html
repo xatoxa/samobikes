@@ -14,7 +14,7 @@
 
 <div class="container">
     <form th:action="@{/users/save}"
-          th:object="${user}" method="post" class="form-vertical">
+          th:object="${user}" method="post" class="form-vertical" onsubmit="return checkUsername(this)">
 
         <div  class="input-group">
             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -56,12 +56,35 @@
         <div class="form-group button">
             <div>
                 <button type="submit" class="btn">Сохранить</button>
-                <button type="button" value="Cancel">Отмена</button>
+                <button  type="button" class="btn"><a  th:href="@{'/users'}" th:text="Отмена"/></button>
             </div>
         </div>
     </form>
 </div>
 
+<!--Проверка уникальности логина-->
+<!--Изменить окно ошибки-->
+<script type="text/javascript">
+    function checkUsername(form){
+        url = "[[@{/users/check_username}]]";
+        username = $("#username").val();
+        csrfValue = $("input[name='_csrf']").val();
+        params = {username: username, _csrf: csrfValue};
+        $.post(url, params, function(response){
+            if(response == "OK"){
+                form.submit();
+            } else if(response == "Duplicated"){
+                alert("Есть другой пользователь с логином " + username);
+            } else {
+                alert("Произошло что-то непонятное...");
+            }
+        }).fail(function(){
+            alert("Невозможно подключиться к серверу.");
+        });
+
+        return false;
+    }
+</script>
 
 </body>
 </html>
