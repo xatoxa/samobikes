@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -45,6 +46,12 @@ public class UserController {
     public String saveUser(@ModelAttribute(value = "user") User user){
         userService.save(user);
 
+        return "redirect:/users";
+    }
+
+    @GetMapping("users/delete/{id}")
+    public String deleteUser(@PathVariable(value = "id") Integer id){
+        userService.deleteById(id);
         return "redirect:/users";
     }
 }

@@ -43,7 +43,7 @@
                 <td th:text="${user.enabled}"/>
                 <td th:text="${user.roles}"/>
                 <td style="text-align: center;">
-                    <button type="submit" class="btn btnTab"></button>
+                    <button  type="submit" class="btn btnTab"><a  th:href="@{'/users/delete/' + ${user.id}}" th:text="Удалить"/></button>
                 </td>
             </tr>
         </tbody>

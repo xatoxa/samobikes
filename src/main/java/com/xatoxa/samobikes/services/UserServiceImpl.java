@@ -71,6 +71,10 @@ public class UserServiceImpl implements UserService{
         return roleRepository.findAll();
     }
 
+    public void deleteById(Integer id){
+        userRepository.deleteById(id);
+    }
+
     public void save(User user){
         encodePassword(user);
         userRepository.save(user);
