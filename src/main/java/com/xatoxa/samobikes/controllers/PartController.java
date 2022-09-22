@@ -41,7 +41,7 @@ public class PartController {
         bikeService.save(bike);
         model.addAttribute("part", part);
         model.addAttribute("bike", bike);
-        return "bike-page";
+        return "redirect:/bikes/show/" + bike.getId();
     }
 
 
