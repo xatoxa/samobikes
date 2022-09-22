@@ -18,6 +18,7 @@ public class BikeController {
         this.bikeService = bikeService;
     }
 
+    //добавить варианты сортировки
     @GetMapping
     public String showBikes(Model model){
         Bike bike = new Bike();

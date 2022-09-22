@@ -12,6 +12,10 @@
 <body>
     <!--Если на страничку прилетает id, то редактирование, иначе добавление-->
 
+    <div class="homeBut">
+        <button class="home"><a class="home" th:href="@{'/bikes'}" th:text="'На главную'"/></button>
+    </div>
+
     <h1  th:text="${bike.id == null ? 'Добавление велосипеда' : 'Изменение велосипеда ' + bike.id}"/></h1>
 
     <div class="container">

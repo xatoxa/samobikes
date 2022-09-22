@@ -12,8 +12,8 @@
 <body>
 <h1 th:text="${'Изменение состояния запчастей велосипеда ' + part.id_bike}"/>
 <div class="homeBut">
-    <button class="home"><a class="home" th:href="@{'/bikes'}" th:text="'На главную'"/></button>
-    <!-- <button class="home"><a class="home" th:href="@{'bikes/edit/' + ${bike.id}}" th:text="'К велосипеду'"/></button> -->
+  <button class="home"><a class="home" th:href="@{'/bikes/show/' + ${id_bike}}" th:text="'Назад'"/></button>
+  <button class="home"><a class="home" th:href="@{'/bikes'}" th:text="'На главную'"/></button>
 </div>
 <div class="container">
   <!--Форма редактирования запчастей-->
