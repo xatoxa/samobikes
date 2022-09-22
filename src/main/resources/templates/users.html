@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>Пользователи</title>
+    <link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre&display=swap" rel="stylesheet"><!-- ссылка на шрифт -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<H1>Пользователи</H1>
+
+<div>
+    <button type="submit" class="btn btnTab"><a  th:href="@{'/users/add/'}" th:text="Добавить" /></button>
+</div>
+
+<!--Сообщение о добавлении/изменении-->
+<div th:if="${message != null}">
+    [[${message}]]
+</div>
+
+<div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>логин</th>
+                <th>Имя</th>
+                <th>Фамилия</th>
+                <th>Активен</th>
+                <th>Роль</th>
+                <th>Кнопки</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.id}"/>
+                <td th:text="${user.username}"/>
+                <td th:text="${user.firstName}"/>
+                <td th:text="${user.lastName}"/>
+                <td th:text="${user.enabled}"/>
+                <td th:text="${user.roles}"/>
+                <td style="text-align: center;">
+                    <button type="submit" class="btn btnTab"></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+</body>
+</html>

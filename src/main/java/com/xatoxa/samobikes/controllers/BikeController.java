@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/bikes")
@@ -54,10 +55,12 @@ public class BikeController {
     }
 
     @PostMapping("/edit")
-    public String saveBike (@ModelAttribute(value = "bike") Bike bike){
+    public String saveBike (@ModelAttribute(value = "bike") Bike bike,
+                            RedirectAttributes redirectAttributes){
         //добавить проверку на совпадающий id, если да, редирект обратно
         //добавить проверку на заполненные значения id, number, VIN
         bikeService.save(bike);
+        redirectAttributes.addFlashAttribute("message", "Успешно выполнено.");
         return "redirect:/bikes";
     }
 

@@ -10,16 +10,22 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService{
     private UserRepository userRepository;
     private RoleRepository roleRepository;
+
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     public void setUserRepository (UserRepository userRepository) {
@@ -29,6 +35,11 @@ public class UserServiceImpl implements UserService{
     @Autowired
     public void setRoleRepository (RoleRepository roleRepository) {
         this.roleRepository = roleRepository;
+    }
+
+    @Autowired
+    public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -50,5 +61,23 @@ public class UserServiceImpl implements UserService{
 
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles){
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
+    }
+
+    public List<User> getAllUsers(){
+        return userRepository.findAll();
+    }
+
+    public List<Role> getAllRoles(){
+        return roleRepository.findAll();
+    }
+
+    public void save(User user){
+        encodePassword(user);
+        userRepository.save(user);
+    }
+
+    private void encodePassword(User user){
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
     }
 }

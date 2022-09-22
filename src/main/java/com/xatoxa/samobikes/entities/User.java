@@ -7,7 +7,7 @@ import java.util.Collection;
 @Table(name = "users")
 public class User {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 
@@ -23,6 +23,9 @@ public class User {
     @Column(name = "last_name")
     private String lastName;
 
+    @Column(name = "enabled")
+    private boolean enabled;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -33,11 +36,20 @@ public class User {
     public User() {
     }
 
-    public User(String username, String password, String firstName, String lastName, Collection<Role> roles) {
+    public User(Integer id, String username, String password, boolean enabled, Collection<Role> roles) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.enabled = enabled;
+        this.roles = roles;
+    }
+
+    public User(String username, String password, String firstName, String lastName, boolean enabled, Collection<Role> roles) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.enabled = enabled;
         this.roles = roles;
     }
 
@@ -83,6 +95,14 @@ public class User {
         this.lastName = lastName;
     }
 
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
     public Collection<Role> getRoles() {
         return roles;
     }
@@ -90,4 +110,6 @@ public class User {
     public void setRoles(Collection<Role> roles) {
         this.roles = roles;
     }
+
+
 }
