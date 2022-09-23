@@ -16,7 +16,7 @@
     <button type="submit" class="btn btnTab"><a  th:href="@{'/users/add/'}" th:text="Добавить" /></button>
 </div>
 
-<!--Сообщение о добавлении/изменении-->
+<!--Сообщение об успешном добавлении/изменении-->
 <div th:if="${message != null}">
     [[${message}]]
 </div>

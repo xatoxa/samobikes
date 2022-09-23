@@ -6,11 +6,11 @@ import javax.persistence.*;
 @Table(name = "parts")
 public class Part {
     @Id
-    @Column(name = "id_bike")
-    private Integer id_bike;
+    @Column(name = "bike_id")
+    private Integer bikeId;
 
     @OneToOne
-    @JoinColumn(name = "id_bike")
+    @MapsId
     private Bike bike;
 
     @Column(name = "f_wheel")
@@ -65,14 +65,14 @@ public class Part {
     public Part() {
     }
 
-    public Part(Integer id_bike){
-        this.id_bike = id_bike;
+    public Part(Integer bikeId){
+        this.bikeId = bikeId;
     }
 
-    public Part(Integer id_bike, boolean f_wheel, boolean r_wheel, boolean f_brake, boolean r_brake, boolean f_tyre,
+    public Part(Integer bikeId, boolean f_wheel, boolean r_wheel, boolean f_brake, boolean r_brake, boolean f_tyre,
                 boolean r_tyre, boolean chain, boolean saddle, boolean crank, boolean gears, boolean l_pedal,
                 boolean r_pedal, boolean cassete, boolean chain_wheel, boolean bot_bracket, boolean steering_wheel) {
-        this.id_bike = id_bike;
+        this.bikeId = bikeId;
         this.f_wheel = f_wheel;
         this.r_wheel = r_wheel;
         this.f_brake = f_brake;
@@ -91,11 +91,11 @@ public class Part {
         this.steering_wheel = steering_wheel;
     }
 
-    public Part(Integer id_bike, Bike bike, boolean f_wheel, boolean r_wheel, boolean f_brake, boolean r_brake,
+    public Part(Integer bikeId, Bike bike, boolean f_wheel, boolean r_wheel, boolean f_brake, boolean r_brake,
                 boolean f_tyre, boolean r_tyre, boolean chain, boolean saddle, boolean crank, boolean gears,
                 boolean l_pedal, boolean r_pedal, boolean cassete, boolean chain_wheel, boolean bot_bracket,
                 boolean steering_wheel) {
-        this.id_bike = id_bike;
+        this.bikeId = bikeId;
         this.bike = bike;
         this.f_wheel = f_wheel;
         this.r_wheel = r_wheel;
@@ -116,12 +116,12 @@ public class Part {
     }
 
     //getters, setters
-    public Integer getId_bike() {
-        return id_bike;
+    public Integer getBikeId() {
+        return bikeId;
     }
 
-    public void setId_bike(Integer id_bike) {
-        this.id_bike = id_bike;
+    public void setBikeId(Integer bikeId) {
+        this.bikeId = bikeId;
     }
 
     public boolean isF_wheel() {

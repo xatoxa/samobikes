@@ -37,16 +37,11 @@ public class BikeService {
     }
 
     public void save(Bike bike){
-        Part part;
         if (bike.getPart() == null) {
-            part = new Part();
+            Part part = new Part();
             bike.setPart(part);
             part.setBike(bike);
         }
-        else {
-            part = bike.getPart();
-        }
-        part.setId_bike(bike.getId());
         bikeRepository.save(bike);
     }
 

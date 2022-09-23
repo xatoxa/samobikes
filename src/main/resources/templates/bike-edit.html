@@ -16,7 +16,7 @@
         <button class="home"><a class="home" th:href="@{'/bikes'}" th:text="'На главную'"/></button>
     </div>
 
-    <h1  th:text="${bike.id == null ? 'Добавление велосипеда' : 'Изменение велосипеда ' + bike.id}"/></h1>
+    <h1  th:text="${bike.id == null ? 'Добавление велосипеда' : 'Изменение велосипеда ' + bike.number + ' / ' + bike.qrNumber}"/></h1>
 
     <div class="container">
         <!--Форма редактирования велосипеда-->
@@ -25,7 +25,7 @@
 
             <div  class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                <input th:field="*{id}" class="form-control"/>
+                <input th:field="*{id}" class="form-control" hidden/>
             </div>
 
             <div  class="input-group">
@@ -35,12 +35,17 @@
 
             <div  class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                <input th:field="*{number}" placeholder="Номер (4-хзначный)" class="form-control"/>
+                <input th:field="*{number}" placeholder="Номер" class="form-control" required/>
             </div>
 
             <div  class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                <input th:field="*{VIN}" placeholder="VIN (буквы латиницей)" class="form-control"/>
+                <input th:field="*{qrNumber}" placeholder="QR Номер 4-хзначный" class="form-control" required/>
+            </div>
+
+            <div  class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <input th:field="*{VIN}" placeholder="VIN (буквы латиницей)" class="form-control" required/>
             </div>
 
             <div class="input-group select">
@@ -54,6 +59,18 @@
             <div class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                 <input th:field="*{comment}" placeholder="О состоянии вело" class="form-control"/>
+            </div>
+
+            <div  class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <input th:field="*{qrLink}"
+                       placeholder="Ссылка на страницу в ELMA (ссылка по QR)"
+                       class="form-control"/>
+            </div>
+
+            <div  class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <input th:field="*{photo}" class="form-control" hidden/>
             </div>
 
             <div class="form-group button">

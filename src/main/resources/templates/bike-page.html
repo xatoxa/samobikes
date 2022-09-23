@@ -16,20 +16,21 @@
 </div>
 <div class="header">
     <div class="velInfo">
-        <span th:text="${'ID: ' + bike.id}"/><br>
         <span th:text="${'Номер: ' + bike.number}"/><br>
+        <span th:text="${'QR Номер: ' + bike.qrNumber}"/><br>
         <span th:text="${'VIN: ' + bike.VIN}"/><br>
         <span th:text="${bike.status == true ? 'Работает' : 'Сломан'}"/><br>
-        <span th:text="${'Комментарий: ' + bike.comment}"/>
+        <span th:text="${'Комментарий: ' + bike.comment}"/><br>
+        <span th:text="${'Ссылка на ELMA: '}"/><a th:href="@{${bike.qrLink}}" th:text="${bike.qrLink}" />
         <br>
         <button><a th:href="@{'/bikes/edit/' + ${bike.id}}" th:text="'Изменить'"/></button>
+        <button><a th:href="@{'/bikes/delete/' + ${bike.id}}" th:text="'Удалить'"/></button>
     </div>
-    <div class="velFoto">
-        <img class="foto" src="../../css/img/velo.png">
+    <div class="velPhoto">
+        <!--потом добавить как bike.photo-->
+        <img class="photo" src="../../css/img/velo.png">
     </div>
 </div>
-
-<!--Добавить сюда ссылки "изменить" и удалить как в bikes-->
 
 <br>
 <div class="partsDiv">
@@ -120,9 +121,8 @@
 <br>   
 <!--Добавить кнопку/ссылку "Изменить", которая откроет новую страницу с формой и селектами по запчастям-->
 <div class="divBut">
-
-    <button><a th:href="@{'/parts/fine/' + ${part.id_bike}}" th:text="'Все части работают'"/></button>
-    <button><a th:href="@{'/parts/edit/' + ${part.id_bike}}" th:text="'Изменить'"/></button>
+    <button><a th:href="@{'/parts/fine/' + ${part.bikeId}}" th:text="'Все части работают'"/></button>
+    <button><a th:href="@{'/parts/edit/' + ${part.bikeId}}" th:text="'Изменить'"/></button>
 </div>
 <!--'bikes/show' + ${bike.id}-->
 </body>

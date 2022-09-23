@@ -29,7 +29,9 @@ public class PartController {
     @GetMapping("/edit/{id_bike}")
     public String showEditPartForm(Model model, @PathVariable(value = "id_bike") Integer id){
         Part part = partService.getById(id);
+        Bike bike = part.getBike();
         model.addAttribute("part", part);
+        model.addAttribute("bike", bike);
         return "part-edit";
     }
 

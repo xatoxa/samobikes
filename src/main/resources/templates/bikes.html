@@ -15,7 +15,7 @@
 
     <H1>Каталог велосипедов</H1>
 
-    <!--Сообщение о добавлении/изменении-->
+    <!--Сообщение об успешном добавлении/изменении-->
     <div th:if="${message != null}">
         [[${message}]]
     </div>
@@ -25,8 +25,8 @@
     <table class="table table-hover">
         <thead>
         <tr>
-            <th>ID</th>
             <th>Номер</th>
+            <th>QR номер</th>
             <th>VIN</th>
             <th>Статус</th>
             <th>Комментарий</th>
@@ -36,8 +36,8 @@
         <tbody>
         <!--Цикл foreach по всем велосипедам-->
         <tr th:each="bike : ${bikes}">
-            <td th:text="${bike.id}"/>
             <td th:text="${bike.number}"/>
+            <td th:text="${bike.qrNumber}"/>
             <td th:text="${bike.VIN}"/>
             <td th:text="${bike.status == true ? 'Работает' : 'Сломан'}"/>
             <td th:text="${bike.comment}"/>
@@ -52,7 +52,7 @@
     <br>
     <span th:text="${'Всего: ' + bikes.size()}"/>
     <br>
-    <span th:text="${'Сломано: ' + bikes.size()}"/><br>
+    <span th:text="${'Сломано: ' + broken_bikes.size()}"/><br>
     <div class="divBtn">
         <button type="submit" class="btn add"><a th:href="@{'/bikes/add/'}" th:text="Добавить" class="aAdd" /></button>
     </div>

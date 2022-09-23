@@ -10,9 +10,9 @@
   <link media="all" rel="stylesheet" type="text/css" th:href="@{/css/style_part-edit.css}"><!-- ссылка на css всегда должна быть самой последней -->
 </head>
 <body>
-<h1 th:text="${'Изменение состояния запчастей велосипеда ' + part.id_bike}"/>
+<h1 th:text="${'Изменение состояния запчастей велосипеда ' + bike.number + ' / ' + bike.qrNumber}"/>
 <div class="homeBut">
-  <button class="home"><a class="home" th:href="@{'/bikes/show/' + ${id_bike}}" th:text="'Назад'"/></button>
+  <button class="home"><a class="home" th:href="@{'/bikes/show/' + ${bikeId}}" th:text="'Назад'"/></button>
   <button class="home"><a class="home" th:href="@{'/bikes'}" th:text="'На главную'"/></button>
 </div>
 <div class="container">
@@ -22,7 +22,7 @@
 
     <!--Неизменяемые части part-->
     <div class="input-group">
-      <input th:field="*{id_bike}" class="form-control" hidden/>
+      <input th:field="*{bikeId}" class="form-control" hidden/>
     </div>
     <div class="input-group">
       <input th:field="*{bike}" class="form-control" hidden/>
