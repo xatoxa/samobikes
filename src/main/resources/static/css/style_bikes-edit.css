@@ -29,9 +29,9 @@ input{
 }
 button{
 	margin-top: 5% ;
-	background: rgb(254,51,96);
+	background: rgb(254,12,106);
 	color: white;
-	width: 300px;
+	width: 50%;
 	font-family: 'Averia Serif Libre', cursive;
 	appearance: none;
 	border: 0;
@@ -65,6 +65,17 @@ option{
 option:hover{
 	background-color: rgb(254,51,96);
 	color: white;
+}
+.homeBut{
+	text-align: center;
+}
+.home{
+	background: rgb(254,12,106);
+	color: white;
+	width: 50%;
+}
+a{
+	text-decoration: none;
 }
 
 

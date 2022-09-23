@@ -5,6 +5,9 @@ body{
     background-position:center;
     font-family: 'Averia Serif Libre', cursive;
 }
+.divBut{
+	float: left;
+}
 button{
 	font-family: 'Averia Serif Libre', cursive;
 	appearance: none;
@@ -36,6 +39,18 @@ hr{
 	border: 2px solid rgb(254,12,106);
 	text-align: center;
 	color: rgb(254,12,106);
+
+}
+.velInfo{
+	width: 40%;
+	display: inline-block;
+}
+.velFoto{
+	width: 58%;
+	display: inline-block;
+}
+.foto{
+	height: 100%;
 }
 .homeBut{
 	text-align: center;
@@ -45,8 +60,21 @@ hr{
 	color: white;
 	width: 50%;
 }
-.parts{
-	width: 50%;
+
+.partsLeft{
+	width: 47%;
+	float: left;
+	border-radius: 5px;
+	border: 2px solid rgb(254,12,106);
+	padding: 1%;
+}
+.partsRight{
+	width: 47%;
+	float: right;
+	border-radius: 5px;
+	border: 2px solid rgb(254,12,106);
+	padding: 1%;
+
 }
 img{
 	height: 20px;
@@ -69,7 +97,7 @@ img{
   position: absolute;
   z-index: 1;
   bottom: -370%;
-  left: 450%;
+  left: -900%;
   margin-left: -60px;
   opacity: 0;
   transition: opacity 0.3s;
@@ -82,12 +110,12 @@ img{
   content: "";
   position: absolute;
   top: 47%;
-  left: -2%;
+  left: 102%;
   margin-left: -5px;
   border-width: 5px;
   border-style: solid;
   border-color: #555  transparent transparent transparent;
-  transform: rotate(90deg)
+  transform: rotate(270deg)
 }
 
 .tooltip:hover .tooltiptext {
@@ -96,4 +124,13 @@ img{
 }
 .plcImg{
 	height: 200px;
+}
+@media all and (max-width:768px){
+	.partsLeft{
+		width: 98%;
+		float: none;
+	}
+	.partsRight{
+		width: 98%;
+		float: none;
 }
