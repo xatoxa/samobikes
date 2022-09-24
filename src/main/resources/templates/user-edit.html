@@ -10,12 +10,13 @@
 </head>
 
 <body>
-<H1>Создание нового пользователя</H1>
+<h1  th:text="${user.id == null ? 'Добавление пользователя' : 'Изменение пользователя ' + user.username}"/></h1>
 
 <div class="container">
     <form th:action="@{/users/save}"
           th:object="${user}" method="post" class="form-vertical" onsubmit="return checkUsername(this)">
 
+        <input type="hidden" th:field="*{id}"/>
         <div  class="input-group">
             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
             <input th:field="*{username}" placeholder="Логин" class="form-control" required/>
@@ -23,7 +24,11 @@
 
         <div  class="input-group">
             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-            <input type="password" th:field="*{password}" placeholder="Пароль" class="form-control" required/>
+            <input th:if="${user.id == null}" type="password" th:field="*{password}"
+                   placeholder="Пароль" class="form-control" required/>
+            <input th:if="${user.id != null}" type="password" th:field="*{password}"
+                   placeholder="Ничего не вводите, если не хотите изменить" class="form-control"/>
+
         </div>
 
         <div class="input-group">
@@ -68,8 +73,9 @@
     function checkUsername(form){
         url = "[[@{/users/check_username}]]";
         username = $("#username").val();
+        userId = $("#id").val();
         csrfValue = $("input[name='_csrf']").val();
-        params = {username: username, _csrf: csrfValue};
+        params = {id: userId, username: username, _csrf: csrfValue};
         $.post(url, params, function(response){
             if(response == "OK"){
                 form.submit();

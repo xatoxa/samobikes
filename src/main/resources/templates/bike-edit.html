@@ -23,15 +23,8 @@
         <form th:action="@{/bikes/edit}"
               th:object="${bike}" method="post" class="form-vertical">
 
-            <div  class="input-group">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                <input th:field="*{id}" class="form-control" hidden/>
-            </div>
-
-            <div  class="input-group">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                <input th:field="*{part}" class="form-control" hidden/>
-            </div>
+            <input type="hidden" th:field="*{id}" class="form-control" hidden/>
+            <input type="hidden" th:field="*{part}" class="form-control" hidden/>
 
             <div  class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>

@@ -59,6 +59,10 @@ public class UserServiceImpl implements UserService{
                 mapRolesToAuthorities(user.getRoles()));
     }
 
+    public User getById(Integer id){
+        return userRepository.getReferenceById(id);
+    }
+
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles){
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
     }
@@ -75,12 +79,38 @@ public class UserServiceImpl implements UserService{
         userRepository.deleteById(id);
     }
 
-    public boolean isUsernameUnique(String username){
-        return userRepository.findOneByUsername(username) == null;
+    public boolean isUsernameUnique(Integer id, String username){
+        User user = userRepository.findOneByUsername(username);
+
+        if (user == null) return true;
+
+        boolean isCreating = (id == null);
+
+        //если создаётся
+        if(id == null){
+            if (user != null) {
+                return false;
+            }
+        }else {
+            if (user.getId() != id){
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public void save(User user){
-        encodePassword(user);
+        if (user.getId() != null){
+            User existingUser = userRepository.getReferenceById(user.getId());
+            if (user.getPassword().isEmpty()){
+                user.setPassword(existingUser.getPassword());
+            }else {
+                encodePassword(user);
+            }
+        }else{
+            encodePassword(user);
+        }
         userRepository.save(user);
     }
 

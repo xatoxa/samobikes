@@ -21,12 +21,8 @@
         th:object="${part}" method="post" class="form-vertical">
 
     <!--Неизменяемые части part-->
-    <div class="input-group">
-      <input th:field="*{bikeId}" class="form-control" hidden/>
-    </div>
-    <div class="input-group">
-      <input th:field="*{bike}" class="form-control" hidden/>
-    </div>
+    <input type="hidden" th:field="*{bikeId}" class="form-control" hidden/>
+    <input type="hidden" th:field="*{bike}" class="form-control" hidden/>
 
     <!--Селекты. Названия полей запишу в комментарии.-->
   <div class="partsLeft">

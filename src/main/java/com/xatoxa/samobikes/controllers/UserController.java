@@ -39,8 +39,20 @@ public class UserController {
         model.addAttribute("user", user);
         model.addAttribute("roles", roles);
 
-        return "user-add";
+        return "user-edit";
     }
+
+    //возможно добавить exception на несуществующий id
+    @GetMapping("/users/edit/{id}")
+    public String editUser(Model model, @PathVariable(value = "id") Integer id){
+        User user = userService.getById(id);
+        List<Role> roles = userService.getAllRoles();
+        model.addAttribute("user", user);
+        model.addAttribute("roles", roles);
+
+        return "user-edit";
+    }
+
 
     @PostMapping("/users/save")
     public String saveUser(@ModelAttribute(value = "user") User user,
