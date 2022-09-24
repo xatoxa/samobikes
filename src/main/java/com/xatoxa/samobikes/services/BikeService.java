@@ -48,4 +48,41 @@ public class BikeService {
     public void deleteById(Integer id){
         bikeRepository.deleteById(id);
     }
+
+    public boolean isNumberUnique(Integer id, Integer number) {
+        Bike bike = bikeRepository.findByNumber(number);
+        if (bike == null) return true;
+
+        return checkUniqueness(id, bike);
+    }
+
+    public boolean isQRNumberUnique(Integer id, Integer qrNumber) {
+        Bike bike = bikeRepository.findByqrNumber(qrNumber);
+        if (bike == null) return true;
+
+        return checkUniqueness(id, bike);
+    }
+
+    public boolean isVINUnique(Integer id, String VIN) {
+        Bike bike = bikeRepository.findByVIN(VIN);
+        if (bike == null) return true;
+
+
+        return checkUniqueness(id, bike);
+    }
+
+    private boolean checkUniqueness(Integer id, Bike bike){
+        //если создаётся
+        if(id == null){
+            if (bike != null) {
+                return false;
+            }
+        }else {
+            if (bike.getId() != id){
+                return false;
+            }
+        }
+
+        return true;
+    }
 }

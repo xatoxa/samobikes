@@ -9,4 +9,8 @@ import java.util.List;
 @Repository
 public interface BikeRepository extends JpaRepository<Bike, Integer> {
     List<Bike> findByStatus (boolean status);
+    Bike findByNumber(Integer number);
+    Bike findByqrNumber(Integer qrNumber);
+    Bike findByVIN(String VIN);
+
 }

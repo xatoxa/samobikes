@@ -84,8 +84,6 @@ public class UserServiceImpl implements UserService{
 
         if (user == null) return true;
 
-        boolean isCreating = (id == null);
-
         //если создаётся
         if(id == null){
             if (user != null) {
