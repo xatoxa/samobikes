@@ -5,6 +5,7 @@ import com.xatoxa.samobikes.entities.User;
 import com.xatoxa.samobikes.services.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,13 +27,15 @@ public class UserController {
 
     @GetMapping("/users")
     public String showUsers(Model model){
-        return showUsersByPage(model, 1);
+        return showUsersByPage(model, 1, "username", "asc");
     }
 
     @GetMapping("/users/page/{pageNum}")
     public String showUsersByPage(Model model,
-                           @PathVariable(name = "pageNum") int pageNum){
-        Page<User> page = userService.getAllByPage(pageNum);
+                                  @PathVariable(name = "pageNum") int pageNum,
+                                  @Param("sortField") String sortField,
+                                  @Param("sortDir") String sortDir){
+        Page<User> page = userService.getAllByPage(pageNum, sortField, sortDir);
         List<User> users = page.getContent();
 
         model.addAttribute("users", users);
@@ -48,6 +51,10 @@ public class UserController {
         model.addAttribute("endCount", endCount);
         model.addAttribute("totalItems", page.getTotalElements());
 
+        String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
+        model.addAttribute("sortField", sortField);
+        model.addAttribute("sortDir", sortDir);
+        model.addAttribute("reverseSortDir", reverseSortDir);
 
         return "users";
     }

@@ -7,6 +7,7 @@ import com.xatoxa.samobikes.services.BikeService;
 import com.xatoxa.samobikes.services.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -27,16 +28,18 @@ public class BikeController {
     //добавить варианты сортировки
     @GetMapping
     public String showBikes(Model model){
-        return showBikesByPage(model, 1);
+        return showBikesByPage(model, 1, "number", "asc");
     }
 
-    @GetMapping("/bikes/page/{pageNum}")
+    @GetMapping("/page/{pageNum}")
     public String showBikesByPage(Model model,
-                                  @PathVariable(name = "pageNum") int pageNum){
+                                  @PathVariable(name = "pageNum") int pageNum,
+                                  @Param("sortField") String sortField,
+                                  @Param("sortDir") String sortDir){
         Bike bike = new Bike();
         model.addAttribute("bike", bike);
 
-        Page<Bike> page = bikeService.getAllByPage(pageNum);
+        Page<Bike> page = bikeService.getAllByPage(pageNum, sortField, sortDir);
         List<Bike> bikes = page.getContent();
 
         model.addAttribute("bikes", bikes);
@@ -52,6 +55,11 @@ public class BikeController {
         model.addAttribute("startCount", startCount);
         model.addAttribute("endCount", endCount);
         model.addAttribute("totalItems", page.getTotalElements());
+
+        String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
+        model.addAttribute("sortField", sortField);
+        model.addAttribute("sortDir", sortDir);
+        model.addAttribute("reverseSortDir", reverseSortDir);
 
         return "bikes";
     }

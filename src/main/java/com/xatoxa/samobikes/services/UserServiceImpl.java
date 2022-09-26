@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,7 +19,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -75,8 +75,15 @@ public class UserServiceImpl implements UserService{
         return userRepository.findAll();
     }*/
 
-    public Page<User> getAllByPage(int pageNum){
-        Pageable pageable = PageRequest.of(pageNum - 1, USERS_PER_PAGE);
+    public Page<User> getAllByPage(int pageNum, String sortField, String sortDir){
+        Sort sort = Sort.by(sortField);
+        if (sortDir.equals("asc")){
+            sort = sort.ascending();
+        } else{
+            sort = sort.descending();
+        }
+
+        Pageable pageable = PageRequest.of(pageNum - 1, USERS_PER_PAGE, sort);
         return userRepository.findAll(pageable);
     }
 

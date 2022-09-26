@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,8 +34,15 @@ public class BikeService {
         return bikeRepository.findAll();
     }*/
 
-    public Page<Bike> getAllByPage(int pageNum){
-        Pageable pageable = PageRequest.of(pageNum - 1, BIKES_PER_PAGE);
+    public Page<Bike> getAllByPage(int pageNum, String sortField, String sortDir){
+        Sort sort = Sort.by(sortField);
+        if (sortDir.equals("asc")){
+            sort = sort.ascending();
+        } else{
+            sort = sort.descending();
+        }
+
+        Pageable pageable = PageRequest.of(pageNum - 1, BIKES_PER_PAGE, sort);
         return bikeRepository.findAll(pageable);
     }
 
