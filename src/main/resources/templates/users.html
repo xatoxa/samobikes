@@ -21,15 +21,62 @@
     [[${message}]]
 </div>
 
+<!--добавить к заголовкам таблицы классы в спаны
+при выбранной сортировке у имени поля должна появляться стрелочка
+классы назвал произвольно, чтоб понятно было что куда-->
 <div>
     <table class="table table-hover">
         <thead>
             <tr>
                 <th>ID</th>
-                <th>логин</th>
-                <th>Имя</th>
-                <th>Фамилия</th>
-                <th>Активен</th>
+                <th>
+                    <a th:if="${sortField != 'username'}"
+                       th:href="@{'/users/page/' + ${currentPage} + '?sortField=username&sortDir=' + ${sortDir}}">
+                        логин
+                    </a>
+                    <a th:if="${sortField == 'username'}"
+                       th:href="@{'/users/page/' + ${currentPage} + '?sortField=username&sortDir=' + ${reverseSortDir}}">
+                        логин
+                    </a>
+                    <span th:if="${sortField == 'username'}"
+                          th:class="${sortDir == 'asc' ? 'arrow-up' : 'arrow-down'}"/>
+                </th>
+                <th>
+                    <a th:if="${sortField != 'firstName'}"
+                       th:href="@{'/users/page/' + ${currentPage} + '?sortField=firstName&sortDir=' + ${sortDir}}">
+                        Имя
+                    </a>
+                    <a th:if="${sortField == 'firstName'}"
+                       th:href="@{'/users/page/' + ${currentPage} + '?sortField=firstName&sortDir=' + ${reverseSortDir}}">
+                        Имя
+                    </a>
+                    <span th:if="${sortField == 'firstName'}"
+                          th:class="${sortDir == 'asc' ? 'arrow-up' : 'arrow-down'}"/>
+                </th>
+                <th>
+                    <a th:if="${sortField != 'lastName'}"
+                       th:href="@{'/users/page/' + ${currentPage} + '?sortField=lastName&sortDir=' + ${sortDir}}">
+                        Фамилия
+                    </a>
+                    <a th:if="${sortField == 'lastName'}"
+                       th:href="@{'/users/page/' + ${currentPage} + '?sortField=lastName&sortDir=' + ${reverseSortDir}}">
+                        Фамилия
+                    </a>
+                    <span th:if="${sortField == 'lastName'}"
+                          th:class="${sortDir == 'asc' ? 'arrow-up' : 'arrow-down'}"/>
+                </th>
+                <th>
+                    <a th:if="${sortField != 'enabled'}"
+                       th:href="@{'/users/page/' + ${currentPage} + '?sortField=enabled&sortDir=' + ${sortDir}}">
+                        Активен
+                    </a>
+                    <a th:if="${sortField == 'enabled'}"
+                       th:href="@{'/users/page/' + ${currentPage} + '?sortField=enabled&sortDir=' + ${reverseSortDir}}">
+                        Активен
+                    </a>
+                    <span th:if="${sortField == 'enabled'}"
+                          th:class="${sortDir == 'asc' ? 'arrow-up' : 'arrow-down'}"/>
+                </th>
                 <th>Роль</th>
                 <th class="textCenter">Кнопки</th>
             </tr>
@@ -54,6 +101,42 @@
             </tr>
         </tbody>
     </table>
+    <div th:if="${totalItems > 0}">
+        <span>
+            Пользователи с [[${startCount}]] по [[${endCount}]] из [[${totalItems}]].
+        </span>
+    </div>
+    <div th:unless="${totalItems > 0}">
+        <span>
+            Пользователи не найдены.
+        </span>
+    </div>
+    <div>
+        <nav>
+            <ul>
+                <!--Если первая, то кнопки неактивны, классы в css называй как хочешь, я только пример привёл.
+                С последней и следующей кнопками то же самое.-->
+                <li th:class="${currentPage > 1 ? 'page-item': 'page-item disabled'}">
+                    <a th:href="@{'/users/page/1?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">В начало</a>
+                </li>
+                <li th:class="${currentPage > 1 ? 'page-item': 'page-item disabled'}" >
+                    <a th:href="@{'/users/page/' + ${currentPage - 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">☚ Туда</a>
+                </li>
+                <!--Если текущая страница, то объект активный (подсвечивается), иначе - обычный-->
+                <li th:class="${currentPage != i ? 'page-item' : 'page-item active'}"
+                    th:each="i: ${#numbers.sequence(1, totalPages)}">
+                    <a th:href="@{'/users/page/' + ${i} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+                </li>
+                <li th:class="${currentPage < totalPages ? 'page-item': 'page-item disabled'}">
+                    <a th:href="@{'/users/page/' + ${currentPage + 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Сюда ☛</a>
+                </li>
+                <li th:class="${currentPage < totalPages ? 'page-item': 'page-item disabled'}">
+                    <a th:href="@{'/users/page/' + ${totalPages} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">В конец</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
 </div>
 
 <div>
