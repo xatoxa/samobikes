@@ -2,12 +2,17 @@ package com.xatoxa.samobikes.controllers;
 
 import com.xatoxa.samobikes.entities.Bike;
 import com.xatoxa.samobikes.entities.Part;
+import com.xatoxa.samobikes.entities.User;
 import com.xatoxa.samobikes.services.BikeService;
+import com.xatoxa.samobikes.services.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/bikes")
@@ -22,12 +27,35 @@ public class BikeController {
     //добавить варианты сортировки
     @GetMapping
     public String showBikes(Model model){
+        return showBikesByPage(model, 1);
+    }
+
+    @GetMapping("/bikes/page/{pageNum}")
+    public String showBikesByPage(Model model,
+                                  @PathVariable(name = "pageNum") int pageNum){
         Bike bike = new Bike();
-        model.addAttribute("bikes" ,bikeService.getAllBikes());
-        model.addAttribute("broken_bikes", bikeService.getBrokenBikes());
         model.addAttribute("bike", bike);
+
+        Page<Bike> page = bikeService.getAllByPage(pageNum);
+        List<Bike> bikes = page.getContent();
+
+        model.addAttribute("bikes", bikes);
+        model.addAttribute("broken_bikes", bikeService.getBrokenBikes());
+
+        long startCount = (long) (pageNum - 1) * BikeService.BIKES_PER_PAGE + 1;
+        long endCount = startCount + BikeService.BIKES_PER_PAGE - 1;
+        if (endCount > page.getTotalElements()){
+            endCount = page.getTotalElements();
+        }
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("currentPage", pageNum);
+        model.addAttribute("startCount", startCount);
+        model.addAttribute("endCount", endCount);
+        model.addAttribute("totalItems", page.getTotalElements());
+
         return "bikes";
     }
+
 
     @GetMapping("/show/{id}")
     public String showOneBike(Model model, @PathVariable(value = "id") Integer id){

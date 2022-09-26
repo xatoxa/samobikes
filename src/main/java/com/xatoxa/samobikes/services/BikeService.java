@@ -2,15 +2,20 @@ package com.xatoxa.samobikes.services;
 
 import com.xatoxa.samobikes.entities.Bike;
 import com.xatoxa.samobikes.entities.Part;
+import com.xatoxa.samobikes.entities.User;
 import com.xatoxa.samobikes.repositories.BikeRepository;
 import com.xatoxa.samobikes.repositories.PartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class BikeService {
+    public static final int BIKES_PER_PAGE = 6;
     private BikeRepository bikeRepository;
     private PartRepository partRepository;
 
@@ -24,8 +29,13 @@ public class BikeService {
         this.partRepository = partRepository;
     }
 
-    public List<Bike> getAllBikes(){
+    /*public List<Bike> getAllBikes(){
         return bikeRepository.findAll();
+    }*/
+
+    public Page<Bike> getAllByPage(int pageNum){
+        Pageable pageable = PageRequest.of(pageNum - 1, BIKES_PER_PAGE);
+        return bikeRepository.findAll(pageable);
     }
 
     public List<Bike> getBrokenBikes(){
@@ -33,7 +43,7 @@ public class BikeService {
     }
 
     public Bike getById(Integer id){
-        return bikeRepository.getReferenceById(id);
+        return bikeRepository.findById(id).get();
     }
 
     public void save(Bike bike){

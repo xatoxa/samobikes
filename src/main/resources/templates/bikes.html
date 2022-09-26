@@ -52,7 +52,46 @@
     <br>
     <span th:text="${'Всего: ' + bikes.size()}"/>
     <br>
-    <span th:text="${'Сломано: ' + broken_bikes.size()}"/><br>
+    <span th:text="${'Всего сломано: ' + broken_bikes.size()}"/><br>
+
+    <div th:if="${totalItems > 0}">
+        <span>
+            Велосипеды с [[${startCount}]] по [[${endCount}]] из [[${totalItems}]].
+        </span>
+    </div>
+    <div th:unless="${totalItems > 0}">
+        <span>
+            Велосипеды не найдены.
+        </span>
+    </div>
+
+    <div>
+        <nav>
+            <ul>
+                <!--Если первая, то кнопки неактивны, классы в css называй как хочешь, я только пример привёл.
+                С последней и следующей кнопками то же самое.-->
+                <li th:class="${currentPage > 1 ? 'page-item': 'page-item disabled'}">
+                    <a th:href="@{/bikes/page/1}">В начало</a>
+                </li>
+                <li th:class="${currentPage > 1 ? 'page-item': 'page-item disabled'}" >
+                    <a th:href="@{'/bikes/page/' + ${currentPage - 1}}">☚ Туда</a>
+                </li>
+                <!--Если текущая страница, то объект активный (подсвечивается), иначе - обычный-->
+                <li th:class="${currentPage != i ? 'page-item' : 'page-item active'}"
+                    th:each="i: ${#numbers.sequence(1, totalPages)}">
+                    <a th:href="@{'/bikes/page/' + ${i}}">[[${i}]]</a>
+                </li>
+                <li th:class="${currentPage < totalPages ? 'page-item': 'page-item disabled'}">
+                    <a th:href="@{'/bikes/page/' + ${currentPage + 1}}">Сюда ☛</a>
+                </li>
+                <li th:class="${currentPage < totalPages ? 'page-item': 'page-item disabled'}">
+                    <a th:href="@{'/bikes/page/' + ${totalPages}}">В конец</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+
     <div class="divBtn">
         <button type="submit" class="btn add"><a th:href="@{'/bikes/add/'}" th:text="Добавить" class="aAdd" /></button>
     </div>

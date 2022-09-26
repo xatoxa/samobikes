@@ -6,6 +6,9 @@ import com.xatoxa.samobikes.repositories.RoleRepository;
 import com.xatoxa.samobikes.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,6 +25,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService{
+    public static final int USERS_PER_PAGE = 6;
     private UserRepository userRepository;
     private RoleRepository roleRepository;
 
@@ -60,15 +64,20 @@ public class UserServiceImpl implements UserService{
     }
 
     public User getById(Integer id){
-        return userRepository.getReferenceById(id);
+        return userRepository.findById(id).get();
     }
 
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles){
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
     }
 
-    public List<User> getAllUsers(){
+    /*public List<User> getAllUsers(){
         return userRepository.findAll();
+    }*/
+
+    public Page<User> getAllByPage(int pageNum){
+        Pageable pageable = PageRequest.of(pageNum - 1, USERS_PER_PAGE);
+        return userRepository.findAll(pageable);
     }
 
     public List<Role> getAllRoles(){
@@ -100,7 +109,7 @@ public class UserServiceImpl implements UserService{
 
     public void save(User user){
         if (user.getId() != null){
-            User existingUser = userRepository.getReferenceById(user.getId());
+            User existingUser = userRepository.findById(user.getId()).get();
             if (user.getPassword().isEmpty()){
                 user.setPassword(existingUser.getPassword());
             }else {
