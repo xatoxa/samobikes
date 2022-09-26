@@ -43,7 +43,9 @@ public class BikeController {
         List<Bike> bikes = page.getContent();
 
         model.addAttribute("bikes", bikes);
-        model.addAttribute("broken_bikes", bikeService.getBrokenBikes());
+        model.addAttribute("count_all_bikes", bikeService.countAll());
+        model.addAttribute("count_working_bikes", bikeService.countWorkingBikes());
+        model.addAttribute("count_broken_bikes", bikeService.countBrokenBikes());
 
         long startCount = (long) (pageNum - 1) * BikeService.BIKES_PER_PAGE + 1;
         long endCount = startCount + BikeService.BIKES_PER_PAGE - 1;

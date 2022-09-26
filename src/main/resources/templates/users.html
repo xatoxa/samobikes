@@ -32,11 +32,11 @@
                 <th>
                     <a th:if="${sortField != 'username'}"
                        th:href="@{'/users/page/' + ${currentPage} + '?sortField=username&sortDir=' + ${sortDir}}">
-                        логин
+                        Логин
                     </a>
                     <a th:if="${sortField == 'username'}"
                        th:href="@{'/users/page/' + ${currentPage} + '?sortField=username&sortDir=' + ${reverseSortDir}}">
-                        логин
+                        Логин
                     </a>
                     <span th:if="${sortField == 'username'}"
                           th:class="${sortDir == 'asc' ? 'arrow-up' : 'arrow-down'}"/>

@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public interface BikeRepository extends PagingAndSortingRepository<Bike, Integer> {
-    List<Bike> findByStatus (boolean status);
+    int countByStatus (boolean status);
     Bike findByNumber(Integer number);
     Bike findByqrNumber(Integer qrNumber);
     Bike findByVIN(String VIN);

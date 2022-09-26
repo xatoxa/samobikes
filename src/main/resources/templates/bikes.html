@@ -97,9 +97,9 @@
         </tbody>
     </table>
     <br>
-    <span th:text="${'Всего: ' + bikes.size()}"/>
-    <br>
-    <span th:text="${'Всего сломано: ' + broken_bikes.size()}"/><br>
+    <span th:text="${'Всего: ' + count_all_bikes}"/><br>
+    <span th:text="${'Cломано: ' + count_broken_bikes}"/><br>
+    <span th:text="${'Работают: ' + count_working_bikes}"/><br>
 
     <div th:if="${totalItems > 0}">
         <span>
@@ -118,7 +118,7 @@
                 <!--Если первая, то кнопки неактивны, классы в css называй как хочешь, я только пример привёл.
                 С последней и следующей кнопками то же самое.-->
                 <li th:class="${currentPage > 1 ? 'page-item': 'page-item disabled'}">
-                    <a th:href="@{/bikes/page/1?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">В начало</a>
+                    <a th:href="@{'/bikes/page/1?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">В начало</a>
                 </li>
                 <li th:class="${currentPage > 1 ? 'page-item': 'page-item disabled'}" >
                     <a th:href="@{'/bikes/page/' + ${currentPage - 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">☚ Туда</a>

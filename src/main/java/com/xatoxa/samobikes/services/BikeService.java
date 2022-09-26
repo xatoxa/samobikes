@@ -46,8 +46,17 @@ public class BikeService {
         return bikeRepository.findAll(pageable);
     }
 
-    public List<Bike> getBrokenBikes(){
-        return bikeRepository.findByStatus(false);
+    public int countAll(){
+        return (int)bikeRepository.count();
+    }
+
+    public int countWorkingBikes(){
+        return bikeRepository.countByStatus(true);
+    }
+
+
+    public int countBrokenBikes(){
+        return bikeRepository.countByStatus(false);
     }
 
     public Bike getById(Integer id){
