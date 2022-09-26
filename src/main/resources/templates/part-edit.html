@@ -12,7 +12,7 @@
 <body>
 <h1 th:text="${'Изменение состояния запчастей велосипеда ' + bike.number + ' / ' + bike.qrNumber}"/>
 <div class="homeBut">
-  <button class="home"><a class="home" th:href="@{'/bikes/show/' + ${bikeId}}" th:text="'Назад'"/></button>
+  <button class="home"><a class="home" th:href="@{'/bikes/show/' + ${part.bikeId}}" th:text="'Назад'"/></button>
   <button class="home"><a class="home" th:href="@{'/bikes'}" th:text="'На главную'"/></button>
 </div>
 <div class="container">

@@ -7,6 +7,7 @@
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <link media="all" rel="stylesheet" type="text/css" th:href="@{/css/style_user-edit.css}">
 </head>
 
 <body>
@@ -17,28 +18,28 @@
           th:object="${user}" method="post" class="form-vertical" onsubmit="return checkUsername(this)">
 
         <input type="hidden" th:field="*{id}"/>
-        <div  class="input-group">
+        <div  class="input-group inp">
             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-            <input th:field="*{username}" placeholder="Логин" class="form-control" required/>
+            <input th:field="*{username}" placeholder="Логин" class="form-control form" required/>
         </div>
 
-        <div  class="input-group">
+        <div  class="input-group inp">
             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
             <input th:if="${user.id == null}" type="password" th:field="*{password}"
-                   placeholder="Пароль" class="form-control" required/>
+                   placeholder="Пароль" class="form-control form" required/>
             <input th:if="${user.id != null}" type="password" th:field="*{password}"
-                   placeholder="Ничего не вводите, если не хотите изменить" class="form-control"/>
+                   placeholder="Ничего не вводите, если не хотите изменить" class="form-control form"/>
 
         </div>
 
-        <div class="input-group">
+        <div class="input-group inp">
             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-            <input th:field="*{firstName}" placeholder="Имя (необязательно)" class="form-control"/>
+            <input th:field="*{firstName}" placeholder="Имя (необязательно)" class="form-control form"/>
         </div>
 
-        <div class="input-group">
+        <div class="input-group inp">
             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-            <input th:field="*{lastName}" placeholder="Фамилия (необязательно)" class="form-control"/>
+            <input th:field="*{lastName}" placeholder="Фамилия (необязательно)" class="form-control form"/>
         </div>
 
         <div  class="input-group">

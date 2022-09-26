@@ -12,11 +12,10 @@
 <body>
     <!--Если на страничку прилетает id, то редактирование, иначе добавление-->
 
-    <div class="homeBut">
-        <button class="home"><a class="home" th:href="@{'/bikes'}" th:text="'На главную'"/></button>
-    </div>
+    
 
     <h1  th:text="${bike.id == null ? 'Добавление велосипеда' : 'Изменение велосипеда ' + bike.number + ' | ' + bike.qrNumber}"/></h1>
+
 
     <div class="container">
         <!--Форма редактирования велосипеда-->
@@ -69,6 +68,7 @@
             <div class="form-group button">
                 <div>
                     <button type="submit" class="btn">Сохранить</button>
+                    <button  type="button" class="btn"><a  th:href="@{'/bikes'}" th:text="Отмена" class="home"/></button>
                 </div>
             </div>
         </form>

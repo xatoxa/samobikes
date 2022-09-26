@@ -1,0 +1,58 @@
+body{
+	background-image: url("../img/background.jpg");
+	background-repeat:no-repeat;
+    background-attachment:fixed;
+    background-position:center;
+    font-family: 'Averia Serif Libre', cursive;
+    
+}
+H1{
+    text-align: center;
+    color: rgb(254,51,96);
+}
+.form-control{
+    color: grey;
+    font-size: 20px;
+    font-family: 'Averia Serif Libre', cursive;
+    border: 2px solid grey;
+    border-radius: 5px;
+}
+.inp{
+    text-align: center;
+    margin-top: 2%;
+}
+.form-control:focus{
+    color: rgb(254,51,96);
+    border: 2px solid rgb(254,51,96);
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(254, 51, 96, 0.4);
+}
+.form{
+    width: 90%;
+    margin: auto;
+}
+.button{
+    text-align: center;
+}
+button{
+    font-family: 'Averia Serif Libre', cursive;
+    appearance: none;
+    border: 0;
+    border-radius: 5px;
+    padding: 8px 16px;
+    font-size: 16px;
+    background: white;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    background: rgb(254,12,106);
+    color: white;
+    border: 2px solid rgb(254,12,106);
+}
+button:hover{
+    border: 2px solid rgb(254,12,106);
+    box-shadow: 0 0 0 0.2rem rgba(254, 12, 106, 0.6);
+}
+a{
+    color: white;
+    text-decoration: none;
+}

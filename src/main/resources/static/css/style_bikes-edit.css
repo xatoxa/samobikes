@@ -7,18 +7,16 @@ body{
     
 }
 select{
-	background-repeat:no-repeat;
-    background-attachment:fixed;
-    background-position:center;
     font-family: 'Averia Serif Libre', cursive;
 }
+
 .input-group{
 	margin-top: 30px;
 	text-align: center;
 }
 h1{
 	text-align: center;
-	color: rgb(254,51,96);
+	color: rgb(254,51,96);;
 }
 input{
 	font-size: 20px;
@@ -27,11 +25,14 @@ input{
 	border-radius: 5px;
 	color: grey;
 }
+.btn{
+	margin-top: 5%;
+}
 button{
-	margin-top: 5% ;
+	
 	background: rgb(254,12,106);
 	color: white;
-	width: 50%;
+	width: 30%;
 	font-family: 'Averia Serif Libre', cursive;
 	appearance: none;
 	border: 0;
