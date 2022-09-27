@@ -28,18 +28,19 @@ public class BikeController {
     //добавить варианты сортировки
     @GetMapping
     public String showBikes(Model model){
-        return showBikesByPage(model, 1, "number", "asc");
+        return showBikesByPage(model, 1, "number", "asc", null);
     }
 
     @GetMapping("/page/{pageNum}")
     public String showBikesByPage(Model model,
                                   @PathVariable(name = "pageNum") int pageNum,
                                   @Param("sortField") String sortField,
-                                  @Param("sortDir") String sortDir){
+                                  @Param("sortDir") String sortDir,
+                                  @Param("keyword") String keyword){
         Bike bike = new Bike();
         model.addAttribute("bike", bike);
 
-        Page<Bike> page = bikeService.getAllByPage(pageNum, sortField, sortDir);
+        Page<Bike> page = bikeService.getAllByPage(pageNum, sortField, sortDir, keyword);
         List<Bike> bikes = page.getContent();
 
         model.addAttribute("bikes", bikes);
@@ -62,6 +63,8 @@ public class BikeController {
         model.addAttribute("sortField", sortField);
         model.addAttribute("sortDir", sortDir);
         model.addAttribute("reverseSortDir", reverseSortDir);
+
+        model.addAttribute("keyword", keyword);
 
         return "bikes";
     }

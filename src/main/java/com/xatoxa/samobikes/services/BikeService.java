@@ -34,15 +34,18 @@ public class BikeService {
         return bikeRepository.findAll();
     }*/
 
-    public Page<Bike> getAllByPage(int pageNum, String sortField, String sortDir){
+    public Page<Bike> getAllByPage(int pageNum, String sortField, String sortDir, String keyword){
         Sort sort = Sort.by(sortField);
         if (sortDir.equals("asc")){
             sort = sort.ascending();
         } else{
             sort = sort.descending();
         }
-
         Pageable pageable = PageRequest.of(pageNum - 1, BIKES_PER_PAGE, sort);
+
+        if (keyword != null){
+            return bikeRepository.findAll(keyword, pageable);
+        }
         return bikeRepository.findAll(pageable);
     }
 

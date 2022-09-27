@@ -16,10 +16,22 @@
 
     <H1>Каталог велосипедов</H1>
 
-    <!--Сообщение об успешном добавлении/изменении-->
+    <!--Сообщение об успешном добавлении/изменении/удалении-->
     <div class="alert" th:if="${message != null}">
         [[${message}]]
     </div>
+
+    <div>
+        <form th:action="@{/bikes/page/1}" class="form-inline">
+            <input type="hidden" name="sortField" th:value="${sortField}">
+            <input type="hidden" name="sortDir" th:value="${sortDir}">
+            <input type="search" name="keyword" th:value="${keyword}" class="form-control" required>
+            <input type="submit" value="Поиск"/>
+            <input type="button" value="Очистить" onclick="clearFilter()"/>
+        </form>
+    </div>
+
+
     <!--добавить к заголовкам таблицы классы в спаны
     при выбранной сортировке у имени поля должна появляться стрелочка
     классы назвал произвольно, чтоб понятно было что куда-->
@@ -30,11 +42,11 @@
         <tr>
             <th>
                 <a th:if="${sortField != 'number'}"
-                   th:href="@{'/bikes/page/' + ${currentPage} + '?sortField=number&sortDir=' + ${sortDir}}">
+                   th:href="@{'/bikes/page/' + ${currentPage} + '?sortField=number&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">
                     Номер
                 </a>
                 <a th:if="${sortField == 'number'}"
-                   th:href="@{'/bikes/page/' + ${currentPage} + '?sortField=number&sortDir=' + ${reverseSortDir}}">
+                   th:href="@{'/bikes/page/' + ${currentPage} + '?sortField=number&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">
                     Номер
                 </a>
                 <span th:if="${sortField == 'number'}"
@@ -42,11 +54,11 @@
             </th>
             <th>
                 <a th:if="${sortField != 'qrNumber'}"
-                   th:href="@{'/bikes/page/' + ${currentPage} + '?sortField=qrNumber&sortDir=' + ${sortDir}}">
+                   th:href="@{'/bikes/page/' + ${currentPage} + '?sortField=qrNumber&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">
                     QR номер
                 </a>
                 <a th:if="${sortField == 'qrNumber'}"
-                   th:href="@{'/bikes/page/' + ${currentPage} + '?sortField=qrNumber&sortDir=' + ${reverseSortDir}}">
+                   th:href="@{'/bikes/page/' + ${currentPage} + '?sortField=qrNumber&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">
                     QR номер
                 </a>
                 <span th:if="${sortField == 'qrNumber'}"
@@ -54,11 +66,11 @@
             </th>
             <th>
                 <a th:if="${sortField != 'VIN'}"
-                   th:href="@{'/bikes/page/' + ${currentPage} + '?sortField=VIN&sortDir=' + ${sortDir}}">
+                   th:href="@{'/bikes/page/' + ${currentPage} + '?sortField=VIN&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">
                     VIN
                 </a>
                 <a th:if="${sortField == 'VIN'}"
-                   th:href="@{'/bikes/page/' + ${currentPage} + '?sortField=VIN&sortDir=' + ${reverseSortDir}}">
+                   th:href="@{'/bikes/page/' + ${currentPage} + '?sortField=VIN&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">
                     VIN
                 </a>
                 <span th:if="${sortField == 'VIN'}"
@@ -66,11 +78,11 @@
             </th>
             <th>
                 <a th:if="${sortField != 'status'}"
-                   th:href="@{'/bikes/page/' + ${currentPage} + '?sortField=status&sortDir=' + ${sortDir}}">
+                   th:href="@{'/bikes/page/' + ${currentPage} + '?sortField=status&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">
                     Статус
                 </a>
                 <a th:if="${sortField == 'status'}"
-                   th:href="@{'/bikes/page/' + ${currentPage} + '?sortField=status&sortDir=' + ${reverseSortDir}}">
+                   th:href="@{'/bikes/page/' + ${currentPage} + '?sortField=status&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">
                     Статус
                 </a>
                 <span th:if="${sortField == 'status'}"
@@ -112,31 +124,37 @@
         </span>
     </div>
 
-    <div>
+    <div th:if="${totalPages > 1}">
         <nav>
             <ul>
                 <!--Если первая, то кнопки неактивны, классы в css называй как хочешь, я только пример привёл.
                 С последней и следующей кнопками то же самое.-->
                 <li th:class="${currentPage > 1 ? 'page-item': 'page-item disabled'}">
-                    <a th:href="@{'/bikes/page/1?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">В начало</a>
+                    <a th:href="@{'/bikes/page/1?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">В начало</a>
                 </li>
                 <li th:class="${currentPage > 1 ? 'page-item': 'page-item disabled'}" >
-                    <a th:href="@{'/bikes/page/' + ${currentPage - 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">☚ Туда</a>
+                    <a th:href="@{'/bikes/page/' + ${currentPage - 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">☚ Туда</a>
                 </li>
                 <!--Если текущая страница, то объект активный (подсвечивается), иначе - обычный-->
                 <li th:class="${currentPage != i ? 'page-item' : 'page-item active'}"
                     th:each="i: ${#numbers.sequence(1, totalPages)}">
-                    <a th:href="@{'/bikes/page/' + ${i} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+                    <a th:href="@{'/bikes/page/' + ${i} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">[[${i}]]</a>
                 </li>
                 <li th:class="${currentPage < totalPages ? 'page-item': 'page-item disabled'}">
-                    <a th:href="@{'/bikes/page/' + ${currentPage + 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Сюда ☛</a>
+                    <a th:href="@{'/bikes/page/' + ${currentPage + 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">Сюда ☛</a>
                 </li>
                 <li th:class="${currentPage < totalPages ? 'page-item': 'page-item disabled'}">
-                    <a th:href="@{'/bikes/page/' + ${totalPages} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">В конец</a>
+                    <a th:href="@{'/bikes/page/' + ${totalPages} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">В конец</a>
                 </li>
             </ul>
         </nav>
     </div>
+
+    <script>
+        function clearFilter(){
+        window.location = "[[@{/bikes}]]"
+    }
+    </script>
 
 
     <div class="divBtn">
