@@ -98,16 +98,24 @@ public class BikeController {
     @PostMapping("/edit")
     public String saveBike (@ModelAttribute(value = "bike") Bike bike,
                             RedirectAttributes redirectAttributes){
-        //добавить проверку на совпадающий id, если да, редирект обратно
-        //добавить проверку на заполненные значения id, number, VIN
         bikeService.save(bike);
-        redirectAttributes.addFlashAttribute("message", "Успешно выполнено.");
+
+        redirectAttributes.addFlashAttribute(
+                "message",
+                "Велосипед " + bike.getNumber() + " | " + bike.getQrNumber() + " сохранён.");
         return "redirect:/bikes";
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteBike(@PathVariable(value = "id") Integer id){
+    public String deleteBike(@PathVariable(value = "id") Integer id,
+                             RedirectAttributes redirectAttributes){
+        Integer number = bikeService.getById(id).getNumber();
+        Integer qrNumber = bikeService.getById(id).getQrNumber();
         bikeService.deleteById(id);
+
+        redirectAttributes.addFlashAttribute(
+                "message",
+                "Велосипед " + number + " | " + qrNumber + " удалён.");
         return "redirect:/bikes";
     }
 }
