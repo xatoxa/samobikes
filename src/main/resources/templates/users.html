@@ -16,24 +16,28 @@
 
 <!--этот блок есть во всех страницах, кроме login-->
 <!--это куда-нибудь в правый угол; положение - горизонтально-->
+<!--надо сделать что-то типа dropdown из bootstrap: чтоб из имени юзера выпадала менюшка-->
 <div>
     <form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
         <input type="submit"/>
     </form>
+
     <div>
         <span class="fas fa-light fa-user fa-2x"></span>
     </div>
-    <div class="dropdown">
-        <a class="link dropdown-toggle" data-toggle="dropdown"
+    <div>
+        <a data-toggle="dropdown"
            sec:authentication="principal.username"></a>
-        <div class="dropdown-menu">
-            <a class="dropdown-link" id="logoutLink" th:href="@{/logout}">Выйти</a>
+        <div>
+            <a th:href="@{/users}">Пользователи</a>
+        </div>
+        <div>
+            <a id="logoutLink" th:href="@{/logout}">Выйти</a>
         </div>
     </div>
 </div>
 
 <H1>Пользователи</H1>
-
 
 <!--Сообщение об успешном добавлении/изменении/удалении-->
 <div th:if="${message != null}">

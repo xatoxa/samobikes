@@ -89,13 +89,20 @@ public class UserController {
     public String saveUser(@ModelAttribute(value = "user") User user,
                            RedirectAttributes redirectAttributes){
         userService.save(user);
-        redirectAttributes.addFlashAttribute("message", "Успешно выполнено.");
+        redirectAttributes.addFlashAttribute(
+                "message",
+                "Пользователь " + user.getUsername() + " сохранён.");
         return "redirect:/users";
     }
 
     @GetMapping("/users/delete/{id}")
-    public String deleteUser(@PathVariable(value = "id") Integer id){
+    public String deleteUser(@PathVariable(value = "id") Integer id,
+                             RedirectAttributes redirectAttributes){
+        String username = userService.getById(id).getUsername();
         userService.deleteById(id);
+        redirectAttributes.addFlashAttribute(
+                "message",
+                "Пользователь " + username + " удалён.");
         return "redirect:/users";
     }
 }
