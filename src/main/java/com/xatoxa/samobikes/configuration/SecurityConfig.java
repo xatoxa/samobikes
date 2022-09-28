@@ -52,7 +52,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                     .loginPage("/login")
                     .permitAll()
-                .and().logout().permitAll();
+                .and().logout().permitAll()
+                .and().rememberMe();
     }
 
     @Override
