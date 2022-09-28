@@ -1,9 +1,11 @@
 package com.xatoxa.samobikes.services;
 
-import com.xatoxa.samobikes.entities.User;
 import com.xatoxa.samobikes.entities.SamUserDetails;
+import com.xatoxa.samobikes.entities.User;
+
 import com.xatoxa.samobikes.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 public class SamUserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
@@ -16,7 +18,7 @@ public class SamUserDetailsService implements org.springframework.security.core.
 
 
     @Override
-    public SamUserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findOneByUsername(username);
         if (user != null){
             return new SamUserDetails(user);

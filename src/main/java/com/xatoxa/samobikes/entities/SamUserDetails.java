@@ -2,13 +2,14 @@ package com.xatoxa.samobikes.entities;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-public class SamUserDetails implements org.springframework.security.core.userdetails.UserDetails {
+public class SamUserDetails implements UserDetails {
 
     private User user;
 
@@ -18,7 +19,7 @@ public class SamUserDetails implements org.springframework.security.core.userdet
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        Set<Role> roles = (Set<Role>) user.getRoles();
+        Collection<Role> roles = user.getRoles();
 
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 

@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="utf-8"/>
     <title>Каталог велосипедов</title>
@@ -13,6 +15,24 @@
 
 <body>
 <div class="content">
+
+    <!--этот блок есть во всех страницах, кроме login-->
+    <!--это куда-нибудь в правый угол; положение - горизонтально-->
+    <div>
+        <form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
+            <input type="submit"/>
+        </form>
+        <div>
+            <span class="fas fa-light fa-user fa-2x"></span>
+        </div>
+        <div class="dropdown">
+            <a class="link dropdown-toggle" data-toggle="dropdown"
+               sec:authentication="principal.username"></a>
+            <div class="dropdown-menu">
+                <a class="dropdown-link" id="logoutLink" th:href="@{/logout}">Выйти</a>
+            </div>
+        </div>
+    </div>
 
     <H1>Каталог велосипедов</H1>
 
@@ -31,10 +51,6 @@
         </form>
     </div>
 
-
-    <!--добавить к заголовкам таблицы классы в спаны
-    при выбранной сортировке у имени поля должна появляться стрелочка
-    классы назвал произвольно, чтоб понятно было что куда-->
     <br>
     <!--Таблица всех велосипедов-->
     <table>
@@ -130,7 +146,6 @@
                 </li>
             </ul>
         </nav>
-    
     <br>
     <div class="divBtn">
         <button type="submit" class="btn add"><a th:href="@{'/bikes/add/'}" th:text="Добавить" class="aAdd" /></button>
@@ -150,19 +165,20 @@
             Велосипеды не найдены.
         </span>
     </div>
-
-    
-
-   
-
-
-    
 </div>
 
- <script>
-        function clearFilter(){
-        window.location = "[[@{/bikes}]]"
+ <script type="text/javascript">
+    function clearFilter(){
+        window.location = "[[@{/bikes}]]";
     }
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#logoutLink").on("click", function(e) {
+            e.preventDefault();
+            document.logoutForm.submit();
+        });
+    });
 </script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

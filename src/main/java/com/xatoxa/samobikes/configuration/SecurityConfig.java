@@ -32,16 +32,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
+    public UserDetailsService userDetailsService(){
+        return new SamUserDetailsService();
+    }
+
+    @Bean
     public DaoAuthenticationProvider authenticationProvider(){
         DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
         auth.setUserDetailsService(userDetailsService());
         auth.setPasswordEncoder(passwordEncoder());
         return auth;
-    }
-
-    @Bean
-    public UserDetailsService userDetailsService(){
-        return new SamUserDetailsService();
     }
 
     @Override
@@ -50,8 +50,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login")
-                .permitAll();
+                    .loginPage("/login")
+                    .permitAll()
+                .and().logout().permitAll();
     }
 
     @Override
