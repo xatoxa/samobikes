@@ -5,7 +5,7 @@
     <meta charset="utf-8"/>
     <title>Пользователи</title>
     <link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre&display=swap" rel="stylesheet"><!-- ссылка на шрифт -->
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/417822ee3c.js" crossorigin="anonymous"></script>
@@ -48,9 +48,9 @@
     <form th:action="@{/users/page/1}" class="form-inline">
         <input type="hidden" name="sortField" th:value="${sortField}">
         <input type="hidden" name="sortDir" th:value="${sortDir}">
-        <input type="search" name="keyword" th:value="${keyword}" class="form-control" required>
-        <input type="submit" value="Поиск"/>
-        <input type="button" value="Очистить" onclick="clearFilter()"/>
+        <input type="search" name="keyword" th:value="${keyword}" class="form-control search" required>
+        <input  class="inputSearch" type="submit" value="Поиск"/>
+        <input  class="inputSearch" type="button" value="Очистить" onclick="clearFilter()"/>
     </form>
 </div>
 
@@ -144,31 +144,26 @@
             Пользователи не найдены.
         </span>
     </div>
-    <div th:if="${totalPages > 1}">
-        <nav>
-            <ul>
-                <!--Если первая, то кнопки неактивны, классы в css называй как хочешь, я только пример привёл.
-                С последней и следующей кнопками то же самое.-->
+    <nav>
+            <ul class="pagination">
                 <li th:class="${currentPage > 1 ? 'page-item': 'page-item disabled'}">
-                    <a th:href="@{'/users/page/1?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">В начало</a>
+                    <a class="page-link" th:href="@{'/bikes/page/1?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">В начало</a>
                 </li>
                 <li th:class="${currentPage > 1 ? 'page-item': 'page-item disabled'}" >
-                    <a th:href="@{'/users/page/' + ${currentPage - 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">☚ Туда</a>
+                    <a class="page-link" th:href="@{'/bikes/page/' + ${currentPage - 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">☚ Туда</a>
                 </li>
-                <!--Если текущая страница, то объект активный (подсвечивается), иначе - обычный-->
                 <li th:class="${currentPage != i ? 'page-item' : 'page-item active'}"
                     th:each="i: ${#numbers.sequence(1, totalPages)}">
-                    <a th:href="@{'/users/page/' + ${i} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">[[${i}]]</a>
+                    <a class="page-link" th:href="@{'/bikes/page/' + ${i} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">[[${i}]]</a>
                 </li>
                 <li th:class="${currentPage < totalPages ? 'page-item': 'page-item disabled'}">
-                    <a th:href="@{'/users/page/' + ${currentPage + 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">Сюда ☛</a>
+                    <a class="page-link" th:href="@{'/bikes/page/' + ${currentPage + 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">Сюда ☛</a>
                 </li>
                 <li th:class="${currentPage < totalPages ? 'page-item': 'page-item disabled'}">
-                    <a th:href="@{'/users/page/' + ${totalPages} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">В конец</a>
+                    <a class="page-link" th:href="@{'/bikes/page/' + ${totalPages} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">В конец</a>
                 </li>
             </ul>
         </nav>
-    </div>
 
 </div>
 
@@ -190,6 +185,8 @@
         });
     });
 </script>
-
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>

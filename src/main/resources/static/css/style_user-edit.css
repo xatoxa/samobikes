@@ -56,3 +56,10 @@ a{
     color: white;
     text-decoration: none;
 }
+.pagination{
+    justify-content: center;
+}
+.page-item.active .page-link{
+    color: white;
+    background: rgb(254,12,106);
+    border: 1px solid rgb(254,12,106);

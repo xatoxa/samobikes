@@ -68,3 +68,55 @@ button:hover{
 .textCenter{
     text-align: center;
 }
+.pagination{
+    justify-content: center;
+    color: rgb(254,12,106);
+}
+.page-item.active .page-link{
+    color: white;
+    background: rgb(254,12,106);
+    border: 1px solid rgb(254,12,106);
+}
+.page-link{
+    color: rgb(254,12,106);
+}
+.page-link:hover{
+    color: white;
+    background: rgb(254,12,106);
+}
+.page-link:focus{
+    box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0);
+}
+.page-link:not{
+    color: white;
+    background: rgb(254,12,106);
+}
+.page-link:active{
+    color: white;
+    background: rgb(254,12,106);
+}
+.inputSearch{
+    color: white;
+    background: rgb(254,12,106);
+    border-radius: 5px;
+    border: 2px solid rgb(254,12,106);
+    margin-left: 1%;
+    padding: 0.5%;
+}
+.inputSearch:hover{
+    border: 2px solid rgb(254,12,106);
+    box-shadow: 0 0 0 0.2rem rgba(254, 51, 96, 0.4);
+}
+.search{
+    font-size: 20px;
+    border: 2px solid grey;
+    border-radius: 5px;
+    color: grey;
+}
+.search:focus{
+    color: rgb(254,51,96);
+    background-color: #fff;
+    border-color: rgb(254,51,96);
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(254, 51, 96, 0.4);
+}
