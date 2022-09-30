@@ -134,3 +134,39 @@ img{
 		width: 98%;
 		float: none;
 }
+.lastHead{
+	width: 15%;
+	float: right;
+	align-items: center;
+}
+.btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show>.btn-secondary.dropdown-toggle{
+	background: rgb(254,12,106);
+	box-shadow: 0 0 0 0.2rem rgba(254, 12, 106, 0.4);
+	border-color: rgb(254,51,96);
+}
+.btn:hover, .btn-secondary:hover{
+	background: rgb(254,12,106);
+	box-shadow: 0 0 0 0.2rem rgba(254, 12, 106, 0.4);
+	border-color: rgb(254,51,96);
+}
+.btn:focus, .btn-secondary:focus{
+	background: rgb(254,12,106);
+	box-shadow: 0 0 0 0.2rem rgba(254, 12, 106, 0.4);
+	border-color: rgb(254,51,96);
+}
+.btn:active, .btn-secondary:active{
+	background: rgb(254,12,106);
+	box-shadow: 0 0 0 0.2rem rgba(254, 12, 106, 0.4);
+	border-color: rgb(254,51,96);
+}
+.dropdown-item:hover{
+	color: white;
+	background: rgb(254,12,106);
+}
+.dropdown-item:active{
+	color: white;
+	background: rgb(254,12,106);
+}
+.fas{
+	color: grey;
+}

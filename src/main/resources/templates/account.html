@@ -9,7 +9,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
   <script type="text/javascript" th:src="@{/js/common.js}"></script>
-  <link media="all" rel="stylesheet" type="text/css" th:href="@{/css/style_user-edit.css}">
+  <link media="all" rel="stylesheet" type="text/css" th:href="@{/css/style_account.css}">
 </head>
 
 <body>
@@ -20,25 +20,6 @@
 <!--этот блок есть во всех страницах, кроме login-->
 <!--это куда-нибудь в правый угол; положение - горизонтально-->
 <!--надо сделать что-то типа dropdown из bootstrap: чтоб из имени юзера выпадала менюшка-->
-<div>
-  <form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
-    <input type="submit"/>
-  </form>
-
-  <div>
-    <span class="fas fa-light fa-user fa-2x"></span>
-  </div>
-  <div>
-    <a data-toggle="dropdown"
-       sec:authentication="principal.username"></a>
-    <div>
-      <a th:href="@{/users}">Пользователи</a>
-    </div>
-    <div>
-      <a id="logoutLink" th:href="@{/logout}">Выйти</a>
-    </div>
-  </div>
-</div>
 
 <h1  th:text="${'Мой аккаунт'}"/></h1>
 
@@ -52,43 +33,49 @@
         th:object="${user}" method="post" class="form-vertical">
 
     <input type="hidden" th:field="*{id}"/>
-    <div  class="input-group inp">
-      <label>Логин</label>
+    <!-- <div  class="input-group inp">
+      <span>Логин</span>
+      <br>
       <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
       <input th:field="*{username}" placeholder="Логин" class="form-control form" readonly="readonly"/>
-    </div>
+    </div> -->
 
     <div  class="input-group inp">
-      <label>Пароль</label>
+      <span>Пароль</span>
+      <br>
       <div>
-        <input type="password" th:field="*{password}" placeholder="Ничего не вводите, если не хотите изменить"
+        <input class="password" type="password" th:field="*{password}" placeholder="Ничего не вводите, если не хотите изменить"
                oninput="checkPasswordMatch(document.getElementById('confirmPassword'))"/>
       </div>
     </div>
 
     <div  class="input-group inp">
-      <label>Повторите новый пароль</label>
+      <span>Повторите новый пароль</span>
+      <br>
       <div>
-        <input type="password" id="confirmPassword" oninput="checkPasswordMatch(this)"/>
+        <input class="password" type="password" id="confirmPassword" oninput="checkPasswordMatch(this)"/>
       </div>
     </div>
 
     <div class="input-group inp">
-      <label>Имя</label>
+      <span>Имя</span>
+      <br>
       <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
       <input th:field="*{firstName}" placeholder="Имя (необязательно)" class="form-control form"/>
     </div>
 
     <div class="input-group inp">
-      <label>Фамилия</label>
+      <span>Фамилия</span>
+      <br>
       <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
       <input th:field="*{lastName}" placeholder="Фамилия (необязательно)" class="form-control form"/>
     </div>
 
-    <div  class="input-group">
+    <!-- <div  class="input-group inp rols">
       <label class="input-group-addon"><i class="glyphicon glyphicon-user">Мои роли:</i></label>
+      <br>
       <span>[[${user.roles}]]</span>
-    </div>
+    </div> -->
 
     <div class="form-group button">
       <div>

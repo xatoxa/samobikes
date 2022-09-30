@@ -17,32 +17,28 @@
 <!--этот блок есть во всех страницах, кроме login-->
 <!--это куда-нибудь в правый угол; положение - горизонтально-->
 <!--надо сделать что-то типа dropdown из bootstrap: чтоб из имени юзера выпадала менюшка-->
-<div>
+<!-- <div class="lastHead">
     <form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
         <input type="submit"/>
     </form>
 
-    <div>
+     <div>
         <span class="fas fa-light fa-user fa-2x"></span>
     </div>
-    <div>
-        <a data-toggle="dropdown"
-           sec:authentication="principal.username"></a>
-        <div>
-            <a th:href="@{/account}">Мой аккаунт</a>
-        </div>
-        <div>
-            <a th:href="@{/users}">Пользователи</a>
-        </div>
-        <div>
-            <a id="logoutLink" th:href="@{/logout}">Выйти</a>
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a data-toggle="dropdown"
+                   sec:authentication="principal.username"></a>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" th:href="@{/account}">Мой аккаунт</a>
+            <a class="dropdown-item" th:href="@{/users}">Пользователи</a>
+            <a class="dropdown-item" id="logoutLink" th:href="@{/logout}">Выйти</a>
         </div>
     </div>
-</div>
+</div> -->
 
-<div class="homeBut">
-    <button class="home"><a class="home" th:href="@{'/bikes'}" th:text="'На главную'"/></button>
-</div>
+
 <div class="header">
     <div class="velInfo">
         <span th:text="${'Номер: ' + bike.number}"/><br>
@@ -60,7 +56,10 @@
         <img class="photo" th:src="@{/img/velo.png}">
     </div>
 </div>
-
+<br>
+<div class="homeBut">
+    <button class="home"><a class="home" th:href="@{'/bikes'}" th:text="'На главную'"/></button>
+</div>
 <br>
 <div class="partsDiv">
     <div class="partsLeft">
@@ -153,5 +152,8 @@
     <button><a th:href="@{'/parts/fine/' + ${part.bikeId}}" th:text="'Все части работают'"/></button>
     <button><a th:href="@{'/parts/edit/' + ${part.bikeId}}" th:text="'Изменить'"/></button>
 </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>

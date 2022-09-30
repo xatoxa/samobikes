@@ -14,34 +14,38 @@
 </head>
 
 <body>
-<div>
-    <a th:href="@{/bikes}">[На главную]</a>
-</div>
+
 
 <!--этот блок есть во всех страницах, кроме login-->
 <!--это куда-нибудь в правый угол; положение - горизонтально-->
 <!--надо сделать что-то типа dropdown из bootstrap: чтоб из имени юзера выпадала менюшка-->
-<div>
-    <form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
-        <input type="submit"/>
-    </form>
-
-    <div>
-        <span class="fas fa-light fa-user fa-2x"></span>
-    </div>
-    <div>
-        <a data-toggle="dropdown"
-           sec:authentication="principal.username"></a>
-        <div>
-            <a th:href="@{/account}">Мой аккаунт</a>
+<div class="header">
+        <div class="firstHead">
+            <button type="submit" class="btn btnTab add"><a class="home" th:href="@{/bikes}">На главную</a></button>
         </div>
-        <div>
-            <a id="logoutLink" th:href="@{/logout}">Выйти</a>
+        <div class="midleHead">
+            <H1>Пользователи</H1>
+        </div>
+        <div class="lastHead">
+            <form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
+                <input type="submit"/>
+            </form>
+
+            <div>
+                <span class="fas fa-light fa-user fa-2x"></span>
+            </div>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><a data-toggle="dropdown"
+                   sec:authentication="principal.username"></a></button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" th:href="@{/account}">Мой аккаунт</a>
+                    <a class="dropdown-item" id="logoutLink" th:href="@{/logout}">Выйти</a>
+                </div>
+            </div>
         </div>
     </div>
-</div>
 
-<H1>Пользователи</H1>
+
 
 <!--Сообщение об успешном добавлении/изменении/удалении-->
 <div th:if="${message != null}">
@@ -59,7 +63,7 @@
 </div>
 
 <div>
-    <table class="table table-hover">
+    <table >
         <thead>
             <tr>
                 <th>ID</th>
@@ -80,11 +84,11 @@
                 <td th:text="${user.enabled}"/>
                 <td th:text="${user.roles}"/>
                 <td class="textCenter">
-                    <button  type="submit" class="btn btnTab">
+                    <button  type="submit" class=" btnTab">
                         <a  th:href="@{'/users/edit/' + ${user.id}}"><i class="fa-solid fa-pen"></i></a>
                     </button>
 
-                    <button  type="submit" class="btn btnTab">
+                    <button  type="submit" class=" btnTab">
                         <a  th:href="@{'/users/delete/' + ${user.id}}"><i class="fa-solid fa-delete-left"></i></a>
                     </button>
                 </td>

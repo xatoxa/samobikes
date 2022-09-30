@@ -11,10 +11,12 @@ select{
 }
 
 .input-group{
-	margin-top: 30px;
+	margin-top: 33px;
 	text-align: center;
 }
 h1{
+	margin-top: 2%;
+	padding-left: 20%;
 	text-align: center;
 	color: rgb(254,51,96);;
 }
@@ -29,7 +31,6 @@ input{
 	margin-top: 5%;
 }
 button{
-	
 	background: rgb(254,12,106);
 	color: white;
 	width: 30%;
@@ -78,5 +79,65 @@ option:hover{
 a{
 	text-decoration: none;
 }
+a:hover{
+	text-decoration: none;
+	color: white;
+}
+.add,.btn,.btn-secondary{
+	background: rgb(254,12,106);
+	border: 2px solid rgb(254,12,106);
+	margin-top: none;
+}
+.header{
+	margin-top: 1%;
+}
+.firstHead, .midleHead, .lastHead{
+	display: inline-flex;
+	flex-direction: column;
+}
+.firstHead{
 
+}
+.midleHead{
+	width: 85%;
+}
+.lastHead{
+	width: 15%;
+	float: right;
+	align-items: center;
+}
+.btn-secondary{
+	width: auto;
+}
+.btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show>.btn-secondary.dropdown-toggle{
+	background: rgb(254,12,106);
+	box-shadow: 0 0 0 0.2rem rgba(254, 12, 106, 0.4);
+	border-color: rgb(254,51,96);
+}
+.btn:hover, .btn-secondary:hover{
+	background: rgb(254,12,106);
+	box-shadow: 0 0 0 0.2rem rgba(254, 12, 106, 0.4);
+	border-color: rgb(254,51,96);
+}
+.btn:focus, .btn-secondary:focus{
+	background: rgb(254,12,106);
+	box-shadow: 0 0 0 0.2rem rgba(254, 12, 106, 0.4);
+	border-color: rgb(254,51,96);
+}
+.btn:active, .btn-secondary:active{
+	background: rgb(254,12,106);
+	box-shadow: 0 0 0 0.2rem rgba(254, 12, 106, 0.4);
+	border-color: rgb(254,51,96);
+}
+.dropdown-item:hover{
+	color: white;
+	background: rgb(254,12,106);
+}
+.dropdown-item:active{
+	color: white;
+	background: rgb(254,12,106);
+}
+.fas{
+	color: grey;
+}
 

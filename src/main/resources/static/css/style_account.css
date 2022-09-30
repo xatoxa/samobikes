@@ -1,6 +1,6 @@
 body{
-	background-image: url("../img/background.jpg");
-	background-repeat:no-repeat;
+    background-image: url("../img/background.jpg");
+    background-repeat:no-repeat;
     background-attachment:fixed;
     background-position:center;
     font-family: 'Averia Serif Libre', cursive;
@@ -16,6 +16,7 @@ H1{
     font-family: 'Averia Serif Libre', cursive;
     border: 2px solid grey;
     border-radius: 5px;
+
 }
 .inp{
     text-align: center;
@@ -28,7 +29,7 @@ H1{
     box-shadow: 0 0 0 0.2rem rgba(254, 51, 96, 0.4);
 }
 .form{
-    width: 90%;
+    width: 70%;
     margin: auto;
 }
 .button{
@@ -63,4 +64,18 @@ a{
     color: white;
     background: rgb(254,12,106);
     border: 1px solid rgb(254,12,106);
+}
+.password{
+    width: 70%;
+    color: grey;
+    height: 20px;
+    border: 2px solid grey;
+    border-radius: 5px;
+}
+.password:focus{
+    border: 2px solid rgb(254,12,106);
+    box-shadow: 0 0 0 0.2rem rgba(254, 12, 106, 0.6);
+}
+.checkbox{
+    text-align: none;
 }

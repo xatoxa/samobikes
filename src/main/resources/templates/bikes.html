@@ -16,41 +16,37 @@
 
 <body>
 <div class="content">
-
-    <!--этот блок есть во всех страницах, кроме login-->
-    <!--это куда-нибудь в правый угол; положение - горизонтально-->
-    <!--надо сделать что-то типа dropdown из bootstrap: чтоб из имени юзера выпадала менюшка-->
-    <div>
-        <form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
-            <input type="submit"/>
-        </form>
-
-        <div>
-            <span class="fas fa-light fa-user fa-2x"></span>
+    <div class="header">
+        <div class="midleHead">
+            <H1>Каталог велосипедов</H1>
         </div>
-        <div>
-            <a data-toggle="dropdown"
-               sec:authentication="principal.username"></a>
+        <div class="lastHead">
+            <form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
+                <input type="submit"/>
+            </form>
+
             <div>
-                <a th:href="@{/account}">Мой аккаунт</a>
+                <span class="fas fa-light fa-user fa-2x"></span>
             </div>
-            <div>
-                <a th:href="@{/users}">Пользователи</a>
-            </div>
-            <div>
-                <a id="logoutLink" th:href="@{/logout}">Выйти</a>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><a data-toggle="dropdown"
+                   sec:authentication="principal.username"></a></button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" th:href="@{/account}">Мой аккаунт</a>
+                    <a class="dropdown-item" th:href="@{/users}">Пользователи</a>
+                    <a class="dropdown-item" id="logoutLink" th:href="@{/logout}">Выйти</a>
+                </div>
             </div>
         </div>
     </div>
-
-    <H1>Каталог велосипедов</H1>
+    
 
     <!--Сообщение об успешном добавлении/изменении/удалении-->
     <div class="alert" th:if="${message != null}">
         [[${message}]]
     </div>
 
-    <div>
+    <div class="searchDiv">
         <form th:action="@{/bikes/page/1}" class="form-inline">
             <input type="hidden" name="sortField" th:value="${sortField}">
             <input type="hidden" name="sortDir" th:value="${sortDir}">

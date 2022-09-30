@@ -4,17 +4,19 @@ body{
     background-attachment:fixed;
     background-position:center;
     font-family: 'Averia Serif Libre', cursive;
-    
+    padding: 2%;
 }
 H1{
     text-align: center;
     color: rgb(254,51,96);
+    padding-bottom: 1%;
 }
 thead{
     color: rgb(254,12,106);
 }
 td{
     border-bottom: 2px solid rgb(254,12,106);
+    border-right: 2px solid rgba(254,12,106,0.3);
 }
 .trTab:hover{
     background: rgb(254,12,106);
@@ -24,13 +26,26 @@ a{
     color: rgb(254,12,106);
     text-decoration: none;
 }
+a:hover{
+    color: rgb(254,12,106);
+    text-decoration: none;
+}
+.home{
+    color: white;
+}
+.home:hover{
+    color: white;
+}
 table{
+    margin-top: 1%;
     width: 100%;
 }
 th{
+    color: rgb(254,12,106);
     text-align: left;
     border-top: 2px solid rgb(254,12,106);
     border-bottom: 2px solid rgb(254,12,106);
+    border-right: 2px solid rgba(254,12,106,0.3);
     padding-top: 5px;
     padding-bottom: 5px;
 }
@@ -67,6 +82,7 @@ button:hover{
 }
 .textCenter{
     text-align: center;
+    border-right: none;
 }
 .pagination{
     justify-content: center;
@@ -119,4 +135,61 @@ button:hover{
     border-color: rgb(254,51,96);
     outline: 0;
     box-shadow: 0 0 0 0.2rem rgba(254, 51, 96, 0.4);
+}
+.add,.btn,.btn-secondary{
+    background: rgb(254,12,106);
+    border: 2px solid rgb(254,12,106);
+    margin-top: none;
+}
+.header{
+    margin-top: 1%;
+}
+.firstHead, .midleHead, .lastHead{
+    display: inline-flex;
+    flex-direction: column;
+}
+.firstHead{
+    width: 13%;
+}
+.midleHead{
+    width: 70%;
+}
+.lastHead{
+    width: 15%;
+    float: right;
+    align-items: center;
+}
+.btn-secondary{
+    width: auto;
+}
+.btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show>.btn-secondary.dropdown-toggle{
+    background: rgb(254,12,106);
+    box-shadow: 0 0 0 0.2rem rgba(254, 12, 106, 0.4);
+    border-color: rgb(254,51,96);
+}
+.btn:hover, .btn-secondary:hover{
+    background: rgb(254,12,106);
+    box-shadow: 0 0 0 0.2rem rgba(254, 12, 106, 0.4);
+    border-color: rgb(254,51,96);
+}
+.btn:focus, .btn-secondary:focus{
+    background: rgb(254,12,106);
+    box-shadow: 0 0 0 0.2rem rgba(254, 12, 106, 0.4);
+    border-color: rgb(254,51,96);
+}
+.btn:active, .btn-secondary:active{
+    background: rgb(254,12,106);
+    box-shadow: 0 0 0 0.2rem rgba(254, 12, 106, 0.4);
+    border-color: rgb(254,51,96);
+}
+.dropdown-item:hover{
+    color: white;
+    background: rgb(254,12,106);
+}
+.dropdown-item:active{
+    color: white;
+    background: rgb(254,12,106);
+}
+.fas{
+    color: grey;
 }
