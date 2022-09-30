@@ -13,6 +13,9 @@
 </head>
 
 <body>
+<div>
+    <a th:href="@{/bikes}">[На главную]</a>
+</div>
 
 <!--этот блок есть во всех страницах, кроме login-->
 <!--это куда-нибудь в правый угол; положение - горизонтально-->
@@ -28,6 +31,9 @@
     <div>
         <a data-toggle="dropdown"
            sec:authentication="principal.username"></a>
+        <div>
+            <a th:href="@{/account}">Мой аккаунт</a>
+        </div>
         <div>
             <a th:href="@{/users}">Пользователи</a>
         </div>
