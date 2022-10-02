@@ -121,4 +121,8 @@ public class User {
     public void setComments(Collection<Comment> comments) {
         this.comments = comments;
     }
+
+    public void addComment(Comment comment){
+        this.comments.add(comment);
+    }
 }

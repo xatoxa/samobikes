@@ -29,8 +29,8 @@ public class Bike {
     @Column(name = "status")
     private boolean status;
 
-    @Column(name = "comment")
-    private String comment;
+    @Column(name = "description")
+    private String description;
 
     @Column(name = "qr_link")
     private String qrLink;
@@ -42,25 +42,25 @@ public class Bike {
     public Bike() {
     }
 
-    public Bike(Integer id, Part part, Integer number, Integer qrNumber, String VIN, boolean status, String comment) {
+    public Bike(Integer id, Part part, Integer number, Integer qrNumber, String VIN, boolean status, String description) {
         this.id = id;
         this.part = part;
         this.number = number;
         this.qrNumber = qrNumber;
         this.VIN = VIN;
         this.status = status;
-        this.comment = comment;
+        this.description = description;
     }
 
     public Bike(Integer id, Part part, Integer number, Integer qrNumber, String VIN,
-                boolean status, String comment, String qrLink, String photo) {
+                boolean status, String description, String qrLink, String photo) {
         this.id = id;
         this.part = part;
         this.number = number;
         this.qrNumber = qrNumber;
         this.VIN = VIN;
         this.status = status;
-        this.comment = comment;
+        this.description = description;
         this.qrLink = qrLink;
         this.photo = photo;
     }
@@ -116,12 +116,12 @@ public class Bike {
         this.status = status;
     }
 
-    public String getComment() {
-        return comment;
+    public String getDescription() {
+        return description;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getQrLink() {
@@ -151,5 +151,9 @@ public class Bike {
 
     public void setComments(Collection<Comment> comments) {
         this.comments = comments;
+    }
+
+    public void addComment(Comment comment){
+        this.comments.add(comment);
     }
 }

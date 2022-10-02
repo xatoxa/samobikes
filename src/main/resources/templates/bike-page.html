@@ -46,7 +46,7 @@
         <span th:text="${'QR Номер: ' + bike.qrNumber}"/><br>
         <span th:text="${'VIN: ' + bike.VIN}"/><br>
         <span th:text="${bike.status == true ? 'Работает' : 'Сломан'}"/><br>
-        <span th:text="${'Комментарий: ' + bike.comment}"/><br>
+        <span th:text="${'Описание: ' + bike.description}"/><br>
         <span th:text="${'Ссылка на ELMA: '}"/><a th:href="@{${bike.qrLink}}" th:text="${bike.qrLink}" />
         <br>
         <button><a th:href="@{'/bikes/edit/' + ${bike.id}}" th:text="'Изменить'"/></button>

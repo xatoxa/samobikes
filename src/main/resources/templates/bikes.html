@@ -65,7 +65,7 @@
             <th th:replace="fragments :: columnLink('bikes', 'qrNumber', 'QR номер')"/>
             <th th:replace="fragments :: columnLink('bikes', 'VIN', 'VIN')"/>
             <th th:replace="fragments :: columnLink('bikes', 'status', 'Статус')"/>
-            <th>Комментарий</th>
+            <th>Описание</th>
             <th class="textCenter">Кликай куда надо</th>
         </tr>
         </thead>
@@ -76,7 +76,7 @@
             <td th:text="${bike.qrNumber}"/>
             <td th:text="${bike.VIN}"/>
             <td th:text="${bike.status == true ? 'Работает' : 'Сломан'}"/>
-            <td th:text="${bike.comment}"/>
+            <td th:text="${bike.description}"/>
             <td class="textCenter">
                 <button type="submit" class=""><a th:href="@{'/bikes/show/' + ${bike.id}}"><i class="fa-solid fa-list"></i></a></button>
                 <button type="submit" class=""><a  th:href="@{'/bikes/edit/' + ${bike.id}}"><i class="fa-solid fa-pen"></i></a></button>

@@ -43,14 +43,18 @@ public class CommentController {
                                @AuthenticationPrincipal SamUserDetails loggedUser,
                                @ModelAttribute(value = "comment") Comment comment){
         Bike bike = bikeService.getById(id);
+        bike.addComment(comment);
 
         User user = userService.findByUserName(loggedUser.getUsername());
+        user.addComment(comment);
 
         comment.setBike(bike);
         comment.setUser(user);
         comment.setCommentedAt(LocalDateTime.now());
 
-        commentService.save(comment);
+        commentService.insert(user.getId(), bike.getId(), comment.getCommentText(), comment.getCommentedAt());
+        //userService.save(user);
+        //bikeService.save(bike);
 
         Comment newComment = new Comment();
         Part part = bike.getPart();
