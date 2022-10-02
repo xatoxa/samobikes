@@ -167,7 +167,7 @@
         <tr class="trTab" th:each="comment : ${comments}">
             <td th:text="${comment.getUser().getUsername()}"/>
             <td th:text="${comment.commentText}"/>
-            <td th:text="${comment.commentedAt}"/>
+            <td th:text="${#temporals.format(comment.commentedAt, 'HH:mm dd.MM.yy ')}"/>
         </tr>
         </tbody>
     </table>
