@@ -1,6 +1,7 @@
 package com.xatoxa.samobikes.controllers;
 
 import com.xatoxa.samobikes.entities.Bike;
+import com.xatoxa.samobikes.entities.Comment;
 import com.xatoxa.samobikes.entities.Part;
 import com.xatoxa.samobikes.services.BikeService;
 import com.xatoxa.samobikes.services.PartService;
@@ -43,6 +44,8 @@ public class PartController {
         bikeService.save(bike);
         model.addAttribute("part", part);
         model.addAttribute("bike", bike);
+        model.addAttribute("comment", new Comment());
+        model.addAttribute("comments", bike.getComments());
         return "redirect:/bikes/show/" + bike.getId();
     }
 
@@ -57,6 +60,8 @@ public class PartController {
         partService.save(part);
         model.addAttribute("bike", bike);
         model.addAttribute("part", part);
+        model.addAttribute("comment", new Comment());
+        model.addAttribute("comments", bike.getComments());
         return "bike-page";
     }
 }
