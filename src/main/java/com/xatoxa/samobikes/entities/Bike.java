@@ -1,6 +1,7 @@
 package com.xatoxa.samobikes.entities;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Table(name = "bikes")
@@ -12,6 +13,9 @@ public class Bike {
 
     @OneToOne(mappedBy = "bike", cascade = CascadeType.ALL, orphanRemoval = true)
     private Part part;
+
+    @OneToMany(mappedBy = "bike")
+    Collection<Comment> comments;
 
     @Column(name = "number")
     private Integer number;
@@ -139,5 +143,13 @@ public class Bike {
     //methods
     public void checkWorks(){
         this.status = this.part.checkWork();
+    }
+
+    public Collection<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Collection<Comment> comments) {
+        this.comments = comments;
     }
 }
