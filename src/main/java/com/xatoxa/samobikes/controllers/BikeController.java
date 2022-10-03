@@ -1,9 +1,11 @@
 package com.xatoxa.samobikes.controllers;
 
 import com.xatoxa.samobikes.entities.Bike;
+import com.xatoxa.samobikes.entities.Comment;
 import com.xatoxa.samobikes.entities.Part;
 import com.xatoxa.samobikes.entities.User;
 import com.xatoxa.samobikes.services.BikeService;
+import com.xatoxa.samobikes.services.CommentService;
 import com.xatoxa.samobikes.services.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,10 +21,16 @@ import java.util.List;
 @RequestMapping("/bikes")
 public class BikeController {
     private BikeService bikeService;
+    private CommentService commentService;
 
     @Autowired
     public void setBikeService(BikeService bikeService) {
         this.bikeService = bikeService;
+    }
+
+    @Autowired
+    public void setCommentService(CommentService commentService){
+        this.commentService = commentService;
     }
 
     //добавить варианты сортировки
@@ -73,9 +81,12 @@ public class BikeController {
     @GetMapping("/show/{id}")
     public String showOneBike(Model model, @PathVariable(value = "id") Integer id){
         Bike bike = bikeService.getById(id);
+        Comment comment = new Comment();
         Part part = bike.getPart();
         bike.checkWorks();
         bikeService.save(bike);
+        model.addAttribute("comment", comment);
+        model.addAttribute("comments", commentService.findByBikeId(id));
         model.addAttribute("bike", bike);
         model.addAttribute("part", part);
         return "bike-page";

@@ -32,6 +32,9 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Collection<Role> roles;
 
+    @OneToMany(mappedBy = "user")
+    Collection<Comment> comments;
+
     //Construct
     public User() {
     }
@@ -111,5 +114,15 @@ public class User {
         this.roles = roles;
     }
 
+    public Collection<Comment> getComments() {
+        return comments;
+    }
 
+    public void setComments(Collection<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public void addComment(Comment comment){
+        this.comments.add(comment);
+    }
 }
