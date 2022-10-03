@@ -24,7 +24,7 @@ public class CommentService {
     }
 
     public Collection<Comment> findByBikeId(Integer bikeId){
-        return commentRepository.findByBikeId(bikeId);
+        return commentRepository.findByBikeIdOrderByCommentedAtDesc(bikeId);
     }
 
     public void save(Comment comment){

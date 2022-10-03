@@ -14,7 +14,7 @@ import java.util.Collection;
 
 @Repository
 public interface CommentRepository extends JpaRepository<Comment, Integer> {
-    Collection<Comment> findByBikeId(Integer bikeId);
+    Collection<Comment> findByBikeIdOrderByCommentedAtDesc(Integer bikeId);
 
     @Transactional
     @Modifying
