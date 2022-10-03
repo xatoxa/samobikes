@@ -105,7 +105,7 @@
             Пользователи не найдены.
         </span>
     </div>
-    <nav>
+    <nav th:if="${totalPages > 1}">
             <ul class="pagination">
                 <li th:class="${currentPage > 1 ? 'page-item': 'page-item disabled'}">
                     <a th:replace="fragments :: pageLink('users', 1, 'В начало')"/>
