@@ -73,9 +73,10 @@
             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
             <input th:field="*{lastName}" placeholder="Фамилия (необязательно)" class="form-control form"/>
         </div>
-
+    <div class="roles">
         <div  class="input-group">
             <span class="input-group-addon"><i class="glyphicon glyphicon-user">Роли:</i></span>
+            <br>
             <th:block th:each="role : ${roles}">
                 <input type="checkbox"
                        th:field="*{roles}"
@@ -85,11 +86,12 @@
                 />
             </th:block>
         </div>
-
         <div class="input-group">
             <span class="input-group-addon"><i class="glyphicon glyphicon-user">Активен</i></span>
             <input type="checkbox" th:field="*{enabled}" />
         </div>
+    </div>
+        
 
         <div class="form-group button">
             <div>

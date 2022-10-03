@@ -42,3 +42,50 @@ body{
     box-shadow: 0 0 0 0.2rem rgba(254, 12, 106, 0.4);
     border-color: rgb(254,51,96);
 }
+input[type=checkbox] {
+         position: relative;
+           cursor: pointer;
+    }
+    input[type=checkbox]:before {
+         content: "";
+         display: block;
+         position: absolute;
+         width: 12px;
+         height: 12px;
+         top: 0;
+         left: 0;
+         border: 2px solid rgb(254,12,106);
+         border-radius: 3px;
+         background-color: white;
+         top: -1px;
+         left: -1px;
+}
+input[type=checkbox]:after {
+         content: "";
+         display: block;
+         position: absolute;
+         width: 12px;
+         height: 12px;
+         top: 0;
+         left: 0;
+         border: 2px solid grey;
+         border-radius: 3px;
+         top: -1px;
+         left: -1px;
+}
+    input[type=checkbox]:checked:after {
+         content: "";
+         display: block;
+         width: 5px;
+         height: 10px;
+         border: solid rgb(254,12,106);
+         border-width: 0 2px 2px 0;
+         -webkit-transform: rotate(45deg);
+         -ms-transform: rotate(45deg);
+         transform: rotate(45deg);
+         position: absolute;
+         top: -1px;
+         left: 4px;
+         border-radius: 0px;
+         
+}

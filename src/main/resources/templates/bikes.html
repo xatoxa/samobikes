@@ -29,8 +29,7 @@
                 <span class="fas fa-light fa-user fa-2x"></span>
             </div>
             <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><a data-toggle="dropdown"
-                   sec:authentication="principal.username"></a></button>
+                <a sec:authentication="principal.username" class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" th:href="@{/account}">Мой аккаунт</a>
                     <a class="dropdown-item" th:href="@{/users}">Пользователи</a>
@@ -78,9 +77,9 @@
             <td th:text="${bike.status == true ? 'Работает' : 'Сломан'}"/>
             <td th:text="${bike.description}"/>
             <td class="textCenter">
-                <button type="submit" class=""><a th:href="@{'/bikes/show/' + ${bike.id}}"><i class="fa-solid fa-list"></i></a></button>
-                <button type="submit" class=""><a  th:href="@{'/bikes/edit/' + ${bike.id}}"><i class="fa-solid fa-pen"></i></a></button>
-                <button  type="submit" class=""><a  th:href="@{'/bikes/delete/' + ${bike.id}}"><i class="fa-solid fa-delete-left"></i></a></button>
+                <a class="aTab" th:href="@{'/bikes/show/' + ${bike.id}}"><i class="fa-solid fa-list"></i></a>
+                <a class="aTab"  th:href="@{'/bikes/edit/' + ${bike.id}}"><i class="fa-solid fa-pen"></i></a>
+                <a class="aTab" th:href="@{'/bikes/delete/' + ${bike.id}}"><i class="fa-solid fa-delete-left"></i></a>
             </td>
         </tr>
         </tbody>
@@ -109,7 +108,7 @@
         </nav>
     <br>
     <div class="divBtn">
-        <button type="submit" class="btn add"><a th:href="@{'/bikes/add/'}" th:text="Добавить" class="aAdd" /></button>
+        <a th:href="@{'/bikes/add/'}" th:text="Добавить" class="aAdd" />
     </div>
     <br>
     <span th:text="${'Всего: ' + count_all_bikes}"/><br>

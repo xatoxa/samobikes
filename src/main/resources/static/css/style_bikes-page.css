@@ -5,9 +5,7 @@ body{
     background-position:center;
     font-family: 'Averia Serif Libre', cursive;
 }
-.divBut{
-	float: left;
-}
+
 button{
 	font-family: 'Averia Serif Libre', cursive;
 	appearance: none;
@@ -169,4 +167,8 @@ img{
 }
 .fas{
 	color: grey;
+}
+#table{
+	width: 90%;
+	margin: auto;
 }

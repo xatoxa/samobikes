@@ -146,22 +146,18 @@
             <span class="tooltiptext"><img class="plcImg" th:src="@{/img/logo.png}"></span>
         </span>
     </div>
-</div> 
-<br>   
-<!--Добавить кнопку/ссылку "Изменить", которая откроет новую страницу с формой и селектами по запчастям-->
-<div>
     <button><a th:href="@{'/parts/fine/' + ${part.bikeId}}" th:text="'Все части работают'"/></button>
     <button><a th:href="@{'/parts/edit/' + ${part.bikeId}}" th:text="'Изменить'"/></button>
-</div>
-<br>
+</div> 
+<br>   
 <!--Комментарии-->
 <div class="divBut">
     <form th:action="@{'/comment/save/' + ${bike.id}}"
           th:object="${comment}" method="post" class="form-horizontal">
-        <input type="text" placeholder="Написать сообщение..." th:field="*{commentText}" required/>
-        <input class="fa-solid fa-paper-plane-top" type="submit"/>
+        <input  type="text" placeholder="Написать сообщение..." th:field="*{commentText}" required />
+        <input class=" fa-solid fa-paper-plane-top" type="submit"/>
     </form>
-    <table>
+    <table id="table">
         <tbody>
         <!--Цикл foreach по всем комментариям-->
         <tr class="trTab" th:each="comment : ${comments}">
