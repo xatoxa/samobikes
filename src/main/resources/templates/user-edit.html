@@ -17,9 +17,6 @@
     <a th:href="@{/bikes}">[На главную]</a>
 </div>
 
-<!--этот блок есть во всех страницах, кроме login-->
-<!--это куда-нибудь в правый угол; положение - горизонтально-->
-<!--надо сделать что-то типа dropdown из bootstrap: чтоб из имени юзера выпадала менюшка-->
 <div>
     <form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
         <input type="submit"/>
@@ -35,7 +32,7 @@
             <a th:href="@{/account}">Мой аккаунт</a>
         </div>
         <div>
-            <a th:href="@{/users}">Пользователи</a>
+            <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/users}">Пользователи</a>
         </div>
         <div>
             <a id="logoutLink" th:href="@{/logout}">Выйти</a>

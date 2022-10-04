@@ -92,21 +92,21 @@ public class BikeController {
         return "bike-page";
     }
 
-    @GetMapping("/add")
+    @GetMapping("/management/add")
     public String showAddBikeForm(Model model){
         Bike bike = new Bike();
         model.addAttribute("bike", bike);
         return "bike-edit";
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("/management/edit/{id}")
     public String showEditBikeForm(Model model, @PathVariable(value = "id") Integer id){
         Bike bike = bikeService.getById(id);
         model.addAttribute("bike", bike);
         return "bike-edit";
     }
 
-    @PostMapping("/edit")
+    @PostMapping("/management/edit")
     public String saveBike (@ModelAttribute(value = "bike") Bike bike,
                             RedirectAttributes redirectAttributes){
         bikeService.save(bike);
@@ -117,7 +117,7 @@ public class BikeController {
         return "redirect:/bikes";
     }
 
-    @GetMapping("/delete/{id}")
+    @GetMapping("/management/delete/{id}")
     public String deleteBike(@PathVariable(value = "id") Integer id,
                              RedirectAttributes redirectAttributes){
         Integer number = bikeService.getById(id).getNumber();

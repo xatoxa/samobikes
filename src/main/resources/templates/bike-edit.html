@@ -15,10 +15,6 @@
 <body>
     <!--Если на страничку прилетает id, то редактирование, иначе добавление-->
 
-    <!--этот блок есть во всех страницах, кроме login-->
-    <!--это куда-нибудь в правый угол; положение - горизонтально-->
-    <!--надо сделать что-то типа dropdown из bootstrap: чтоб из имени юзера выпадала менюшка-->
-
 <div class="header">
         <div class="midleHead">
             <h1  th:text="${bike.id == null ? 'Добавление велосипеда' : 'Изменение велосипеда ' + bike.number + ' | ' + bike.qrNumber}"/></h1>
@@ -38,18 +34,15 @@
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" th:href="@{/account}">Мой аккаунт</a>
-                <a class="dropdown-item" th:href="@{/users}">Пользователи</a>
+                <a sec:authorize="hasAuthority('ADMIN')" class="dropdown-item" th:href="@{/users}">Пользователи</a>
                 <a class="dropdown-item" id="logoutLink" th:href="@{/logout}">Выйти</a>
             </div>
         </div>
     </div>
 </div>
-    
-
-
     <div class="container">
         <!--Форма редактирования велосипеда-->
-        <form th:action="@{/bikes/edit}"
+        <form th:action="@{/bikes/management/edit}"
               th:object="${bike}" method="post" class="form-vertical" onsubmit="return checkInfo(this)">
 
             <input type="hidden" th:field="*{id}" class="form-control" hidden/>
@@ -111,7 +104,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script type="text/javascript">
         function checkInfo(form){
-        url = "[[@{/bikes/check_info}]]";
+        url = "[[@{/bikes/management/check_info}]]";
         number = $("#number").val();
         qrNumber = $("#qrNumber").val();
         VIN = $("#VIN").val();
