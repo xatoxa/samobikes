@@ -132,4 +132,10 @@ img{
 		float: none
 	}
 }
-
+.toggleParts{
+	text-align: center;
+}
+#toggleParts{
+	color: rgb(254,12,106);
+	font-size: 30px;
+}
