@@ -10,7 +10,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/417822ee3c.js" crossorigin="anonymous"></script>
-    <script type="text/javascript" th:src="@{/webjars/common.js}"></script>
+    <script type="text/javascript" th:src="@{/js/common.js}"></script>
     <link media="all" rel="stylesheet" type="text/css" th:href="@{/css/style_bikes.css}"> <!-- ссылка на css всегда должна быть самой последней -->
 </head>
 
@@ -25,7 +25,6 @@
                 <input type="submit"/>
             </form>
 
-            
             <div class="dropdown">
                 <span class="fas fa-light fa-user fa-2x"></span>
                 <a sec:authentication="principal.username" class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
@@ -40,7 +39,6 @@
             <a class="aTab" th:href="@{'/login'}" th:text="Войти"></a>
         </div>
     </div>
-    
 
     <!--Сообщение об успешном добавлении/изменении/удалении-->
     <div class="alert" th:if="${message != null}">
@@ -56,7 +54,6 @@
             <input class="inputSearch" type="button" value="Очистить" onclick="clearFilter()"/>
         </form>
     </div>
-
     <br>
     <!--Таблица всех велосипедов-->
     <table>
@@ -88,7 +85,6 @@
         </tbody>
     </table>
     <br>
-    
         <nav th:if="${totalPages > 1}">
             <ul class="pagination">
                 <li th:class="${currentPage > 1 ? 'page-item': 'page-item disabled'}">
@@ -135,6 +131,6 @@
 <script type="text/javascript">
 moduleURL = "[[@{/bikes}]]";
 </script>
-<script th:src="@{/webjars/clear.js}"></script>
+<script th:src="@{/js/clear.js}"></script>
 </body>
 </html>

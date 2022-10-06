@@ -9,21 +9,17 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/417822ee3c.js" crossorigin="anonymous"></script>
-    <script type="text/javascript" th:src="@{/webjars/common.js}"></script>
+    <script type="text/javascript" th:src="@{/js/common.js}"></script>
     <link media="all" rel="stylesheet" type="text/css" th:href="@{/css/style_bikes-page.css}">
     <link media="all" rel="stylesheet" type="text/css" th:href="@{/css/style_bikes-page2.css}">
  <!-- ссылка на css всегда должна быть самой последней -->
 </head>
 
 <body>
-
-
-
 <div class="header">
     <button class="home"><a class="home" th:href="@{'/bikes'}" th:text="Назад"/></button>
     <br>
     <div class="velInfo">
-        
         <span th:text="${'Номер: ' + bike.number}"/><br>
         <span th:text="${'QR Номер: ' + bike.qrNumber}"/><br>
         <span th:text="${'VIN: ' + bike.VIN}"/><br>
@@ -31,7 +27,6 @@
         <span th:text="${'Описание: ' + bike.description}"/><br>
         <span th:text="${'Ссылка на ELMA: '}"/><a th:href="@{${bike.qrLink}}" th:text="${bike.qrLink}" />
         <br>
-        
         <button sec:authorize="hasAnyRole('MANAGER', 'ADMIN')"><a th:href="@{'/bikes/management/edit/' + ${bike.id}}" th:text="'Изменить'"/></button>
         <button sec:authorize="hasAnyRole('MANAGER', 'ADMIN')"><a th:href="@{'/bikes/management/delete/' + ${bike.id}}" th:text="'Удалить'"/></button>
     </div>
@@ -168,12 +163,10 @@
     </table>
 </div>
 <script>
-    
     $("#toggleParts").on('click', function(){
         $(".partsDiv").last().fadeToggle( "fast", function(){});
         $("#upDown").toggleClass("fa-chevron-down");
     });
-
 </script>
 </body>
 </html>
