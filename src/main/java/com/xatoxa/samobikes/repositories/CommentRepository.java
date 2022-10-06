@@ -16,6 +16,8 @@ import java.util.Collection;
 public interface CommentRepository extends JpaRepository<Comment, Integer> {
     Collection<Comment> findByBikeIdOrderByCommentedAtDesc(Integer bikeId);
 
+    Collection<Comment> findByBikeIdOrderByCommentedAtAsc(Integer bikeId);
+
     @Transactional
     @Modifying
     @Query(value = "INSERT INTO comments (user_id, bike_id, comment_text, commented_at) VALUES (:userId, :bikeId, :commentText, :commentedAt)",

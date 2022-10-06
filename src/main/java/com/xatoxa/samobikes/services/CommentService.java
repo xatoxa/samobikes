@@ -23,8 +23,9 @@ public class CommentService {
         return commentRepository.findAll();
     }
 
-    public Collection<Comment> findByBikeId(Integer bikeId){
-        return commentRepository.findByBikeIdOrderByCommentedAtDesc(bikeId);
+    public Collection<Comment> findByBikeId(Integer bikeId, String sortField, String sortDir){
+        if (sortDir.equals("asc")) return commentRepository.findByBikeIdOrderByCommentedAtAsc(bikeId);
+        else return commentRepository.findByBikeIdOrderByCommentedAtDesc(bikeId);
     }
 
     public void save(Comment comment){

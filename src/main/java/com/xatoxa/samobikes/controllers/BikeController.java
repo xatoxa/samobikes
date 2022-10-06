@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.Collection;
 import java.util.List;
 
 @Controller
@@ -79,16 +80,24 @@ public class BikeController {
 
 
     @GetMapping("/show/{id}")
-    public String showOneBike(Model model, @PathVariable(value = "id") Integer id){
+    public String showOneBike(Model model, @PathVariable(value = "id") Integer id,
+                              @Param("sortField") String sortField,
+                              @Param("sortDir") String sortDir){
         Bike bike = bikeService.getById(id);
         Comment comment = new Comment();
         Part part = bike.getPart();
         bike.checkWorks();
         bikeService.save(bike);
         model.addAttribute("comment", comment);
-        model.addAttribute("comments", commentService.findByBikeId(id));
+        model.addAttribute("comments", commentService.findByBikeId(id, sortField, sortDir));
         model.addAttribute("bike", bike);
         model.addAttribute("part", part);
+
+        String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
+
+        model.addAttribute("sortField", sortField);
+        model.addAttribute("sortDir", sortDir);
+        model.addAttribute("reverseSortDir", reverseSortDir);
         return "bike-page";
     }
 

@@ -10,7 +10,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/417822ee3c.js" crossorigin="anonymous"></script>
-    <script type="text/javascript" th:src="@{/js/common.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/common.js}"></script>
     <link media="all" rel="stylesheet" type="text/css" th:href="@{/css/style_bikes.css}"> <!-- ссылка на css всегда должна быть самой последней -->
 </head>
 
@@ -80,7 +80,7 @@
             <td th:text="${bike.status == true ? 'Работает' : 'Сломан'}"/>
             <td th:text="${bike.description}"/>
             <td class="textCenter">
-                <a class="aTab" th:href="@{'/bikes/show/' + ${bike.id}}"><i class="fa-solid fa-list"></i></a>
+                <a class="aTab" th:href="@{'/bikes/show/' + ${bike.id} + '?sortField=commentedAt&sortDir=asc'}"><i class="fa-solid fa-list"></i></a>
                 <a sec:authorize="hasAnyRole('MANAGER', 'ADMIN')" class="aTab"  th:href="@{'/bikes/management/edit/' + ${bike.id}}"><i class="fa-solid fa-pen"></i></a>
                 <a sec:authorize="hasAnyRole('MANAGER', 'ADMIN')" class="aTab" th:href="@{'/bikes/management/delete/' + ${bike.id}}"><i class="fa-solid fa-delete-left"></i></a>
             </td>
@@ -135,6 +135,6 @@
 <script type="text/javascript">
 moduleURL = "[[@{/bikes}]]";
 </script>
-<script th:src="@{/js/clear.js}"></script>
+<script th:src="@{/webjars/clear.js}"></script>
 </body>
 </html>
