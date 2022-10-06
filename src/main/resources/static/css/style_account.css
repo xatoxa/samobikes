@@ -6,9 +6,12 @@ body{
     font-family: 'Averia Serif Libre', cursive;
     
 }
+input {
+    outline:none;
+}
 H1{
     text-align: center;
-    color: rgb(254,51,96);
+    color: rgb(254,12,106);
 }
 .form-control{
     color: grey;
@@ -23,10 +26,10 @@ H1{
     margin-top: 2%;
 }
 .form-control:focus{
-    color: rgb(254,51,96);
-    border: 2px solid rgb(254,51,96);
+    color: rgb(254,12,106);
+    border: 2px solid rgb(254,12,106);
     outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(254, 51, 96, 0.4);
+    box-shadow: 0 0 0 0.2rem rgba(254, 12, 106, 0.4);
 }
 .form{
     width: 70%;
@@ -74,8 +77,18 @@ a{
 }
 .password:focus{
     border: 2px solid rgb(254,12,106);
-    box-shadow: 0 0 0 0.2rem rgba(254, 12, 106, 0.6);
+    box-shadow: 0 0 0 0.2rem rgba(254, 12, 106, 0.4);
 }
 .checkbox{
     text-align: none;
+}
+.login{
+    padding: 1px 2px
+    color: grey;
+    border: 2px solid grey;
+    border-radius: 5px;
+    background: white;
+    width: 70%;
+    margin: auto;
+    margin-top: 2%;
 }

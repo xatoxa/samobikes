@@ -21,6 +21,9 @@ body{
     outline: 0;
     box-shadow: 0 0 0 0.2rem rgba(254, 51, 96, 0.4);
 }
+.textCenter{
+    text-align: center;
+}
 .container{
     margin: 20%;
 }

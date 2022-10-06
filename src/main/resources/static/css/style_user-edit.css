@@ -21,7 +21,7 @@ H1{
 }
 .inp{
     text-align: center;
-    margin-top: 2%;
+    margin-bottom: 2%;
 }
 .form:focus{
     color: rgb(254,51,96);
@@ -33,7 +33,13 @@ H1{
     text-align: center;
 }
 .roles{
+    background: white;
+    border: 2px solid grey;
+    border-radius: 5px;
+    color: black;
+    text-align: center;
     margin-top: 2%;
+    padding: 1px 2px;
     width: 90%;
     margin: auto;
 }
@@ -86,7 +92,7 @@ input[type=checkbox]:after {
          height: 12px;
          top: 0;
          left: 0;
-         border: 2px solid grey;
+         border: 2px solid black;
          border-radius: 3px;
          top: -1px;
          left: -1px;
