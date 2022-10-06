@@ -160,21 +160,10 @@
 </div>
 <script>
     
-    var x = 1;
-    var chevron = document.getElementById("upDown"); 
     $("#toggleParts").on('click', function(){
         $(".partsDiv").last().fadeToggle( "fast", function(){});
-        x ++;
+        $("#upDown").toggleClass("fa-chevron-down");
     });
-    // if (x%2 = 0) {
-    //     chevron.classList.remove("fa-chevron-up");
-    //     chevron.classList.add("fa-chevron-down");
-    // }else if (x%2 != 0) {
-    //     chevron.classList.add("fa-chevron-up");
-    //     chevron.classList.remove("fa-chevron-down");
-    // };
-    
-
 
 </script>
 </body>
