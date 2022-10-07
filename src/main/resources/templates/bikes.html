@@ -51,7 +51,7 @@
             <input type="hidden" name="sortDir" th:value="${sortDir}">
             <input type="search" name="keyword" th:value="${keyword}" class="form-control search" required>
             <input class="inputSearch" type="submit" value="Поиск"/>
-            <input class="inputSearch" type="button" value="Очистить" onclick="clearFilter()"/>
+            <input th:if="${keyword != null}" class="inputSearch" type="button" value="Очистить" onclick="clearFilter()"/>
         </form>
     </div>
     <br>
