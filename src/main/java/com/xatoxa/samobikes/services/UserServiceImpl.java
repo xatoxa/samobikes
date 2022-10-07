@@ -2,6 +2,7 @@ package com.xatoxa.samobikes.services;
 
 import com.xatoxa.samobikes.entities.Role;
 import com.xatoxa.samobikes.entities.User;
+import com.xatoxa.samobikes.entities.UserDTO;
 import com.xatoxa.samobikes.repositories.RoleRepository;
 import com.xatoxa.samobikes.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -148,5 +150,23 @@ public class UserServiceImpl implements UserService{
     private void encodePassword(User user){
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
+    }
+
+    @Override
+    public void registerNewUserAccount(UserDTO userDTO){
+        User user = new User();
+        user.setUsername(userDTO.getUsername());
+        user.setFirstName(userDTO.getFirstName());
+        user.setLastName(userDTO.getLastName());
+        user.setEnabled(true);
+
+        Collection<Role> roles = new ArrayList<>();
+        roles.add(roleRepository.findOneByName("ROLE_USER"));
+        user.setRoles(roles);
+
+        user.setPassword(userDTO.getPassword());
+        encodePassword(user);
+
+        userRepository.save(user);
     }
 }

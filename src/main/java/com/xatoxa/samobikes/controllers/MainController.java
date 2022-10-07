@@ -1,6 +1,8 @@
 package com.xatoxa.samobikes.controllers;
 
+import com.xatoxa.samobikes.entities.UserDTO;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
@@ -15,4 +17,13 @@ public class MainController {
 
         return "login";
     }
+
+    @GetMapping("/registration")
+    public String showRegistrationPage(Model model){
+        UserDTO userDTO = new UserDTO();
+        model.addAttribute("user", userDTO);
+        return "registration";
+    }
+
+
 }

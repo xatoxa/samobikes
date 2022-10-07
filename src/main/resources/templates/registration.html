@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+  <link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre&display=swap" rel="stylesheet"><!-- ссылка на шрифт -->
+  <!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+<body>
+<h1  th:text="Регистрация"/></h1>
+<div>
+<form th:action="@{/register-user}" th:object="${user}" method="POST" enctype="utf8" onsubmit="return checkUsername(this)">
+    <div>
+        <label>Придумайте логин</label>
+        <input th:field="*{username}" required/>
+    </div>
+    <div>
+        <label>Имя</label>
+        <input th:field="*{firstName}"/>
+    </div>
+    <div>
+        <label>Фамилия</label>
+        <input th:field="*{lastName}"/>
+    </div>
+    <div>
+        <label>Пароль</label>
+        <input type="password" th:field="*{password}" required
+               oninput="checkPasswordMatch(document.getElementById('confirmPassword'))"/>
+    </div>
+    <div>
+        <label>Подтвердите пароль</label>
+        <input type="password" id="confirmPassword" required
+               oninput="checkPasswordMatch(this)"/>
+    </div>
+    <button type="submit" th:text="Зарегистрироваться">submit</button>
+</form>
+</div>
+<div>    <!--отделить рамкой от основного блока-->
+    <a th:href="@{'/login'}" th:text="${'У меня уже есть логин и пароль'}"/>
+</div>
+<script type="text/javascript">
+    function checkPasswordMatch(confirmPassword) {
+      if (confirmPassword.value != $("#password").val()) {
+        confirmPassword.setCustomValidity("Пароли не совпадают");
+      } else {
+        confirmPassword.setCustomValidity("");
+      }
+    }
+</script>
+<script type="text/javascript">
+    function checkUsername(form){
+        url = "[[@{/check_username}]]";
+        username = $("#username").val();
+        csrfValue = $("input[name='_csrf']").val();
+        params = {username: username, _csrf: csrfValue};
+        $.post(url, params, function(response){
+            if(response == "OK"){
+                form.submit();
+            } else if(response == "Duplicated"){
+                alert("Есть другой пользователь с логином " + username);
+            } else {
+                alert("Произошло что-то непонятное...");
+            }
+        }).fail(function(){
+            alert("Невозможно подключиться к серверу.");
+        });
+        return false;
+    }
+</script>
+</body>
+</html>
