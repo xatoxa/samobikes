@@ -10,6 +10,10 @@
     <link media="all" rel="stylesheet" type="text/css" th:href="@{/css/style_login.css}"><!-- ссылка на css всегда должна быть самой последней -->
 </head>
 <body>
+<h1  th:text="Вход"/></h1>
+<div th:if="${message != null}">
+    [[${message}]]
+</div>
 <div class="container">
     <form th:action="@{/login}" method="post">
         <div th:if="${param.error}">
@@ -30,14 +34,12 @@
                     Запомнить меня <input class="checkbox" type="checkbox" name="remember-me"/>&nbsp;
                 </p>
                 <p>
-                    <input type="submit" value="Вход" class="button" />
+                    <input type="submit" value="Войти" class="button" />
                 </p>
             </div>
         </div>
     </form>
+    <a th:href="@{'/registration'}" th:text="Регистрация"/>
 </div>
-<footer class="textCenter">
-    <input type="submit" value="Зарегестрироваться" class="button" />
-</footer>
 </body>
 </html>
