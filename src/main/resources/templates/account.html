@@ -35,7 +35,8 @@
       <span>Пароль</span>
       <br>
       <div>
-        <input class="password" type="password" th:field="*{password}" placeholder="Ничего не вводите, если не хотите изменить"
+        <input class="password" type="password" th:field="*{password}" minlength="8" maxlength="100"
+               placeholder="Ничего не вводите, если не хотите изменить"
                oninput="checkPasswordMatch(document.getElementById('confirmPassword'))"/>
       </div>
     </div>
@@ -43,20 +44,21 @@
       <span>Повторите новый пароль</span>
       <br>
       <div>
-        <input class="password" type="password" id="confirmPassword" oninput="checkPasswordMatch(this)"/>
+        <input class="password" type="password" id="confirmPassword" minlength="8" maxlength="100"
+               oninput="checkPasswordMatch(this)"/>
       </div>
     </div>
     <div class="input-group inp">
       <span>Имя</span>
       <br>
       <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-      <input th:field="*{firstName}" placeholder="Имя (необязательно)" class="form-control form"/>
+      <input th:field="*{firstName}" placeholder="Имя (необязательно)" class="form-control form" maxlength="100"/>
     </div>
     <div class="input-group inp">
       <span>Фамилия</span>
       <br>
       <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-      <input th:field="*{lastName}" placeholder="Фамилия (необязательно)" class="form-control form"/>
+      <input th:field="*{lastName}" placeholder="Фамилия (необязательно)" class="form-control form" maxlength="100"/>
     </div>
     <div  class="input-group inp login">
       <label class="input-group-addon"><i class="glyphicon glyphicon-user">Мои роли:</i></label>

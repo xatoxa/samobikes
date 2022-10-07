@@ -48,26 +48,26 @@
         <input type="hidden" th:field="*{id}"/>
         <div  class="input-group inp">
             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-            <input th:field="*{username}" placeholder="Логин" class="form-control form" required/>
+            <input th:field="*{username}" placeholder="Логин" class="form-control form" required minlength="3" maxlength="50"/>
         </div>
 
         <div  class="input-group inp">
             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-            <input th:if="${user.id == null}" type="password" th:field="*{password}"
+            <input th:if="${user.id == null}" type="password" th:field="*{password}" minlength="8" maxlength="100"
                    placeholder="Пароль" class="form-control form" required/>
             <input th:if="${user.id != null}" type="password" th:field="*{password}"
-                   placeholder="Ничего не вводите, если не хотите изменить" class="form-control form"/>
+                   placeholder="Ничего не вводите, если не хотите изменить" class="form-control form" minlength="8" maxlength="100"/>
 
         </div>
 
         <div class="input-group inp">
             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-            <input th:field="*{firstName}" placeholder="Имя (необязательно)" class="form-control form"/>
+            <input th:field="*{firstName}" placeholder="Имя (необязательно)" class="form-control form" maxlength="100"/>
         </div>
 
         <div class="input-group inp">
             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-            <input th:field="*{lastName}" placeholder="Фамилия (необязательно)" class="form-control form"/>
+            <input th:field="*{lastName}" placeholder="Фамилия (необязательно)" class="form-control form" maxlength="100"/>
         </div>
     <div class="roles">
         <div  class="input-group">

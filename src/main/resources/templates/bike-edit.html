@@ -46,17 +46,17 @@
 
             <div  class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                <input th:field="*{number}" placeholder="Номер" class="form-control" required/>
+                <input th:field="*{number}" placeholder="Номер" class="form-control" required minlength="1" maxlength="3"/>
             </div>
 
             <div  class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                <input th:field="*{qrNumber}" placeholder="QR Номер 4-хзначный" class="form-control" required/>
+                <input th:field="*{qrNumber}" placeholder="QR Номер 4-хзначный" class="form-control" required minlength="4" maxlength="7"/>
             </div>
 
             <div  class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                <input th:field="*{VIN}" placeholder="VIN (буквы латиницей)" class="form-control" required/>
+                <input th:field="*{VIN}" placeholder="VIN (буквы латиницей)" class="form-control" required minlength="7" maxlength="20"/>
             </div>
 
             <div class="input-group select">
@@ -69,7 +69,7 @@
 
             <div class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                <input th:field="*{description}" placeholder="О состоянии вело" class="form-control"/>
+                <input th:field="*{description}" placeholder="Описание вело" class="form-control"/>
             </div>
 
             <div  class="input-group">

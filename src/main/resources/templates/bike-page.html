@@ -132,11 +132,12 @@
 <br>   
 <!--Комментарии-->
 <div class="comments">
-    <form th:action="@{'/comment/save/' + ${bike.id}}" method="post" >
+    <form sec:authorize="isAuthenticated()" th:action="@{'/comment/save/' + ${bike.id}}" method="post" >
         <input type="hidden" th:name="sortDir" th:value="${sortDir}"/>
         <input type="text" placeholder="Написать сообщение..." th:name="text" required class="search" />
         <button class="inputSearch" type="submit"><i class="fa-solid fa-toilet-paper"></i></i></button>
     </form>
+    <span sec:authorize="isAnonymous()"><b>Чтобы оставить комментарий, войдите в свой аакаунт.</b></span><br>
     <a th:if="${sortDir == 'asc'}"
        th:href="@{'/bikes/show/' + ${bike.id} + '?sortField=commentedAt&sortDir=' + ${reverseSortDir}}">
         Сначала старые

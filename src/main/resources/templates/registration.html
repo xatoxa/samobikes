@@ -14,24 +14,24 @@
 <form th:action="@{/register-user}" th:object="${user}" method="POST" enctype="utf8" onsubmit="return checkUsername(this)">
     <div>
         <label>Придумайте логин</label>
-        <input th:field="*{username}" required/>
+        <input th:field="*{username}" required minlength="3" maxlength="50"/>
     </div>
     <div>
         <label>Имя</label>
-        <input th:field="*{firstName}"/>
+        <input th:field="*{firstName}" maxlength="100"/>
     </div>
     <div>
         <label>Фамилия</label>
-        <input th:field="*{lastName}"/>
+        <input th:field="*{lastName}" maxlength="100"/>
     </div>
     <div>
         <label>Пароль</label>
-        <input type="password" th:field="*{password}" required
+        <input type="password" th:field="*{password}" required minlength="8" maxlength="100"
                oninput="checkPasswordMatch(document.getElementById('confirmPassword'))"/>
     </div>
     <div>
         <label>Подтвердите пароль</label>
-        <input type="password" id="confirmPassword" required
+        <input type="password" id="confirmPassword" required minlength="8" maxlength="100"
                oninput="checkPasswordMatch(this)"/>
     </div>
     <button type="submit" th:text="Зарегистрироваться">submit</button>
