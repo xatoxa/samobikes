@@ -15,7 +15,7 @@ public class UserRestController {
         this.userService = userService;
     }
 
-    @PostMapping("/users/check_username")
+    @PostMapping("/check_username")
     public String checkUsername(@Param("id") Integer id, @Param("username") String username){
         if(userService.isUsernameUnique(id, username)) return "OK";
         else return "Duplicated";

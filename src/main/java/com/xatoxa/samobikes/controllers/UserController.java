@@ -2,6 +2,7 @@ package com.xatoxa.samobikes.controllers;
 
 import com.xatoxa.samobikes.entities.Role;
 import com.xatoxa.samobikes.entities.User;
+import com.xatoxa.samobikes.entities.UserDTO;
 import com.xatoxa.samobikes.services.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -104,5 +105,13 @@ public class UserController {
                 "message",
                 "Пользователь " + username + " удалён.");
         return "redirect:/users";
+    }
+
+    @PostMapping("/register-user")
+    public String registerUserAccount(@ModelAttribute(value = "user")UserDTO userDTO,
+                                      RedirectAttributes redirectAttributes){
+        userService.registerNewUserAccount(userDTO);
+        redirectAttributes.addFlashAttribute("message", "Ваш аккаунт зарегистрирован, можете войти в систему.");
+        return "redirect:/login";
     }
 }
