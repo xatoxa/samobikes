@@ -13,8 +13,9 @@
 <div>
 <form th:action="@{/register-user}" th:object="${user}" method="POST" enctype="utf8" onsubmit="return checkUsername(this)">
     <div>
-        <label>Придумайте логин</label>
-        <input th:field="*{username}" required minlength="3" maxlength="50"/>
+        <label>Придумайте логин</label> <!--только латиница и цифры без пробелов от 2 до 20 символов-->
+        <input th:field="*{username}" required minlength="2" maxlength="20"
+        pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$"/>
     </div>
     <div>
         <label>Имя</label>
@@ -25,14 +26,16 @@
         <input th:field="*{lastName}" maxlength="100"/>
     </div>
     <div>
-        <label>Пароль</label>
+        <label>Пароль</label> <!--только латиница вместе с цифрами от 8 до 100 символов-->
         <input type="password" th:field="*{password}" required minlength="8" maxlength="100"
-               oninput="checkPasswordMatch(document.getElementById('confirmPassword'))"/>
+               oninput="checkPasswordMatch(document.getElementById('confirmPassword'))"
+               pattern="^(?=.*\d)(?=.*[a-zA-Z])(?!.*\s).*$"/>
     </div>
     <div>
-        <label>Подтвердите пароль</label>
+        <label>Подтвердите пароль</label> <!--только латиница вместе с цифрами от 8 до 100 символов-->
         <input type="password" id="confirmPassword" required minlength="8" maxlength="100"
-               oninput="checkPasswordMatch(this)"/>
+               oninput="checkPasswordMatch(this)"
+               pattern="^(?=.*\d)(?=.*[a-zA-Z])(?!.*\s).*$"/>
     </div>
     <button type="submit" th:text="Зарегистрироваться">submit</button>
 </form>
@@ -68,6 +71,18 @@
         });
         return false;
     }
+</script>
+<script type="text/javascript">
+function checkUsernameLang(username){
+    var ru = /[а-яё]+/i.test(username.value);
+    var en = /[a-z]+/i.test(username.value);
+
+    if (! (ru) ) {
+        username.setCustomValidity("Используйте латиницу!");
+    } else {
+        username.setCustomValidity("");
+    }
+}
 </script>
 </body>
 </html>

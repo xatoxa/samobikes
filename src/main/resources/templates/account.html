@@ -34,18 +34,19 @@
     <div  class="input-group inp">
       <span>Пароль</span>
       <br>
-      <div>
+      <div><!--только латиница вместе с цифрами от 8 до 100 символов-->
         <input class="password" type="password" th:field="*{password}" minlength="8" maxlength="100"
                placeholder="Ничего не вводите, если не хотите изменить"
-               oninput="checkPasswordMatch(document.getElementById('confirmPassword'))"/>
+               oninput="checkPasswordMatch(document.getElementById('confirmPassword'))"
+               pattern="^(?=.*\d)(?=.*[a-zA-Z])(?!.*\s).*$"/>
       </div>
-    </div>
+    </div><!--только латиница вместе с цифрами от 8 до 100 символов-->
     <div  class="input-group inp">
       <span>Повторите новый пароль</span>
       <br>
       <div>
         <input class="password" type="password" id="confirmPassword" minlength="8" maxlength="100"
-               oninput="checkPasswordMatch(this)"/>
+               oninput="checkPasswordMatch(this)" pattern="^(?=.*\d)(?=.*[a-zA-Z])(?!.*\s).*$"/>
       </div>
     </div>
     <div class="input-group inp">
