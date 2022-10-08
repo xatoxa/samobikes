@@ -72,17 +72,5 @@
         return false;
     }
 </script>
-<script type="text/javascript">
-function checkUsernameLang(username){
-    var ru = /[а-яё]+/i.test(username.value);
-    var en = /[a-z]+/i.test(username.value);
-
-    if (! (ru) ) {
-        username.setCustomValidity("Используйте латиницу!");
-    } else {
-        username.setCustomValidity("");
-    }
-}
-</script>
 </body>
 </html>
