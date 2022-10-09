@@ -241,3 +241,8 @@ ul{
 .dropdown-toggle{
 	margin-bottom: 22px;
 }
+@media all and (max-width:768px){
+	.aTab{
+		padding: 4px;
+	}
+}

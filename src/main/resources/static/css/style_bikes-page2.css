@@ -52,11 +52,11 @@ th{
 	color: grey;
 }
 .search:focus{
-	color: rgb(254,51,96);
+	color: rgb(254,12,106);
 	background-color: #fff;
-	border-color: rgb(254,51,96);
+	border-color: rgb(254,12,106);
 	outline: 0;
-	box-shadow: 0 0 0 0.2rem rgba(254, 51, 96, 0.4);
+	box-shadow: 0 0 0 0.2rem rgba(254, 12,106, 0.4);
 }
 .comments{
 	text-align: center;
@@ -68,4 +68,16 @@ form{
 .fa-share{
 	color: white;
 	font-size: 17px;
+}
+#table{
+	font-family: 'Averia Serif Libre', cursive;
+	width: 98%;
+	margin: auto;
+	font-weight: 1;
+}
+.fas {
+	display: inline;
+}
+.upDown{
+	color: rgb(254,12,106);
 }

@@ -25,7 +25,10 @@ body{
     text-align: center;
 }
 .container{
-    margin: 20%;
+    margin-top: 10%;
+    margin-left: 20%;
+    margin-right: 20%;
+
 }
 .checkbox{
     width: auto;
@@ -91,4 +94,16 @@ input[type=checkbox]:after {
          left: 4px;
          border-radius: 0px;
          
+}
+.reg{
+    color: rgb(254,51,96);
+}
+.reg: hover{
+    color: rgb(254,51,96);
+    font-size: 20px;
+}
+H1{
+    margin-top: 10%;
+    text-align: center;
+    color: rgb(254,12,106);
 }

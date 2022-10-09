@@ -1,0 +1,64 @@
+body{
+	background-image: url("../img/background.jpg");
+	background-repeat:no-repeat;
+    background-attachment:fixed;
+    background-position:center;
+    font-family: 'Averia Serif Libre', cursive;
+}
+form{
+    font-size: 20px;
+    text-align: center;
+    margin-top: 5%;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+.form-control{
+    margin-top:;
+    width: 100%;
+    margin: auto;
+    color: grey;
+    font-size: 20px;
+    font-family: 'Averia Serif Libre', cursive;
+    border: 2px solid grey;
+    border-radius: 5px;
+    text-align: center;
+}
+.form-control:focus{
+    color: rgb(254,12,106);
+    border: 2px solid rgb(254,12,106);
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(254, 12,106, 0.4);
+}
+.reg{
+    margin-left: 20%;
+    float: left;
+    color: rgb(254,12,106);
+}
+.reg: hover{
+    color: rgb(254,12,106);
+    font-size: 20px;
+}
+H1{
+    margin-top: 5%;
+    text-align: center;
+    color: rgb(254,12,106);
+}
+.button{
+    margin-top: 5%;
+    background: rgb(254,12,106);
+    width: 30%;
+    align-items: center;
+    border: 2px solid rgb(254,12,106);
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 20px;
+    font-family: 'Averia Serif Libre', cursive;
+}
+.button:hover{
+    box-shadow: 0 0 0 0.2rem rgba(254, 12, 106, 0.4);
+    border-color: rgb(254,12,106);
+}
+.formDiv{
+    margin-top: 2%;
+}

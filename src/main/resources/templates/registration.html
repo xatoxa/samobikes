@@ -7,41 +7,42 @@
   <!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+  <link media="all" rel="stylesheet" type="text/css" th:href="@{/css/style_registration.css}"><!-- ссылка на css всегда должна быть самой последней -->
 </head>
 <body>
 <h1  th:text="Регистрация"/></h1>
-<div>
+<div class="formReg">
 <form th:action="@{/register-user}" th:object="${user}" method="POST" enctype="utf8" onsubmit="return checkUsername(this)">
-    <div>
-        <label>Придумайте логин</label> <!--только латиница и цифры без пробелов от 2 до 20 символов-->
-        <input th:field="*{username}" required minlength="2" maxlength="20"
+    <div class="formDiv">
+        <label>Придумайте логин</label><br> <!--только латиница и цифры без пробелов от 2 до 20 символов-->
+        <input class="form-control" th:field="*{username}" required minlength="2" maxlength="20"
         pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$"/>
     </div>
-    <div>
-        <label>Имя</label>
-        <input th:field="*{firstName}" maxlength="100"/>
+    <div class="formDiv">
+        <label>Имя</label><br>
+        <input class="form-control" th:field="*{firstName}" maxlength="100"/>
     </div>
-    <div>
-        <label>Фамилия</label>
-        <input th:field="*{lastName}" maxlength="100"/>
+    <div class="formDiv">
+        <label>Фамилия</label><br>
+        <input class="form-control" th:field="*{lastName}" maxlength="100"/>
     </div>
-    <div>
-        <label>Пароль</label> <!--только латиница вместе с цифрами от 8 до 100 символов-->
-        <input type="password" th:field="*{password}" required minlength="8" maxlength="100"
+    <div class="formDiv">
+        <label>Пароль</label><br> <!--только латиница вместе с цифрами от 8 до 100 символов-->
+        <input class="form-control" type="password" th:field="*{password}" required minlength="8" maxlength="100"
                oninput="checkPasswordMatch(document.getElementById('confirmPassword'))"
                pattern="^(?=.*\d)(?=.*[a-zA-Z])(?!.*\s).*$"/>
     </div>
-    <div>
-        <label>Подтвердите пароль</label> <!--только латиница вместе с цифрами от 8 до 100 символов-->
-        <input type="password" id="confirmPassword" required minlength="8" maxlength="100"
+    <div class="formDiv">
+        <label>Подтвердите пароль</label><br> <!--только латиница вместе с цифрами от 8 до 100 символов-->
+        <input class="form-control" type="password" id="confirmPassword" required minlength="8" maxlength="100"
                oninput="checkPasswordMatch(this)"
                pattern="^(?=.*\d)(?=.*[a-zA-Z])(?!.*\s).*$"/>
-    </div>
-    <button type="submit" th:text="Зарегистрироваться">submit</button>
+    </div >
+    <button class="button" type="submit" th:text="Зарегистрироваться">submit</button>
 </form>
 </div>
 <div>    <!--отделить рамкой от основного блока-->
-    <a th:href="@{'/login'}" th:text="${'У меня уже есть логин и пароль'}"/>
+    <a class="reg formDiv" th:href="@{'/login'}" th:text="${'У меня уже есть логин и пароль'}"/>
 </div>
 <script type="text/javascript">
     function checkPasswordMatch(confirmPassword) {

@@ -38,7 +38,7 @@
 <!-- кнопка для скрытия и открытия partsDiv -->
 <br>
 <div class="toggleParts">
-    <button id="toggleParts"><i id="upDown" class="fa-solid fa-chevron-up"></i></button>
+    <button id="toggleParts">Список деталей</button>
 </div>
 <br>
 
@@ -138,15 +138,17 @@
         <button class="inputSearch" type="submit"><i class="fa-solid fa-toilet-paper"></i></i></button>
     </form>
     <span sec:authorize="isAnonymous()"><b>Чтобы оставить комментарий, войдите в свой аакаунт.</b></span><br>
-    <a th:if="${sortDir == 'asc'}"
-       th:href="@{'/bikes/show/' + ${bike.id} + '?sortField=commentedAt&sortDir=' + ${reverseSortDir}}">
-        Сначала старые
-    </a>
-    <a th:if="${sortDir == 'desc'}"
-       th:href="@{'/bikes/show/' + ${bike.id} + '?sortField=commentedAt&sortDir=' + ${reverseSortDir}}">
-        Сначала новые
-    </a>
-    <span th:class="${sortDir == 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}"/>
+    <div class="upDown">
+        <a class="" th:if="${sortDir == 'asc'}"
+           th:href="@{'/bikes/show/' + ${bike.id} + '?sortField=commentedAt&sortDir=' + ${reverseSortDir}}">
+            Сначала старые
+        </a>
+        <a th:if="${sortDir == 'desc'}"
+           th:href="@{'/bikes/show/' + ${bike.id} + '?sortField=commentedAt&sortDir=' + ${reverseSortDir}}">
+            Сначала новые
+        </a>
+        <span th:class="${sortDir == 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}"/>
+    </div>
     <table id="table">
         <tbody>
             <thead>
@@ -166,7 +168,6 @@
 <script>
     $("#toggleParts").on('click', function(){
         $(".partsDiv").last().fadeToggle( "fast", function(){});
-        $("#upDown").toggleClass("fa-chevron-down");
     });
 </script>
 </body>

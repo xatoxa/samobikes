@@ -57,7 +57,9 @@ hr{
 	color: white;
 	float: left;
 }
-
+.partsDiv{
+	display: none;
+}
 .partsLeft{
 	width: 47%;
 	float: left;
@@ -137,5 +139,5 @@ img{
 }
 #toggleParts{
 	color: rgb(254,12,106);
-	font-size: 30px;
+	font-size: 16px;
 }
