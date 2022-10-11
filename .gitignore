@@ -35,4 +35,7 @@ build/
 .vscode/
 
 ### Maven ###
+mvnw
+mvnw.cmd
+.mvn/
 pom.xml
