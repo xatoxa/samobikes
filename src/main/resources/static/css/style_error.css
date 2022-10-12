@@ -37,3 +37,25 @@ a:hover{
     color: rgb(254,12,106);
     text-decoration: none;
 }
+.mem404, .mem403, .mem500{
+
+    margin: auto;
+    border: 2px solid rgb(254,12,106);
+    border-radius: 5px;
+    text-align: center;
+    width: 600px;
+    height: 500px;
+    
+}
+.mem403{
+    margin-top: 50px;
+    background-image: url(../img/kto_takie.png);
+}
+.mem404{
+    margin-top: 50px;
+    background-image: url(../img/travolt.png);
+}
+.mem500{
+    margin-top: 50px;
+    background-image: url(../img/tech_chok.png);
+}
