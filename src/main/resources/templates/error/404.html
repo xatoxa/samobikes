@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Не найдено</title>
+    <link media="all" rel="stylesheet" type="text/css" th:href="@{/css/style_error.css}"> <!-- ссылка на css всегда должна быть самой последней -->
 </head>
 <body>
 <div class="firstHead">
-    <button type="submit" class="btn btnTab add"><a class="home" th:href="@{/bikes}">На главную</a></button>
+    <a class="aAdd" th:href="@{/bikes}">На главную</a>
 </div>
 <div>
     <h2>Нет такой страницы.</h2>
