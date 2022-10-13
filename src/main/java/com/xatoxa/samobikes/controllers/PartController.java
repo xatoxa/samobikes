@@ -33,7 +33,7 @@ public class PartController {
         Bike bike = part.getBike();
         model.addAttribute("part", part);
         model.addAttribute("bike", bike);
-        return "part-edit";
+        return "redirect:/bikes/show/" + bike.getId();
     }
 
     @PostMapping("/edit")
@@ -62,6 +62,6 @@ public class PartController {
         model.addAttribute("part", part);
         model.addAttribute("comment", new Comment());
         model.addAttribute("comments", bike.getComments());
-        return "bike-page";
+        return "redirect:/bikes/show/" + bike.getId();
     }
 }
