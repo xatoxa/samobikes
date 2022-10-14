@@ -33,7 +33,7 @@ public class PartController {
         Bike bike = part.getBike();
         model.addAttribute("part", part);
         model.addAttribute("bike", bike);
-        return "redirect:/bikes/show/" + bike.getId();
+        return "part-edit";
     }
 
     @PostMapping("/edit")
@@ -46,7 +46,13 @@ public class PartController {
         model.addAttribute("bike", bike);
         model.addAttribute("comment", new Comment());
         model.addAttribute("comments", bike.getComments());
-        return "redirect:/bikes/show/" + bike.getId();
+
+        String sortDir = "asc";
+        String reverseSortDir = "desc";
+
+        model.addAttribute("sortDir", sortDir);
+        model.addAttribute("reverseSortDir", reverseSortDir);
+        return "redirect:/bikes/show/" + bike.getId() + "?sortField=commentedAt&sortDir=" + sortDir;
     }
 
 
@@ -62,6 +68,12 @@ public class PartController {
         model.addAttribute("part", part);
         model.addAttribute("comment", new Comment());
         model.addAttribute("comments", bike.getComments());
-        return "redirect:/bikes/show/" + bike.getId();
+
+        String sortDir = "asc";
+        String reverseSortDir = "desc";
+
+        model.addAttribute("sortDir", sortDir);
+        model.addAttribute("reverseSortDir", reverseSortDir);
+        return "redirect:/bikes/show/" + id + "?sortField=commentedAt&sortDir=" + sortDir;
     }
 }
