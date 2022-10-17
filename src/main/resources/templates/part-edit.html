@@ -36,7 +36,6 @@
 
 <h1 th:text="${'Изменение состояния запчастей велосипеда ' + bike.number + ' / ' + bike.qrNumber}"/>
 <div class="homeBut">
-  <button class="home"><a class="home" th:href="@{'/bikes/show/' + ${part.bikeId}}" th:text="'Назад'"/></button>
   <button class="home"><a class="home" th:href="@{'/bikes'}" th:text="'На главную'"/></button>
 </div>
 <div class="container">
@@ -204,6 +203,7 @@
       </div>
     </div>
   </form>
+  <button class="home"><a class="home" th:href="@{'/bikes/show/' + ${part.bikeId} + '?currentPage=' + ${currentPage} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&commentSortField=commentedAt&commentSortDir=asc' + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="'Назад'"/></button>
 </div>
 </body>
 </html>

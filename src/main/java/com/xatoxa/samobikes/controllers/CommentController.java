@@ -42,7 +42,12 @@ public class CommentController {
     @PostMapping("/comment/save/{id}")
     public String saveComment (Model model, @PathVariable(value = "id") Integer id,
                                @AuthenticationPrincipal SamUserDetails loggedUser,
+                               @RequestParam(value = "currentPage") String currentPage,
+                               @RequestParam(value = "sortField") String sortField,
                                @RequestParam(value = "sortDir") String sortDir,
+                               @RequestParam(value = "commentSortField") String commentSortField,
+                               @RequestParam(value = "commentSortDir") String commentSortDir,
+                               @RequestParam(value = "keyword") String keyword,
                                @RequestParam(value = "text") String text){
         Comment comment = new Comment();
         comment.setCommentText(text);
@@ -58,22 +63,28 @@ public class CommentController {
         comment.setUser(user);
 
         commentService.insert(user.getId(), bike.getId(), comment.getCommentText(), comment.getCommentedAt());
-        //userService.save(user);
-        //bikeService.save(bike);
 
         Comment newComment = new Comment();
         Part part = bike.getPart();
-
-        String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
 
         model.addAttribute("comment", newComment);
         model.addAttribute("comments", commentService.findByBikeId(id, "commentedAt", sortDir));
         model.addAttribute("bike", bike);
         model.addAttribute("part", part);
-        model.addAttribute("sortField", "commentedAt");
+
+        String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
+        String commentReverseSortDir = commentSortDir.equals("asc") ? "desc" : "asc";
+
+        model.addAttribute("sortField", sortField);
         model.addAttribute("sortDir", sortDir);
         model.addAttribute("reverseSortDir", reverseSortDir);
+        model.addAttribute("commentSortField", commentSortField);
+        model.addAttribute("commentSortDir", commentSortDir);
+        model.addAttribute("commentReverseSortDir", commentReverseSortDir);
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("keyword", keyword);
 
-        return "redirect:/bikes/show/" + id + "?sortField=commentedAt&sortDir=" + sortDir;
+
+        return "redirect:/bikes/show/" + id + "?currentPage=" + currentPage + "&sortField=" + sortField + "&sortDir=" + sortDir + "&commentSortField=commentedAt&commentSortDir=" + commentSortDir + (keyword != null ? "&keyword=" + keyword : "");
     }
 }

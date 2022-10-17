@@ -78,26 +78,35 @@ public class BikeController {
         return "bikes";
     }
 
-
     @GetMapping("/show/{id}")
     public String showOneBike(Model model, @PathVariable(value = "id") Integer id,
+                              @Param("currentPage") String currentPage,
                               @Param("sortField") String sortField,
-                              @Param("sortDir") String sortDir){
+                              @Param("sortDir") String sortDir,
+                              @Param("commentSortField") String commentSortField,
+                              @Param("commentSortDir") String commentSortDir,
+                              @Param("keyword") String keyword){
         Bike bike = bikeService.getById(id);
         Comment comment = new Comment();
         Part part = bike.getPart();
         bike.checkWorks();
         bikeService.save(bike);
         model.addAttribute("comment", comment);
-        model.addAttribute("comments", commentService.findByBikeId(id, sortField, sortDir));
+        model.addAttribute("comments", commentService.findByBikeId(id, commentSortField, commentSortDir));
         model.addAttribute("bike", bike);
         model.addAttribute("part", part);
 
         String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
+        String commentReverseSortDir = commentSortDir.equals("asc") ? "desc" : "asc";
 
         model.addAttribute("sortField", sortField);
         model.addAttribute("sortDir", sortDir);
         model.addAttribute("reverseSortDir", reverseSortDir);
+        model.addAttribute("commentSortField", commentSortField);
+        model.addAttribute("commentSortDir", commentSortDir);
+        model.addAttribute("commentReverseSortDir", commentReverseSortDir);
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("keyword", keyword);
         return "bike-page";
     }
 

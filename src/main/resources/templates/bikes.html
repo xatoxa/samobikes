@@ -77,7 +77,7 @@
             <td th:text="${bike.status == true ? 'Работает' : 'Сломан'}"/>
             <td th:text="${bike.description}"/>
             <td class="textCenter">
-                <a class="aTab" th:href="@{'/bikes/show/' + ${bike.id} + '?sortField=commentedAt&sortDir=asc'}"><i class="fa-solid fa-list"></i></a>
+                <a class="aTab" th:href="@{'/bikes/show/' + ${bike.id} + '?currentPage=' + ${currentPage} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&commentSortField=commentedAt&commentSortDir=asc' + ${keyword != null ? '&keyword=' + keyword : ''}}"><i class="fa-solid fa-list"></i></a>
                 <a sec:authorize="hasAnyRole('MANAGER', 'ADMIN')" class="aTab"  th:href="@{'/bikes/management/edit/' + ${bike.id}}"><i class="fa-solid fa-pen"></i></a>
                 <a sec:authorize="hasAnyRole('MANAGER', 'ADMIN')" class="aTab" th:href="@{'/bikes/management/delete/' + ${bike.id}}"><i class="fa-solid fa-delete-left"></i></a>
             </td>

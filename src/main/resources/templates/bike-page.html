@@ -17,7 +17,7 @@
 
 <body>
 <div class="header">
-    <button class="home"><a class="home" th:href="@{'/bikes'}" th:text="Назад"/></button>
+    <button class="home"><a class="home" th:href="@{'/bikes/page/' + ${currentPage} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="Назад"/></button>
     <br>
     <div class="velInfo">
         <span th:text="${'Номер: ' + bike.number}"/><br>
@@ -126,28 +126,33 @@
             <span class="tooltiptext"><img class="plcImg" th:src="@{/img/logo.png}"></span>
         </span>
     </div>
-    <button sec:authorize="hasAnyRole('MANAGER', 'ADMIN')" ><a th:href="@{'/parts/fine/' + ${part.bikeId}}" th:text="'Все части работают'"/></button>
-    <button sec:authorize="hasAnyRole('MANAGER', 'ADMIN')" ><a th:href="@{'/parts/edit/' + ${part.bikeId}}" th:text="'Изменить'"/></button>
+    <button sec:authorize="hasAnyRole('MANAGER', 'ADMIN')" ><a th:href="@{'/parts/fine/' + ${part.bikeId} + '?currentPage=' + ${currentPage} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&commentSortField=commentedAt&commentSortDir=asc' + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="'Все части работают'"/></button>
+    <button sec:authorize="hasAnyRole('MANAGER', 'ADMIN')" ><a th:href="@{'/parts/edit/' + ${part.bikeId} + '?currentPage=' + ${currentPage} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&commentSortField=commentedAt&commentSortDir=asc' + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="'Изменить'"/></button>
 </div> 
 <br>   
 <!--Комментарии-->
 <div class="comments">
     <form sec:authorize="isAuthenticated()" th:action="@{'/comment/save/' + ${bike.id}}" method="post" >
+        <input type="hidden" th:name="currentPage" th:value="${currentPage}"/>
+        <input type="hidden" th:name="sortField" th:value="${sortField}"/>
         <input type="hidden" th:name="sortDir" th:value="${sortDir}"/>
+        <input type="hidden" th:name="commentSortField" th:value="${commentSortField}"/>
+        <input type="hidden" th:name="commentSortDir" th:value="${commentSortDir}"/>
+        <input type="hidden" th:name="keyword" th:value="${keyword}"/>
         <input type="text" placeholder="Написать сообщение..." th:name="text" required class="search" />
         <button class="inputSearch" type="submit"><i class="fa-solid fa-toilet-paper"></i></i></button>
     </form>
     <span sec:authorize="isAnonymous()"><b>Чтобы оставить комментарий, войдите в свой аакаунт.</b></span><br>
     <div class="upDown">
-        <a class="" th:if="${sortDir == 'asc'}"
-           th:href="@{'/bikes/show/' + ${bike.id} + '?sortField=commentedAt&sortDir=' + ${reverseSortDir}}">
+        <a class="" th:if="${commentSortDir == 'asc'}"
+           th:href="@{'/bikes/show/' + ${bike.id} + '?currentPage=' + ${currentPage} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&commentSortField=commentedAt&commentSortDir=' + ${commentReverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">
             Сначала старые
         </a>
-        <a th:if="${sortDir == 'desc'}"
-           th:href="@{'/bikes/show/' + ${bike.id} + '?sortField=commentedAt&sortDir=' + ${reverseSortDir}}">
+        <a th:if="${commentSortDir == 'desc'}"
+           th:href="@{'/bikes/show/' + ${bike.id} + '?currentPage=' + ${currentPage} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&commentSortField=commentedAt&commentSortDir=' + ${commentReverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">
             Сначала новые
         </a>
-        <span th:class="${sortDir == 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}"/>
+        <span th:class="${commentSortDir == 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}"/>
     </div>
     <table id="table">
         <tbody>
