@@ -56,13 +56,7 @@ public class PartController {
     }
 
     @PostMapping("/edit")
-    public String editPart (Model model, @ModelAttribute(value = "part") Part part,
-                            @Param("currentPage") String currentPage,
-                            @Param("sortField") String sortField,
-                            @Param("sortDir") String sortDir,
-                            @Param("commentSortField") String commentSortField,
-                            @Param("commentSortDir") String commentSortDir,
-                            @Param("keyword") String keyword){
+    public String editPart (Model model, @ModelAttribute(value = "part") Part part){
         partService.save(part);
         Bike bike = part.getBike();
         bike.checkWorks();
@@ -71,19 +65,7 @@ public class PartController {
         model.addAttribute("bike", bike);
         model.addAttribute("comment", new Comment());
         model.addAttribute("comments", bike.getComments());
-
-        String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
-        String commentReverseSortDir = commentSortDir.equals("asc") ? "desc" : "asc";
-
-        model.addAttribute("sortField", sortField);
-        model.addAttribute("sortDir", sortDir);
-        model.addAttribute("reverseSortDir", reverseSortDir);
-        model.addAttribute("commentSortField", commentSortField);
-        model.addAttribute("commentSortDir", commentSortDir);
-        model.addAttribute("commentReverseSortDir", commentReverseSortDir);
-        model.addAttribute("currentPage", currentPage);
-        model.addAttribute("keyword", keyword);
-        return "redirect:/bikes/show/" + bike.getId() + "?currentPage=" + currentPage + "&sortField=" + sortField + "&sortDir=" + sortDir + "&commentSortField=commentedAt&commentSortDir=" + commentSortDir + (keyword != null ? "&keyword=" + keyword : "");
+        return "redirect:/bikes";
     }
 
     @GetMapping("/fine/{id_bike}")
