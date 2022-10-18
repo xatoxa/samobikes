@@ -35,15 +35,24 @@
         <img class="photo" th:src="@{/img/velo.png}">
     </div>
 </div>
-<!-- кнопка для скрытия и открытия partsDiv -->
+<div>
+    <th:block th:each="part : ${brokenParts}">
+        <span th:text="${part.name} + ${part.status == true ? ' Работает' : ' Сломано'}"/>
+        <span class="tooltip"><img th:src="@{/img/logo.png}">
+            <span class="tooltiptext"><img class="plcImg" th:src="@{/img/logo.png}"></span>
+        </span>
+        <br><hr>
+    </th:block>
+</div>
 <br>
+<!-- кнопка для скрытия и открытия partsDiv -->
 <div class="toggleParts">
     <button id="toggleParts">Список деталей</button>
 </div>
 <br>
 
 <div class="partsDiv">
-    <th:block th:each="part : ${parts}">
+    <th:block th:each="part : ${workingParts}">
         <span th:text="${part.name} + ${part.status == true ? ' Работает' : ' Сломано'}"/>
         <span class="tooltip"><img th:src="@{/img/logo.png}">
             <span class="tooltiptext"><img class="plcImg" th:src="@{/img/logo.png}"></span>

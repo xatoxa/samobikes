@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/bikes")
@@ -89,12 +90,16 @@ public class BikeController {
         Bike bike = bikeService.getById(id);
         Comment comment = new Comment();
         List<Part> parts = bike.getParts();
+        List<Part> brokenParts = parts.stream().filter(s -> !s.isStatus()).toList();
+        List<Part> workingParts = parts.stream().filter(Part::isStatus).toList();
         bike.checkWorks();
         bikeService.save(bike);
         model.addAttribute("comment", comment);
         model.addAttribute("comments", commentService.findByBikeId(id, commentSortField, commentSortDir));
         model.addAttribute("bike", bike);
         model.addAttribute("parts", parts);
+        model.addAttribute("brokenParts", brokenParts);
+        model.addAttribute("workingParts", workingParts);
 
         String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
         String commentReverseSortDir = commentSortDir.equals("asc") ? "desc" : "asc";
