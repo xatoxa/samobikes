@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Controller
 public class CommentController {
@@ -65,12 +66,12 @@ public class CommentController {
         commentService.insert(user.getId(), bike.getId(), comment.getCommentText(), comment.getCommentedAt());
 
         Comment newComment = new Comment();
-        Part part = bike.getPart();
+        List<Part> parts = bike.getParts();
 
         model.addAttribute("comment", newComment);
         model.addAttribute("comments", commentService.findByBikeId(id, "commentedAt", sortDir));
         model.addAttribute("bike", bike);
-        model.addAttribute("part", part);
+        model.addAttribute("parts", parts);
 
         String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
         String commentReverseSortDir = commentSortDir.equals("asc") ? "desc" : "asc";

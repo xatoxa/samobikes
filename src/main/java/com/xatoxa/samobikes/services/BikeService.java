@@ -2,6 +2,7 @@ package com.xatoxa.samobikes.services;
 
 import com.xatoxa.samobikes.entities.Bike;
 import com.xatoxa.samobikes.entities.Part;
+import com.xatoxa.samobikes.entities.PartName;
 import com.xatoxa.samobikes.entities.User;
 import com.xatoxa.samobikes.repositories.BikeRepository;
 import com.xatoxa.samobikes.repositories.PartRepository;
@@ -12,13 +13,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class BikeService {
     public static final int BIKES_PER_PAGE = 6;
     private BikeRepository bikeRepository;
-    private PartRepository partRepository;
+    private PartService partService;
+
 
     @Autowired
     public void setBikeRepository(BikeRepository bikeRepository){
@@ -26,8 +29,8 @@ public class BikeService {
     }
 
     @Autowired
-    public void setPartRepository(PartRepository partRepository){
-        this.partRepository = partRepository;
+    public void setPartService(PartService partService){
+        this.partService = partService;
     }
 
     /*public List<Bike> getAllBikes(){
@@ -67,12 +70,12 @@ public class BikeService {
     }
 
     public void save(Bike bike){
-        if (bike.getPart() == null) {
-            Part part = new Part();
-            bike.setPart(part);
-            part.setBike(bike);
-        }
         bikeRepository.save(bike);
+        List<Part> parts = bike.getParts();
+        if (parts.size() == 0){
+            parts = partService.createParts(bike);
+            bike.setParts(parts);
+        }
     }
 
     public void deleteById(Integer id){

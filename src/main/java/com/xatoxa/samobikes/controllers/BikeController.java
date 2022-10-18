@@ -88,13 +88,13 @@ public class BikeController {
                               @Param("keyword") String keyword){
         Bike bike = bikeService.getById(id);
         Comment comment = new Comment();
-        Part part = bike.getPart();
+        List<Part> parts = bike.getParts();
         bike.checkWorks();
         bikeService.save(bike);
         model.addAttribute("comment", comment);
         model.addAttribute("comments", commentService.findByBikeId(id, commentSortField, commentSortDir));
         model.addAttribute("bike", bike);
-        model.addAttribute("part", part);
+        model.addAttribute("parts", parts);
 
         String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
         String commentReverseSortDir = commentSortDir.equals("asc") ? "desc" : "asc";

@@ -41,169 +41,31 @@
 <div class="container">
   <!--Форма редактирования запчастей-->
   <form th:action="@{/parts/edit}"
-        th:object="${part}" method="post" class="form-vertical">
-
-    <!--Неизменяемые части part-->
+        th:object="${partList}" method="post" class="form-vertical">
+    <input type="hidden" th:field="*{params}" class="form-control" hidden/>
     <input type="hidden" th:field="*{bikeId}" class="form-control" hidden/>
-    <input type="hidden" th:field="*{bike}" class="form-control" hidden/>
-
-    <!--Селекты. Названия полей запишу в комментарии.-->
-  <div class="partsLeft">
-    <div class="input-group">
-      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>Переднее колесо - 
-      <!--Переднее колесо-->
-      <select th:field="*{f_wheel}" required>
-        <option value="true">Работает</option>
-        <option value="false">Сломан</option>
-      </select>
-    </div>
-    <hr>
-    <div class="input-group">
-      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>Заднее колесо - 
-      <!--Заднее колесо-->
-      <select th:field="*{r_wheel}" required>
-        <option value="true">Работает</option>
-        <option value="false">Сломан</option>
-      </select>
-    </div>
-    <hr>
-    <div class="input-group">
-      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span> Передний тормоз - 
-      <!--Передний тормоз-->
-      <select th:field="*{f_brake}" required>
-        <option value="true">Работает</option>
-        <option value="false">Сломан</option>
-      </select>
-    </div>
-    <hr>
-    <div class="input-group">
-      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>Задний тормоз - 
-      <!--Задний тормоз-->
-      <select th:field="*{r_brake}" required>
-        <option value="true">Работает</option>
-        <option value="false">Сломан</option>
-      </select>
-    </div>
-    <hr>
-    <div class="input-group">
-      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>Передняя покрышка/камера - 
-      <!--Передняя покрышка/камера-->
-      <select th:field="*{f_tyre}" required>
-        <option value="true">Работает</option>
-        <option value="false">Сломан</option>
-      </select>
-    </div>
-    <hr>
-    <div  class="input-group">
-      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>Задняя покрышка/камера - 
-      <!--Задняя покрышка/камера-->
-      <select th:field="*{r_tyre}" required>
-        <option value="true">Работает</option>
-        <option value="false">Сломан</option>
-      </select>
-    </div>
-    <hr>
-    <div  class="input-group">
-      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>Цепь - 
-      <!--Цепь-->
-      <select th:field="*{chain}" required>
-        <option value="true">Работает</option>
-        <option value="false">Сломан</option>
-      </select>
-    </div>
-    <hr>
-    <div  class="input-group">
-      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>Седло/Подседельный штырь - 
-      <!--Седло/Подседельный штырь-->
-      <select th:field="*{saddle}" required>
-        <option value="true">Работает</option>
-        <option value="false">Сломан</option>
-      </select>
-    </div>
-    <hr>
-  </div>  
-
-  <div class="partsRight">
-    <div  class="input-group">
-      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>Шатуны - 
-      <!--Шатуны-->
-      <select th:field="*{crank}" required>
-        <option value="true">Работает</option>
-        <option value="false">Сломан</option>
-      </select>
-    </div>
-    <hr>
-    <div  class="input-group">
-      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>Переключатель передач - 
-      <!--Переключатель передач-->
-      <select th:field="*{gears}" required>
-        <option value="true">Работает</option>
-        <option value="false">Сломан</option>
-      </select>
-    </div>
-    <hr>
-    <div  class="input-group">
-      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>Левая педаль - 
-      <!--Левая педаль-->
-      <select th:field="*{l_pedal}" required>
-        <option value="true">Работает</option>
-        <option value="false">Сломан</option>
-      </select>
-    </div>
-    <hr>
-    <div  class="input-group">
-      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>Правая педаль - 
-      <!--Правая педаль-->
-      <select th:field="*{r_pedal}" required>
-        <option value="true">Работает</option>
-        <option value="false">Сломан</option>
-      </select>
-    </div>
-    <hr>
-    <div  class="input-group">
-      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>Кассета/Трещотка - 
-      <!--Кассета/Трещотка-->
-      <select th:field="*{cassete}" required>
-        <option value="true">Работает</option>
-        <option value="false">Сломан</option>
-      </select>
-    </div>
-    <hr>
-    <div  class="input-group">
-      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>Передние звёзды - 
-      <!--Передние звёзды-->
-      <select th:field="*{chain_wheel}" required>
-        <option value="true">Работает</option>
-        <option value="false">Сломан</option>
-      </select>
-    </div>
-    <hr>
-    <div class="input-group">
-      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>Каретка - 
-      <!--Каретка-->
-      <select th:field="*{bot_bracket}" required>
-        <option value="true">Работает</option>
-        <option value="false">Сломан</option>
-      </select>
-    </div>
-    <hr>
-    <div  class="input-group">
-      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>Руль/Вынос/Грипсы - 
-      <!--Руль/Вынос/Грипсы-->
-      <select th:field="*{steering_wheel}" required>
-        <option value="true">Работает</option>
-        <option value="false">Сломан</option>
-      </select>
-    </div>
-    <hr>
-  </div>
+    <th:block  th:each="part, iter : ${partList.parts}">
+      <div class="input-group">
+        <input type="hidden" th:field="*{parts[__${iter.index}__].id}" class="form-control" hidden/>
+        <input type="hidden" th:field="*{parts[__${iter.index}__].bike}" class="form-control" hidden/>
+        <input type="hidden" th:field="*{parts[__${iter.index}__].name}" class="form-control" hidden/>
+        <input type="hidden" th:field="*{parts[__${iter.index}__].description}" class="form-control" hidden/>
+        <input type="hidden" th:field="*{parts[__${iter.index}__].importance}" class="form-control" hidden/>
+        <span class="input-group-addon"><i class="glyphicon glyphicon-user" th:text="${part.name}"></i></span>
+        <select th:field="*{parts[__${iter.index}__].status}" required>
+          <option value="true">Работает</option>
+          <option value="false">Сломан</option>
+        </select>
+      <hr>
+     </div>
+    </th:block>
     <div  class="form-group">
       <div class="button">
         <button>Сохранить</button>
       </div>
     </div>
   </form>
-  <button class="home"><a class="home" th:href="@{'/bikes/show/' + ${part.bikeId} + '?currentPage=' + ${currentPage} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&commentSortField=commentedAt&commentSortDir=asc' + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="'Назад'"/></button>
+  <button class="home"><a class="home" th:href="@{'/bikes/show/' + ${bike.id} + '?currentPage=' + ${currentPage} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&commentSortField=commentedAt&commentSortDir=asc' + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="'Назад'"/></button>
 </div>
 </body>
 </html>

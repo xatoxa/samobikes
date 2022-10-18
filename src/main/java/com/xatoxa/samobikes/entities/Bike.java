@@ -1,7 +1,9 @@
 package com.xatoxa.samobikes.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "bikes")
@@ -11,8 +13,8 @@ public class Bike {
     @Column(name = "id")
     private Integer id;
 
-    @OneToOne(mappedBy = "bike", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Part part;
+    @OneToMany(mappedBy = "bike", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Part> parts;
 
     @OneToMany(mappedBy = "bike")
     Collection<Comment> comments;
@@ -42,9 +44,9 @@ public class Bike {
     public Bike() {
     }
 
-    public Bike(Integer id, Part part, Integer number, Integer qrNumber, String VIN, boolean status, String description) {
+    public Bike(Integer id, List<Part> parts, Integer number, Integer qrNumber, String VIN, boolean status, String description) {
         this.id = id;
-        this.part = part;
+        this.parts = parts;
         this.number = number;
         this.qrNumber = qrNumber;
         this.VIN = VIN;
@@ -52,10 +54,10 @@ public class Bike {
         this.description = description;
     }
 
-    public Bike(Integer id, Part part, Integer number, Integer qrNumber, String VIN,
+    public Bike(Integer id, List<Part> parts, Integer number, Integer qrNumber, String VIN,
                 boolean status, String description, String qrLink, String photo) {
         this.id = id;
-        this.part = part;
+        this.parts = parts;
         this.number = number;
         this.qrNumber = qrNumber;
         this.VIN = VIN;
@@ -66,8 +68,6 @@ public class Bike {
     }
 
     //getters, setters
-
-
     public Integer getId() {
         return id;
     }
@@ -76,12 +76,12 @@ public class Bike {
         this.id = id;
     }
 
-    public Part getPart() {
-        return part;
+    public List<Part> getParts() {
+        return parts;
     }
 
-    public void setPart(Part part) {
-        this.part = part;
+    public void setParts(List<Part> parts) {
+        this.parts = parts;
     }
 
     public Integer getNumber() {
@@ -142,7 +142,14 @@ public class Bike {
 
     //methods
     public void checkWorks(){
-        this.status = this.part.checkWork();
+        for (Part part:
+             parts) {
+            if (!part.isStatus()){
+                this.status = false;
+                return;
+            }
+        }
+        this.status = true;
     }
 
     public Collection<Comment> getComments() {

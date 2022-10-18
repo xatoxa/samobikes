@@ -3,6 +3,7 @@ package com.xatoxa.samobikes.controllers;
 import com.xatoxa.samobikes.entities.Bike;
 import com.xatoxa.samobikes.entities.Comment;
 import com.xatoxa.samobikes.entities.Part;
+import com.xatoxa.samobikes.entities.PartListDTO;
 import com.xatoxa.samobikes.services.BikeService;
 import com.xatoxa.samobikes.services.PartService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,9 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Arrays;
+import java.util.List;
 
 @Controller
 @RequestMapping("/parts")
@@ -35,9 +39,14 @@ public class PartController {
                                    @Param("commentSortField") String commentSortField,
                                    @Param("commentSortDir") String commentSortDir,
                                    @Param("keyword") String keyword){
-        Part part = partService.getById(id);
-        Bike bike = part.getBike();
-        model.addAttribute("part", part);
+        Bike bike = bikeService.getById(id);
+        List<Part> parts = bike.getParts();
+        PartListDTO partListDTO = new PartListDTO();
+        partListDTO.setBikeId(bike.getId());
+        partListDTO.setParts(parts);
+        partListDTO.setParams(id + "?currentPage=" + currentPage + "&sortField=" + sortField + "&sortDir=" + sortDir + "&commentSortField=commentedAt&commentSortDir=" + commentSortDir + (keyword != null ? "&keyword=" + keyword : ""));
+        model.addAttribute("partList", partListDTO);
+        model.addAttribute("parts", parts);
         model.addAttribute("bike", bike);
 
         String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
@@ -56,16 +65,18 @@ public class PartController {
     }
 
     @PostMapping("/edit")
-    public String editPart (Model model, @ModelAttribute(value = "part") Part part){
-        partService.save(part);
-        Bike bike = part.getBike();
+    public String editPart (Model model, @ModelAttribute(value = "partList") PartListDTO partListDTO){
+        Bike bike = bikeService.getById(partListDTO.getBikeId());
+        List<Part> parts = bike.getParts();
+        parts.clear();
+        parts.addAll(partListDTO.getParts());
         bike.checkWorks();
         bikeService.save(bike);
-        model.addAttribute("part", part);
+        model.addAttribute("parts", bike.getParts());
         model.addAttribute("bike", bike);
         model.addAttribute("comment", new Comment());
         model.addAttribute("comments", bike.getComments());
-        return "redirect:/bikes";
+        return "redirect:/bikes/show/" + partListDTO.getParams();
     }
 
     @GetMapping("/fine/{id_bike}")
@@ -76,14 +87,15 @@ public class PartController {
                              @Param("commentSortField") String commentSortField,
                              @Param("commentSortDir") String commentSortDir,
                              @Param("keyword") String keyword) {
-        Part part = partService.getById(id);
-        part.setAllTrue();
-        Bike bike = part.getBike();
+
+        Bike bike = bikeService.getById(id);
+        List<Part> parts = bike.getParts();
+        parts.forEach(s -> s.setStatus(true));
+        bike.setParts(parts);
         bike.setStatus(true);
         bikeService.save(bike);
-        partService.save(part);
         model.addAttribute("bike", bike);
-        model.addAttribute("part", part);
+        model.addAttribute("parts", parts);
         model.addAttribute("comment", new Comment());
         model.addAttribute("comments", bike.getComments());
 

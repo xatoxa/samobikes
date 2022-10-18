@@ -43,91 +43,15 @@
 <br>
 
 <div class="partsDiv">
-    <div class="partsLeft">
-        <span th:text="${'Переднее колесо: '} + ${part.f_wheel == true ? 'Работает' : 'Сломано'}"/>
+    <th:block th:each="part : ${parts}">
+        <span th:text="${part.name} + ${part.status == true ? ' Работает' : ' Сломано'}"/>
         <span class="tooltip"><img th:src="@{/img/logo.png}">
             <span class="tooltiptext"><img class="plcImg" th:src="@{/img/logo.png}"></span>
         </span>
         <br><hr>
-        <span th:text="${'Заднее колесо: '} + ${part.r_wheel == true ? 'Работает' : 'Сломано'}"/>
-        <span class="tooltip"><img th:src="@{/img/logo.png}">
-            <span class="tooltiptext"><img class="plcImg" th:src="@{/img/logo.png}"></span>
-        </span>
-        <br><hr>
-        <span th:text="${'Передний тормоз: '} + ${part.f_brake == true ? 'Работает' : 'Сломано'}"/>
-        <span class="tooltip"><img th:src="@{/img/logo.png}">
-            <span class="tooltiptext"><img class="plcImg" th:src="@{/img/logo.png}"></span>
-        </span>
-        <br><hr>
-        <span th:text="${'Задний тормоз: '} + ${part.r_brake == true ? 'Работает' : 'Сломано'}"/>
-        <span class="tooltip"><img th:src="@{/img/logo.png}">
-            <span class="tooltiptext"><img class="plcImg" th:src="@{/img/logo.png}"></span>
-        </span>
-        <br><hr>
-        <span th:text="${'Передняя покрышка/камера: '} + ${part.f_tyre == true ? 'Работает' : 'Сломано'}"/>
-        <span class="tooltip"><img th:src="@{/img/logo.png}">
-            <span class="tooltiptext"><img class="plcImg" th:src="@{/img/logo.png}"></span>
-        </span>
-        <br><hr>
-        <span th:text="${'Задняя покрышка/камера: '} + ${part.r_tyre == true ? 'Работает' : 'Сломано'}"/>
-        <span class="tooltip"><img th:src="@{/img/logo.png}">
-            <span class="tooltiptext"><img class="plcImg" th:src="@{/img/logo.png}"></span>
-        </span>
-        <br><hr>
-        <span th:text="${'Цепь: '} + ${part.chain == true ? 'Работает' : 'Сломано'}"/>
-        <span class="tooltip"><img th:src="@{/img/logo.png}">
-            <span class="tooltiptext"><img class="plcImg" th:src="@{/img/logo.png}"></span>
-        </span>
-        <br><hr>
-        <span th:text="${'Седло/Подседельный штырь: '} + ${part.saddle == true ? 'Работает' : 'Сломано'}"/>
-        <span class="tooltip"><img th:src="@{/img/logo.png}">
-            <span class="tooltiptext"><img class="plcImg" th:src="@{/img/logo.png}"></span>
-        </span> 
-    </div>
- 
-    <div class="partsRight">
-        <span th:text="${'Шатуны: '} + ${part.crank == true ? 'Работает' : 'Сломано'}"/>
-        <span class="tooltip"><img th:src="@{/img/logo.png}">
-            <span class="tooltiptext"><img class="plcImg" th:src="@{/img/logo.png}"></span>
-        </span>
-        <br><hr>
-        <span th:text="${'Левая педаль: '} + ${part.l_pedal == true ? 'Работает' : 'Сломано'}"/>
-        <span class="tooltip"><img th:src="@{/img/logo.png}">
-            <span class="tooltiptext"><img class="plcImg" th:src="@{/img/logo.png}"></span>
-        </span>
-        <br><hr>
-        <span th:text="${'Правая педаль: '} + ${part.r_pedal == true ? 'Работает' : 'Сломано'}"/>
-        <span class="tooltip"><img th:src="@{/img/logo.png}">
-            <span class="tooltiptext"><img class="plcImg" th:src="@{/img/logo.png}"></span>
-        </span>
-        <br><hr>
-        <span th:text="${'Передние звёзды: '} + ${part.chain_wheel == true ? 'Работает' : 'Сломано'}"/>
-        <span class="tooltip"><img th:src="@{/img/logo.png}">
-            <span class="tooltiptext"><img class="plcImg" th:src="@{/img/logo.png}"></span>
-        </span>
-        <br><hr>
-        <span th:text="${'Переключатель передач: '} + ${part.gears == true ? 'Работает' : 'Сломано'}"/>
-        <span class="tooltip"><img th:src="@{/img/logo.png}">
-            <span class="tooltiptext"><img class="plcImg" th:src="@{/img/logo.png}"></span>
-        </span>
-        <br><hr>
-        <span th:text="${'Кассета/Трещотка: '} + ${part.cassete == true ? 'Работает' : 'Сломано'}"/>
-        <span class="tooltip"><img th:src="@{/img/logo.png}">
-            <span class="tooltiptext"><img class="plcImg" th:src="@{/img/logo.png}"></span>
-        </span>
-        <br><hr>
-        <span th:text="${'Каретка: '} + ${part.bot_bracket == true ? 'Работает' : 'Сломано'}"/>
-        <span class="tooltip"><img th:src="@{/img/logo.png}">
-            <span class="tooltiptext"><img class="plcImg" th:src="@{/img/logo.png}"></span>
-        </span>
-        <br><hr>
-        <span th:text="${'Руль/Вынос/Грипсы: '} + ${part.steering_wheel == true ? 'Работает' : 'Сломано'}"/>
-        <span class="tooltip"><img th:src="@{/img/logo.png}">
-            <span class="tooltiptext"><img class="plcImg" th:src="@{/img/logo.png}"></span>
-        </span>
-    </div>
-    <button sec:authorize="hasAnyRole('MANAGER', 'ADMIN')" ><a th:href="@{'/parts/fine/' + ${part.bikeId} + '?currentPage=' + ${currentPage} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&commentSortField=commentedAt&commentSortDir=asc' + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="'Все части работают'"/></button>
-    <button sec:authorize="hasAnyRole('MANAGER', 'ADMIN')" ><a th:href="@{'/parts/edit/' + ${part.bikeId} + '?currentPage=' + ${currentPage} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&commentSortField=commentedAt&commentSortDir=asc' + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="'Изменить'"/></button>
+    </th:block>
+    <button sec:authorize="hasAnyRole('MANAGER', 'ADMIN')" ><a th:href="@{'/parts/fine/' + ${bike.id} + '?currentPage=' + ${currentPage} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&commentSortField=commentedAt&commentSortDir=asc' + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="'Все части работают'"/></button>
+    <button sec:authorize="hasAnyRole('MANAGER', 'ADMIN')" ><a th:href="@{'/parts/edit/' + ${bike.id} + '?currentPage=' + ${currentPage} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&commentSortField=commentedAt&commentSortDir=asc' + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="'Изменить'"/></button>
 </div> 
 <br>   
 <!--Комментарии-->
