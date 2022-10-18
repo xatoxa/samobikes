@@ -34,6 +34,9 @@
             <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/users}">Пользователи</a>
         </div>
         <div>
+            <a sec:authorize="hasRole('ADMIN')" class="dropdown-item" th:href="@{/part-names}">Запчасти</a>
+        </div>
+        <div>
             <a id="logoutLink" th:href="@{/logout}">Выйти</a>
         </div>
     </div>

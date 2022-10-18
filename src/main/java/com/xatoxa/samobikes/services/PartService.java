@@ -17,6 +17,8 @@ public class PartService {
 
     private PartNameService partNameService;
 
+    private BikeService bikeService;
+
     @Autowired
     public void setPartRepository(PartRepository partRepository){
         this.partRepository = partRepository;
@@ -25,6 +27,11 @@ public class PartService {
     @Autowired
     public void setPartNameService(PartNameService partNameService) {
         this.partNameService = partNameService;
+    }
+
+    @Autowired
+    public void setBikeService(BikeService bikeService) {
+        this.bikeService = bikeService;
     }
 
     public void save (Part part){
@@ -40,7 +47,7 @@ public class PartService {
         List<Part> parts = new ArrayList<>();
         for (PartName partName:
              partNames) {
-            Part part = new Part(partName.getName(), 1, "", true, bike);
+            Part part = new Part(partName.getName(), partName.getImportance(), partName.getDescription(), true, bike);
             parts.add(part);
             partRepository.save(part);
         }
@@ -48,4 +55,20 @@ public class PartService {
         return parts;
     }
 
+    public void deleteByName(String name) {
+        partRepository.deleteByName(name);
+    }
+
+    public void saveForAll(PartName partName){
+        Iterable<Bike> bikes = bikeService.getAllBikes();
+        bikes.forEach(bike -> {
+            bike.getParts()
+                    .add(new Part(partName.getName(),
+                            partName.getImportance(),
+                            partName.getDescription(),
+                            true,
+                            bike));
+            bikeService.save(bike);
+        });
+    }
 }

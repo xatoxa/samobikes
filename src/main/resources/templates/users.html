@@ -32,6 +32,7 @@
                    sec:authentication="principal.username"></a></button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" th:href="@{/account}">Мой аккаунт</a>
+                    <a sec:authorize="hasRole('ADMIN')" class="dropdown-item" th:href="@{/part-names}">Запчасти</a>
                     <a class="dropdown-item" id="logoutLink" th:href="@{/logout}">Выйти</a>
                 </div>
             </div>

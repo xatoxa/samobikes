@@ -19,4 +19,16 @@ public class PartNameService {
     public List<PartName> getAll(){
         return partNameRepository.findAll();
     }
+
+    public PartName getById(Integer id){
+        return partNameRepository.getReferenceById(id);
+    }
+
+    public void save(PartName partName){
+        partNameRepository.save(partName);
+    }
+
+    public void deleteById(Integer id){
+        partNameRepository.deleteById(id);
+    }
 }

@@ -33,9 +33,9 @@ public class BikeService {
         this.partService = partService;
     }
 
-    /*public List<Bike> getAllBikes(){
+    public Iterable<Bike> getAllBikes(){
         return bikeRepository.findAll();
-    }*/
+    }
 
     public Page<Bike> getAllByPage(int pageNum, String sortField, String sortDir, String keyword){
         Sort sort = Sort.by(sortField);

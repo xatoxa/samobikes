@@ -12,6 +12,12 @@ public class PartName {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "importance")
+    private int importance;
+
+    @Column(name = "description")
+    private String description;
+
     public PartName() {
     }
 
@@ -34,5 +40,21 @@ public class PartName {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getImportance() {
+        return importance;
+    }
+
+    public void setImportance(int importance) {
+        this.importance = importance;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

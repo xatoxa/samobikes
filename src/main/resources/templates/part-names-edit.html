@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактор запчастей</title>
+    <link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre&display=swap" rel="stylesheet"><!-- ссылка на шрифт -->
+    <!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/common.js}"></script>
+</head>
+<body>
+<div>
+    <form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
+        <input type="submit"/>
+    </form>
+    <div>
+        <span class="fas fa-light fa-user fa-2x"></span>
+    </div>
+    <div class="dropdown">
+        <a class="link dropdown-toggle" data-toggle="dropdown"
+           sec:authentication="principal.username"></a>
+        <div>
+            <a th:href="@{/account}">Мой аккаунт</a>
+        </div>
+        <div>
+            <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/users}">Пользователи</a>
+        </div>
+        <div>
+            <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/part-names}">Запчасти</a>
+        </div>
+        <div>
+            <a id="logoutLink" th:href="@{/logout}">Выйти</a>
+        </div>
+    </div>
+</div>
+
+<div class="midleHead">
+    <h1  th:text="${partName.id == null ? 'Глобальное добавление запчастей' : 'Глобальное изменение запчасти ' + partName.name}"/></h1>
+</div>
+<div class="homeBut">
+    <button class="home"><a class="home" th:href="@{'/bikes'}" th:text="'На главную'"/></button>
+</div>
+<div class="homeBut">
+    <button class="home"><a class="home" th:href="@{'/part-names'}" th:text="'Назад'"/></button>
+</div>
+
+<!--Форма редактирования велосипеда-->
+<form th:action="@{/part-names/edit}"
+      th:object="${partName}" method="post" class="form-vertical" onsubmit="return checkInfo(this)">
+
+    <input type="hidden" th:field="*{id}" class="form-control" hidden/>
+    <div  class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+        <input th:field="*{name}" placeholder="Наименование" class="form-control"
+               required minlength="1" maxlength="255"/>
+    </div>
+    <div  class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+        <input th:field="*{description}" placeholder="Описание" class="form-control"/>
+    </div>
+    <div class="input-group select">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+        <select th:field="*{importance}" required>
+            <option selected value="1">Важно</option>
+            <option value="2">Средне</option>
+            <option value="3">Не важно</option>
+        </select>
+    </div>
+    <div class="form-group button">
+        <div>
+            <button type="submit" class="btn">Сохранить</button>
+        </div>
+    </div>
+</form>
+
+</body>
+</html>
