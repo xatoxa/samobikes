@@ -1,4 +1,6 @@
-package com.xatoxa.samobikes.entities;
+package com.xatoxa.samobikes.DTO;
+
+import com.xatoxa.samobikes.entities.Part;
 
 import java.util.List;
 

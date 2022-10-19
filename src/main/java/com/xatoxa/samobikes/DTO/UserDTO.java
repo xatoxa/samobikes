@@ -1,4 +1,4 @@
-package com.xatoxa.samobikes.entities;
+package com.xatoxa.samobikes.DTO;
 
 public class UserDTO {
     private String username;
