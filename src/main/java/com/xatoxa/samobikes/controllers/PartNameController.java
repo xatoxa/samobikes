@@ -1,7 +1,5 @@
 package com.xatoxa.samobikes.controllers;
 
-import com.xatoxa.samobikes.entities.Bike;
-import com.xatoxa.samobikes.entities.PartListDTO;
 import com.xatoxa.samobikes.entities.PartName;
 import com.xatoxa.samobikes.services.PartNameService;
 import com.xatoxa.samobikes.services.PartService;

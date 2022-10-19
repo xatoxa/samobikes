@@ -1,7 +1,7 @@
 package com.xatoxa.samobikes.services;
 
 import com.xatoxa.samobikes.entities.User;
-import com.xatoxa.samobikes.entities.UserDTO;
+import com.xatoxa.samobikes.DTO.UserDTO;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 public interface UserService extends UserDetailsService {

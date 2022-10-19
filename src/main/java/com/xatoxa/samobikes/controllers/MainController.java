@@ -1,6 +1,6 @@
 package com.xatoxa.samobikes.controllers;
 
-import com.xatoxa.samobikes.entities.UserDTO;
+import com.xatoxa.samobikes.DTO.UserDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

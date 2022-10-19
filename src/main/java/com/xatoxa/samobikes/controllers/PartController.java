@@ -3,7 +3,7 @@ package com.xatoxa.samobikes.controllers;
 import com.xatoxa.samobikes.entities.Bike;
 import com.xatoxa.samobikes.entities.Comment;
 import com.xatoxa.samobikes.entities.Part;
-import com.xatoxa.samobikes.entities.PartListDTO;
+import com.xatoxa.samobikes.DTO.PartListDTO;
 import com.xatoxa.samobikes.services.BikeService;
 import com.xatoxa.samobikes.services.PartService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Controller
