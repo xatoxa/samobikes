@@ -37,7 +37,7 @@
 </div>
 <div>
     <th:block th:each="part : ${brokenParts}">
-        <span th:text="${part.name} + ${part.status == true ? ' Работает' : ' Сломано'}"/>
+        <span th:text="${part.name} + ${part.status == true ? ': Работает' : ': Сломано'}"/>
         <span class="tooltip"><img th:src="@{/img/logo.png}">
             <span class="tooltiptext"><img class="plcImg" th:src="@{/img/logo.png}"></span>
         </span>
@@ -53,7 +53,7 @@
 
 <div class="partsDiv">
     <th:block th:each="part : ${workingParts}">
-        <span th:text="${part.name} + ${part.status == true ? ' Работает' : ' Сломано'}"/>
+        <span th:text="${part.name} + ${part.status == true ? ': Работает' : ': Сломано'}"/>
         <span class="tooltip"><img th:src="@{/img/logo.png}">
             <span class="tooltiptext"><img class="plcImg" th:src="@{/img/logo.png}"></span>
         </span>
