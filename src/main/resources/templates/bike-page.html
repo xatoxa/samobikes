@@ -35,14 +35,22 @@
         <img class="photo" th:src="@{/img/velo.png}">
     </div>
 </div>
-<div>
-    <th:block th:each="part : ${brokenParts}">
+<!--сюда создать новое имя класса, функционал как partsDiv-->
+<div >
+    <div class="partsLeft" th:if="${brokenPartsLeft != null}" th:each="part : ${brokenPartsLeft}">
         <span th:text="${part.name} + ${part.status == true ? ': Работает' : ': Сломано'}"/>
         <span class="tooltip"><img th:src="@{/img/logo.png}">
             <span class="tooltiptext"><img class="plcImg" th:src="@{/img/logo.png}"></span>
         </span>
         <br><hr>
-    </th:block>
+    </div>
+    <div class="partsRight" th:if="${brokenPartsRight != null}" th:each="part : ${brokenPartsRight}">
+        <span th:text="${part.name} + ${part.status == true ? ': Работает' : ': Сломано'}"/>
+        <span class="tooltip"><img th:src="@{/img/logo.png}">
+            <span class="tooltiptext"><img class="plcImg" th:src="@{/img/logo.png}"></span>
+        </span>
+        <br><hr>
+    </div>
 </div>
 <br>
 <!-- кнопка для скрытия и открытия partsDiv -->
@@ -52,13 +60,20 @@
 <br>
 
 <div class="partsDiv">
-    <th:block th:each="part : ${workingParts}">
+    <div class="partsLeft"  th:if="${workingPartsLeft != null}" th:each="part : ${workingPartsLeft}">
         <span th:text="${part.name} + ${part.status == true ? ': Работает' : ': Сломано'}"/>
         <span class="tooltip"><img th:src="@{/img/logo.png}">
             <span class="tooltiptext"><img class="plcImg" th:src="@{/img/logo.png}"></span>
         </span>
         <br><hr>
-    </th:block>
+    </div>
+    <div class="partsRight"  th:if="${workingPartsRight != null}" th:each="part : ${workingPartsRight}">
+        <span th:text="${part.name} + ${part.status == true ? ': Работает' : ': Сломано'}"/>
+        <span class="tooltip"><img th:src="@{/img/logo.png}">
+            <span class="tooltiptext"><img class="plcImg" th:src="@{/img/logo.png}"></span>
+        </span>
+        <br><hr>
+    </div>
     <button sec:authorize="hasAnyRole('MANAGER', 'ADMIN')" ><a th:href="@{'/parts/fine/' + ${bike.id} + '?currentPage=' + ${currentPage} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&commentSortField=commentedAt&commentSortDir=asc' + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="'Все части работают'"/></button>
     <button sec:authorize="hasAnyRole('MANAGER', 'ADMIN')" ><a th:href="@{'/parts/edit/' + ${bike.id} + '?currentPage=' + ${currentPage} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&commentSortField=commentedAt&commentSortDir=asc' + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="'Изменить'"/></button>
 </div> 

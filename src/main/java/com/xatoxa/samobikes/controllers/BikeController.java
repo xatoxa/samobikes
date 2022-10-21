@@ -87,19 +87,27 @@ public class BikeController {
                               @Param("commentSortField") String commentSortField,
                               @Param("commentSortDir") String commentSortDir,
                               @Param("keyword") String keyword){
-        Bike bike = bikeService.getById(id);
         Comment comment = new Comment();
+
+        Bike bike = bikeService.getById(id);
+        bike.checkWorks();
+        bikeService.save(bike);
+
         List<Part> parts = bike.getParts();
         List<Part> brokenParts = parts.stream().filter(s -> !s.isStatus()).toList();
         List<Part> workingParts = parts.stream().filter(Part::isStatus).toList();
-        bike.checkWorks();
-        bikeService.save(bike);
+        List<Part> brokenPartsLeft = brokenParts.subList(0, brokenParts.size() / 2);
+        List<Part> brokenPartsRight = brokenParts.subList(brokenParts.size() / 2, brokenParts.size());
+        List<Part> workingPartsLeft = workingParts.subList(0, workingParts.size() / 2);
+        List<Part> workingPartsRight = workingParts.subList(workingParts.size() / 2, workingParts.size());
+
         model.addAttribute("comment", comment);
         model.addAttribute("comments", commentService.findByBikeId(id, commentSortField, commentSortDir));
         model.addAttribute("bike", bike);
-        model.addAttribute("parts", parts);
-        model.addAttribute("brokenParts", brokenParts);
-        model.addAttribute("workingParts", workingParts);
+        model.addAttribute("brokenPartsLeft", brokenPartsLeft);
+        model.addAttribute("brokenPartsRight", brokenPartsRight);
+        model.addAttribute("workingPartsLeft", workingPartsLeft);
+        model.addAttribute("workingPartsRight", workingPartsRight);
 
         String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
         String commentReverseSortDir = commentSortDir.equals("asc") ? "desc" : "asc";
