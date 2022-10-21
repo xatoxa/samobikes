@@ -96,10 +96,16 @@ public class BikeController {
         List<Part> parts = bike.getParts();
         List<Part> brokenParts = parts.stream().filter(s -> !s.isStatus()).toList();
         List<Part> workingParts = parts.stream().filter(Part::isStatus).toList();
-        List<Part> brokenPartsLeft = brokenParts.subList(0, brokenParts.size() / 2);
-        List<Part> brokenPartsRight = brokenParts.subList(brokenParts.size() / 2, brokenParts.size());
-        List<Part> workingPartsLeft = workingParts.subList(0, workingParts.size() / 2);
-        List<Part> workingPartsRight = workingParts.subList(workingParts.size() / 2, workingParts.size());
+
+        int wTemp = 0, bTemp = 0;
+
+        if (brokenParts.size() % 2 != 0) bTemp = 1;
+        if (workingParts.size() % 2 != 0) wTemp = 1;
+
+        List<Part> brokenPartsLeft = brokenParts.subList(0, brokenParts.size() / 2 + bTemp);
+        List<Part> brokenPartsRight = brokenParts.subList(brokenParts.size() / 2 + bTemp, brokenParts.size());
+        List<Part> workingPartsLeft = workingParts.subList(0, workingParts.size() / 2 + wTemp);
+        List<Part> workingPartsRight = workingParts.subList(workingParts.size() / 2 + wTemp, workingParts.size());
 
         model.addAttribute("comment", comment);
         model.addAttribute("comments", commentService.findByBikeId(id, commentSortField, commentSortDir));
