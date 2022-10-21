@@ -42,24 +42,9 @@
 </div>
 <!--сюда создать новое имя класса, функционал как partsDiv-->
 <div >
-    <div class="partsLeft" th:if="${brokenPartsLeft.size != 0}">
-        <th:block th:each="part : ${brokenPartsLeft}">
-            <span th:text="${part.name} + ${part.status == true ? ': Работает' : ': Сломано'}"/>
-            <span class="tooltip"><img th:src="@{/img/logo.png}">
-            <span class="tooltiptext"><img class="plcImg" th:src="@{/img/logo.png}"></span>
-        </span>
-            <br><hr>
-        </th:block>
-    </div>
-    <div class="partsRight" th:if="${brokenPartsRight.size != 0}">
-        <th:block th:each="part : ${brokenPartsRight}">
-            <span th:text="${part.name} + ${part.status == true ? ': Работает' : ': Сломано'}"/>
-            <span class="tooltip"><img th:src="@{/img/logo.png}">
-            <span class="tooltiptext"><img class="plcImg" th:src="@{/img/logo.png}"></span>
-        </span>
-            <br><hr>
-        </th:block>
-    </div>
+    <div th:replace="fragments :: partsList(${brokenPartsLeft})"/>
+    <div th:replace="fragments :: partsList(${brokenPartsRight})"/>
+
 </div>
 <br>
 <!-- кнопка для скрытия и открытия partsDiv -->
@@ -69,29 +54,14 @@
 <br>
 
 <div class="partsDiv">
-    <div class="partsLeft"  th:if="${workingPartsLeft.size != 0}">
-        <th:block th:each="part : ${workingPartsLeft}">
-            <span th:text="${part.name} + ${part.status == true ? ': Работает' : ': Сломано'}"/>
-            <span class="tooltip"><img th:src="@{/img/logo.png}">
-            <span class="tooltiptext"><img class="plcImg" th:src="@{/img/logo.png}"></span>
-        </span>
-            <br><hr>
-        </th:block>
-    </div>
-    <div class="partsRight"  th:if="${workingPartsRight.size != 0}">
-        <th:block th:each="part : ${workingPartsRight}">
-            <span th:text="${part.name} + ${part.status == true ? ': Работает' : ': Сломано'}"/>
-            <span class="tooltip"><img th:src="@{/img/logo.png}">
-            <span class="tooltiptext"><img class="plcImg" th:src="@{/img/logo.png}"></span>
-        </span>
-            <br><hr>
-        </th:block>
-    </div>
-    <div class="divAdminButton">
-        <a sec:authorize="hasAnyRole('MANAGER', 'ADMIN')" th:href="@{'/parts/fine/' + ${bike.id} + '?currentPage=' + ${currentPage} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&commentSortField=commentedAt&commentSortDir=asc' + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="'Все части работают'" class="adminButton"/>
-        <a sec:authorize="hasAnyRole('MANAGER', 'ADMIN')" th:href="@{'/parts/edit/' + ${bike.id} + '?currentPage=' + ${currentPage} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&commentSortField=commentedAt&commentSortDir=asc' + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="'Изменить'" class="adminButton"/>
-    </div>
-</div> 
+    <div th:replace="fragments :: partsList(${workingPartsLeft})"/>
+    <div th:replace="fragments :: partsList(${workingPartsRight})"/>
+</div>
+<div class="divAdminButton">
+    <a sec:authorize="hasAnyRole('MANAGER', 'ADMIN')" th:href="@{'/parts/fine/' + ${bike.id} + '?currentPage=' + ${currentPage} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&commentSortField=commentedAt&commentSortDir=asc' + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="'Все части работают'" class="adminButton"/>
+    <a sec:authorize="hasAnyRole('MANAGER', 'ADMIN')" th:href="@{'/parts/edit/' + ${bike.id} + '?currentPage=' + ${currentPage} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&commentSortField=commentedAt&commentSortDir=asc' + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="'Изменить'" class="adminButton"/>
+</div>
+
 <br>   
 <!--Комментарии-->
 <div class="comments">
