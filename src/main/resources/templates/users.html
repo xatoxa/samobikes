@@ -16,7 +16,7 @@
 <body>
 <div class="header">
         <div class="firstHead">
-            <button type="submit" class="btn btnTab add"><a class="home" th:href="@{/bikes}">На главную</a></button>
+            <a class="home" th:href="@{/bikes}">На главную</a>
         </div>
         <div class="midleHead">
             <H1>Пользователи</H1>
@@ -75,13 +75,8 @@
                 <td th:text="${user.enabled}"/>
                 <td th:text="${user.roles}"/>
                 <td class="textCenter">
-                    <button  type="submit" class=" btnTab">
-                        <a  th:href="@{'/users/edit/' + ${user.id}}"><i class="fa-solid fa-pen"></i></a>
-                    </button>
-
-                    <button  type="submit" class=" btnTab">
-                        <a  th:href="@{'/users/delete/' + ${user.id}}"><i class="fa-solid fa-delete-left"></i></a>
-                    </button>
+                    <a class="aTab" th:href="@{'/users/edit/' + ${user.id}}"><i class="fa-solid fa-pen"></i></a>
+                    <a class="aTab" th:href="@{'/users/delete/' + ${user.id}}"><i class="fa-solid fa-delete-left"></i></a>
                 </td>
             </tr>
         </tbody>
@@ -118,8 +113,8 @@
         </nav>
 </div>
 
-<div>
-    <button type="submit" class="btn btnTab add"><a  th:href="@{'/users/add/'}" th:text="Добавить" class="add" /></button>
+<div class="aAddDiv">
+    <a  th:href="@{'/users/add/'}" th:text="Добавить" class="aAdd" />
 </div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

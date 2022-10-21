@@ -17,7 +17,7 @@
 
 <body>
 <div class="header">
-    <button class="home"><a class="home" th:href="@{'/bikes/page/' + ${currentPage} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="Назад"/></button>
+    <a class="home" th:href="@{'/bikes/page/' + ${currentPage} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="Назад"/>
     <br>
     <div class="velInfo">
         <span th:text="${'Номер: ' + bike.number}"/><br>
@@ -25,10 +25,15 @@
         <span th:text="${'VIN: ' + bike.VIN}"/><br>
         <span th:text="${bike.status == true ? 'Работает' : 'Сломан'}"/><br>
         <span th:text="${'Описание: ' + bike.description}"/><br>
-        <span sec:authorize="hasAnyRole('MANAGER', 'ADMIN')" th:text="${'Ссылка на ELMA: '}"/><a th:href="@{${bike.qrLink}}" target="_blank" th:text="${'>тык<'}" />
-        <br>
-        <button sec:authorize="hasAnyRole('MANAGER', 'ADMIN')"><a th:href="@{'/bikes/management/edit/' + ${bike.id}}" th:text="'Изменить'"/></button>
-        <button sec:authorize="hasAnyRole('MANAGER', 'ADMIN')"><a th:href="@{'/bikes/management/delete/' + ${bike.id}}" th:text="'Удалить'"/></button>
+        <span class="lastVelInfo" sec:authorize="hasAnyRole('MANAGER', 'ADMIN')" th:text="${'Ссылка на ELMA: '}"/><a th:href="@{${bike.qrLink}}" target="_blank" th:text="${'>тык<'}" /><br>
+        <div class="divAdminButton">
+            <div class="divAdminButtonOne">
+                <a sec:authorize="hasAnyRole('MANAGER', 'ADMIN')" th:href="@{'/bikes/management/edit/' + ${bike.id}}" th:text="'Изменить'" class="adminButton" />
+            </div>
+            <div class="divAdminButtonOne">
+                <a sec:authorize="hasAnyRole('MANAGER', 'ADMIN')" th:href="@{'/bikes/management/delete/' + ${bike.id}}" th:text="'Удалить'" class="adminButton"/>
+            </div>
+        </div>
     </div>
     <div class="velPhoto">
         <!--потом добавить как bike.photo-->
@@ -74,8 +79,10 @@
         </span>
         <br><hr>
     </div>
-    <button sec:authorize="hasAnyRole('MANAGER', 'ADMIN')" ><a th:href="@{'/parts/fine/' + ${bike.id} + '?currentPage=' + ${currentPage} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&commentSortField=commentedAt&commentSortDir=asc' + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="'Все части работают'"/></button>
-    <button sec:authorize="hasAnyRole('MANAGER', 'ADMIN')" ><a th:href="@{'/parts/edit/' + ${bike.id} + '?currentPage=' + ${currentPage} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&commentSortField=commentedAt&commentSortDir=asc' + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="'Изменить'"/></button>
+    <div class="divAdminButton">
+        <a sec:authorize="hasAnyRole('MANAGER', 'ADMIN')" th:href="@{'/parts/fine/' + ${bike.id} + '?currentPage=' + ${currentPage} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&commentSortField=commentedAt&commentSortDir=asc' + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="'Все части работают'" class="adminButton"/>
+        <a sec:authorize="hasAnyRole('MANAGER', 'ADMIN')" th:href="@{'/parts/edit/' + ${bike.id} + '?currentPage=' + ${currentPage} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&commentSortField=commentedAt&commentSortDir=asc' + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="'Изменить'" class="adminButton"/>
+    </div>
 </div> 
 <br>   
 <!--Комментарии-->

@@ -36,7 +36,7 @@
 
 <h1 th:text="${'Изменение состояния запчастей велосипеда ' + bike.number + ' / ' + bike.qrNumber}"/>
 <div class="homeBut">
-  <button class="home"><a class="home" th:href="@{'/bikes'}" th:text="'На главную'"/></button>
+  <a class="home" th:href="@{'/bikes'}" th:text="'На главную'"/>
 </div>
 <div class="container">
   <!--Форма редактирования запчастей-->
@@ -51,7 +51,7 @@
         <input type="hidden" th:field="*{parts[__${iter.index}__].name}" class="form-control" hidden/>
         <input type="hidden" th:field="*{parts[__${iter.index}__].description}" class="form-control" hidden/>
         <input type="hidden" th:field="*{parts[__${iter.index}__].importance}" class="form-control" hidden/>
-        <span class="input-group-addon"><i class="glyphicon glyphicon-user" th:text="${part.name}"></i></span>
+        <span class="input-group-addon"><i class="glyphicon glyphicon-user" th:text="${part.name} + ' - '"></i></span>
         <select th:field="*{parts[__${iter.index}__].status}" required>
           <option value="true">Работает</option>
           <option value="false">Сломан</option>
@@ -62,10 +62,10 @@
     <div  class="form-group">
       <div class="button">
         <button>Сохранить</button>
+        <a class="home" th:href="@{'/bikes/show/' + ${bike.id} + '?currentPage=' + ${currentPage} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&commentSortField=commentedAt&commentSortDir=asc' + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="'Назад'"/>
       </div>
     </div>
   </form>
-  <button class="home"><a class="home" th:href="@{'/bikes/show/' + ${bike.id} + '?currentPage=' + ${currentPage} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&commentSortField=commentedAt&commentSortDir=asc' + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="'Назад'"/></button>
 </div>
 </body>
 </html>
