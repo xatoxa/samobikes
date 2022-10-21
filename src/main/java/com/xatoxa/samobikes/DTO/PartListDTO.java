@@ -3,20 +3,35 @@ package com.xatoxa.samobikes.DTO;
 import com.xatoxa.samobikes.entities.Part;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 public class PartListDTO {
-    private List<Part> parts;
+    private List<Part> partsLeft;
+
+    private List<Part> partsRight;
 
     private String params;
 
     private int bikeId;
 
-    public List<Part> getParts() {
-        return parts;
+    public List<Part> getPartsLeft() {
+        return partsLeft;
     }
 
-    public void setParts(List<Part> parts) {
-        this.parts = parts;
+    public void setPartsLeft(List<Part> partsLeft) {
+        this.partsLeft = partsLeft;
+    }
+
+    public List<Part> getPartsRight() {
+        return partsRight;
+    }
+
+    public void setPartsRight(List<Part> partsRight) {
+        this.partsRight = partsRight;
+    }
+
+    public List<Part> getParts(){
+        return Stream.concat(partsLeft.stream(), partsRight.stream()).toList();
     }
 
     public String getParams() {

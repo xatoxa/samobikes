@@ -42,8 +42,17 @@ public class PartController {
         List<Part> parts = bike.getParts();
         PartListDTO partListDTO = new PartListDTO();
         partListDTO.setBikeId(bike.getId());
-        partListDTO.setParts(parts);
         partListDTO.setParams(id + "?currentPage=" + currentPage + "&sortField=" + sortField + "&sortDir=" + sortDir + "&commentSortField=commentedAt&commentSortDir=" + commentSortDir + (keyword != null ? "&keyword=" + keyword : ""));
+
+        int temp = 0;
+
+        if (parts.size() % 2 != 0) temp = 1;
+
+        List<Part> partsLeft = parts.subList(0, parts.size() / 2 + temp);
+        List<Part> partsRight = parts.subList(parts.size() / 2 + temp, parts.size());
+        partListDTO.setPartsLeft(partsLeft);
+        partListDTO.setPartsRight(partsRight);
+
         model.addAttribute("partList", partListDTO);
         model.addAttribute("parts", parts);
         model.addAttribute("bike", bike);

@@ -23,7 +23,7 @@
    class="page-link" th:href="@{'/' + ${entityName} + '/page/' + ${pageNum} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">
     [[${label}]]
 </a>
-<div th:fragment="partsList(parts)" class="partsLeft"  th:if="${parts.size != 0}">
+<div th:fragment="partsList(parts, class)" th:class="${class}"  th:if="${parts.size != 0}">
     <th:block th:each="part : ${parts}">
         <span th:text="${part.name} + ${part.status == true ? ': Работает' : ': Сломано'}"/>
         <span class="tooltip"><img th:src="@{/img/logo.png}">

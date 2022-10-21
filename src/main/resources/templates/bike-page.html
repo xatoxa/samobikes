@@ -42,8 +42,8 @@
 </div>
 <!--сюда создать новое имя класса, функционал как partsDiv-->
 <div >
-    <div th:replace="fragments :: partsList(${brokenPartsLeft})"/>
-    <div th:replace="fragments :: partsList(${brokenPartsRight})"/>
+    <div th:replace="fragments :: partsList(${brokenPartsLeft}, 'partsLeft')"/>
+    <div th:replace="fragments :: partsList(${brokenPartsRight}, 'partsRight')"/>
 
 </div>
 <br>
@@ -54,8 +54,8 @@
 <br>
 
 <div class="partsDiv">
-    <div th:replace="fragments :: partsList(${workingPartsLeft})"/>
-    <div th:replace="fragments :: partsList(${workingPartsRight})"/>
+    <div th:replace="fragments :: partsList(${workingPartsLeft}, 'partsLeft')"/>
+    <div th:replace="fragments :: partsList(${workingPartsRight}, 'partsRight')"/>
 </div>
 <div class="divAdminButton">
     <a sec:authorize="hasAnyRole('MANAGER', 'ADMIN')" th:href="@{'/parts/fine/' + ${bike.id} + '?currentPage=' + ${currentPage} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&commentSortField=commentedAt&commentSortDir=asc' + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="'Все части работают'" class="adminButton"/>
