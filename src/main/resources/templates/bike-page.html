@@ -48,20 +48,21 @@
 <br>
 <!-- кнопка для скрытия и открытия partsDiv -->
 <div class="toggleParts">
-    <button id="toggleParts">Список деталей</button>
+    <button id="toggleParts">Список всех деталей</button>
 </div>
 <br>
 <div class="partsDiv">
     <div th:replace="fragments :: partsList(${workingPartsLeft}, 'partsLeft', 'working')"/>
     <div th:replace="fragments :: partsList(${workingPartsRight}, 'partsRight', 'working')"/>
     <div class="emptiDiv">Ебать какой же тут костыль)</div> <!-- этот костыль я добавил чтобы блядсие <a> отображались нориально, потом изменю, но я хз с чем связано то, что ссылки тянет постоянно вверх -->
-    <div class="divAdminButton">
-        <a sec:authorize="hasAnyRole('MANAGER', 'ADMIN')" th:href="@{'/parts/fine/' + ${bike.id} + '?currentPage=' + ${currentPage} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&commentSortField=commentedAt&commentSortDir=asc' + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="'Важные части работают'" class="adminButton"/>
-        <a sec:authorize="hasAnyRole('MANAGER', 'ADMIN')" th:href="@{'/parts/fineAll/' + ${bike.id} + '?currentPage=' + ${currentPage} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&commentSortField=commentedAt&commentSortDir=asc' + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="'Все части работают'" class="adminButton"/>
-        <a sec:authorize="hasAnyRole('MANAGER', 'ADMIN')" th:href="@{'/parts/edit/' + ${bike.id} + '?currentPage=' + ${currentPage} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&commentSortField=commentedAt&commentSortDir=asc' + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="'Изменить'" class="adminButton"/>
-    </div>
 </div>
-<br>   
+<br>
+<div class="divAdminButton">
+    <a sec:authorize="hasAnyRole('MANAGER', 'ADMIN')" th:href="@{'/parts/fine/' + ${bike.id} + '?currentPage=' + ${currentPage} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&commentSortField=commentedAt&commentSortDir=asc' + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="'Важные части работают'" class="adminButton"/>
+    <a sec:authorize="hasAnyRole('MANAGER', 'ADMIN')" th:href="@{'/parts/fineAll/' + ${bike.id} + '?currentPage=' + ${currentPage} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&commentSortField=commentedAt&commentSortDir=asc' + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="'Все части работают'" class="adminButton"/>
+    <a sec:authorize="hasAnyRole('MANAGER', 'ADMIN')" th:href="@{'/parts/edit/' + ${bike.id} + '?currentPage=' + ${currentPage} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&commentSortField=commentedAt&commentSortDir=asc' + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="'Редактирование'" class="adminButton"/>
+</div>
+<br>
 <!--Комментарии-->
 <div class="comments">
     <form sec:authorize="isAuthenticated()" th:action="@{'/comment/save/' + ${bike.id}}" method="post" >
