@@ -114,4 +114,22 @@ public class UserController {
         redirectAttributes.addFlashAttribute("message", "Ваш аккаунт зарегистрирован, можете войти в систему.");
         return "redirect:/login";
     }
+
+    @GetMapping("/users/{id}/enabled/{status}")
+    public String setEnabledById (Model model,
+                                  @PathVariable(value = "id") Integer id,
+                                  @PathVariable(value = "status") boolean enabled,
+                                  @Param("currentPage") String currentPage,
+                                  @Param("sortField") String sortField,
+                                  @Param("sortDir") String sortDir,
+                                  @Param("keyword") String keyword,
+                                  RedirectAttributes redirectAttributes){
+        userService.setEnabledById(id, enabled);
+        redirectAttributes.addFlashAttribute("message",
+                "Пользователь " +
+                        userService.getById(id).getUsername() + " теперь" +
+                        (enabled ? " активен" : " не активен"));
+
+        return "redirect:/users/page/" + currentPage + "?sortField=" + sortField + "&sortDir=" + sortDir + (keyword != null ? "&keyword=" + keyword : "");
+    }
 }

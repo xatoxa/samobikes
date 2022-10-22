@@ -168,4 +168,8 @@ public class UserServiceImpl implements UserService{
 
         userRepository.save(user);
     }
+
+    public void setEnabledById(Integer id, boolean enabled){
+        userRepository.setEnabledById(id, enabled);
+    }
 }

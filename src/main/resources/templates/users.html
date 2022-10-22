@@ -72,7 +72,14 @@
                 <td th:text="${user.username}"/>
                 <td th:text="${user.firstName}"/>
                 <td th:text="${user.lastName}"/>
-                <td th:text="${user.enabled}"/>
+                <td>
+                    <a th:if="${user.enabled == true}" class="fas fa-check-circle fa-2x" style="color: green"
+                       th:href="@{'/users/' + ${user.id} + '/enabled/false?currentPage=' + ${currentPage} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}"
+                       title="Выключить этого пользователя"/>
+                    <a th:if="${user.enabled == false}" class="fas fa-circle fa-2x" style="color: darkgray"
+                       th:href="@{'/users/' + ${user.id} + '/enabled/true?currentPage=' + ${currentPage} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}"
+                       title="Включить этого пользователя"/>
+                </td>
                 <td th:text="${user.rolesToString}"/>
                 <td class="textCenter">
                     <a class="aTab" th:href="@{'/users/edit/' + ${user.id}}"><i class="fa-solid fa-pen"></i></a>
