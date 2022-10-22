@@ -6,6 +6,7 @@ td{
 	border-right: 2px solid rgba(254,12,106,0.3);
 	padding-top: 12px;
 	padding-bottom: 12px;
+	background: white;
 }
 .trTab:hover{
 	background: rgb(254,12,106);
@@ -80,4 +81,7 @@ form{
 }
 .upDown{
 	color: rgb(254,12,106);
+}
+.third{
+	width: 20%;
 }

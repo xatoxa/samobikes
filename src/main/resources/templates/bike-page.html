@@ -41,10 +41,9 @@
     </div>
 </div>
 <!--сюда создать новое имя класса, функционал как partsDiv-->
-<div >
+<div class="broken">
     <div th:replace="fragments :: partsList(${brokenPartsLeft}, 'partsLeft')"/>
     <div th:replace="fragments :: partsList(${brokenPartsRight}, 'partsRight')"/>
-
 </div>
 <br>
 <!-- кнопка для скрытия и открытия partsDiv -->
@@ -56,11 +55,14 @@
 <div class="partsDiv">
     <div th:replace="fragments :: partsList(${workingPartsLeft}, 'partsLeft')"/>
     <div th:replace="fragments :: partsList(${workingPartsRight}, 'partsRight')"/>
+    <div class="emptiDiv">Ебать какой же тут костыль)</div> <!-- этот костыль я добавил чтобы блядсие <a> отображались нориально, потом изменю, но я хз с чем связано то, что ссылки тянет постоянно вверх -->
+    <div class="divAdminButton">
+        <a sec:authorize="hasAnyRole('MANAGER', 'ADMIN')" th:href="@{'/parts/fine/' + ${bike.id} + '?currentPage=' + ${currentPage} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&commentSortField=commentedAt&commentSortDir=asc' + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="'Все части работают'" class="adminButton"/>
+        <a sec:authorize="hasAnyRole('MANAGER', 'ADMIN')" th:href="@{'/parts/edit/' + ${bike.id} + '?currentPage=' + ${currentPage} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&commentSortField=commentedAt&commentSortDir=asc' + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="'Изменить'" class="adminButton"/>
+    </div>
 </div>
-<div class="divAdminButton">
-    <a sec:authorize="hasAnyRole('MANAGER', 'ADMIN')" th:href="@{'/parts/fine/' + ${bike.id} + '?currentPage=' + ${currentPage} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&commentSortField=commentedAt&commentSortDir=asc' + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="'Все части работают'" class="adminButton"/>
-    <a sec:authorize="hasAnyRole('MANAGER', 'ADMIN')" th:href="@{'/parts/edit/' + ${bike.id} + '?currentPage=' + ${currentPage} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&commentSortField=commentedAt&commentSortDir=asc' + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="'Изменить'" class="adminButton"/>
-</div>
+
+
 
 <br>   
 <!--Комментарии-->
@@ -92,13 +94,13 @@
             <thead>
                 <th><i class="iCom fa-solid fa-user"></i></th>
                 <th><i class="iCom fa-solid fa-message"></i></th>
-                <th><i class="iCom fa-solid fa-calendar"></i></th>
+                <th class="third"><i class="iCom fa-solid fa-calendar"></i></th>
             </thead>
         <!--Цикл foreach по всем комментариям-->
         <tr class="trTab" th:each="comment : ${comments}">
             <td class="firstTd" th:text="${comment.getUser().getUsername()}"/>
             <td th:text="${comment.commentText}"/>
-            <td  th:text="${#temporals.format(comment.commentedAt, 'HH:mm dd.MM.yy ')}"/>
+            <td class="third" th:text="${#temporals.format(comment.commentedAt, 'HH:mm dd.MM.yy ')}"/>
         </tr>
         </tbody>
     </table>

@@ -35,7 +35,9 @@ hr{
 	border: 2px solid rgb(254,12,106);
 	text-align: center;
 	color: rgb(254,12,106);
-
+}
+.broken{
+	margin-top: 2%;
 }
 .velInfo{
 	width: 30%;
@@ -74,7 +76,7 @@ hr{
 	border-radius: 5px;
 }
 .divAdminButton{
-	margin-top: 4%;
+	margin-top: 2%;
 	margin-bottom: 4%;
 }
 .divAdminButtonOne{
@@ -84,6 +86,10 @@ hr{
 	background: white;
 	box-shadow: 0 0 0 0.2rem rgba(254, 12, 106, 0.4);
 	border-color: rgb(254,12,106);
+}
+.emptiDiv{
+	padding-bottom: 20px;
+	color: rgba(0, 0, 0, 0.0);
 }
 .lastVelInfo{
 	margin-bottom: 20px;
@@ -167,8 +173,13 @@ img{
 	.divAdminButtonOne{
 		margin-bottom: 20px;
 	}
+	.emptiDiv{
+		display: none;
+	}
 }
 .toggleParts{
+	text-align: center;
+	margin-top: 70px;
 	text-align: center;
 }
 #toggleParts{

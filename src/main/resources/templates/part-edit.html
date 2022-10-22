@@ -77,11 +77,11 @@
           <hr>
         </div>
       </th:block>
-
     </div>
+    <div class="emptiDiv">Ебать какой же тут костыль)</div>
     <div  class="form-group">
       <div class="button">
-        <button>Сохранить</button>
+        <button class="save">Сохранить</button>
         <a class="home" th:href="@{'/bikes/show/' + ${bike.id} + '?currentPage=' + ${currentPage} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&commentSortField=commentedAt&commentSortDir=asc' + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="'Назад'"/>
       </div>
     </div>
