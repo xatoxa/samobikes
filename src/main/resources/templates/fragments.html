@@ -23,8 +23,13 @@
    class="page-link" th:href="@{'/' + ${entityName} + '/page/' + ${pageNum} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">
     [[${label}]]
 </a>
-<div th:fragment="partsList(parts, class)" th:class="${class}"  th:if="${parts.size != 0}">
+<div th:fragment="partsList(parts, class, type)" th:class="${class}"  th:if="${parts.size != 0}">
     <th:block th:each="part : ${parts}">
+        <span th:if="${type == 'broken'}">
+            <i th:if="${part.importance == 1}" class="fa-solid fa-triangle-exclamation" style="color: #ff0000"></i>
+            <i th:if="${part.importance == 2}" class="fa-solid fa-triangle-exclamation" style="color: #ddff00"></i>
+            <i th:if="${part.importance == 3}" class="fa-solid fa-triangle-exclamation" style="color: #01559D"></i>
+        </span>
         <span th:text="${part.name} + ${part.status == true ? ': Работает' : ': Сломано'}"/>
         <span class="tooltip"><img th:src="@{/img/logo.png}">
             <span class="tooltiptext"><img class="plcImg" th:src="@{/img/logo.png}"></span>

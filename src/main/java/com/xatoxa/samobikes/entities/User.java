@@ -125,4 +125,8 @@ public class User {
     public void addComment(Comment comment){
         this.comments.add(comment);
     }
+
+    public String rolesToString(){
+        return roles.toString().substring(1, roles.toString().length() - 1);
+    }
 }

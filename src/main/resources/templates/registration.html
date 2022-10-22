@@ -16,7 +16,7 @@
     <div class="formDiv">
         <label>Придумайте логин</label><br> <!--только латиница и цифры без пробелов от 2 до 20 символов-->
         <input class="form-control" th:field="*{username}" required minlength="2" maxlength="20"
-        pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$"/>
+        pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$" placeholder="латиница и цифры от 2 до 20 символов"/>
     </div>
     <div class="formDiv">
         <label>Имя</label><br>
@@ -30,15 +30,15 @@
         <label>Пароль</label><br> <!--только латиница вместе с цифрами от 8 до 100 символов-->
         <input class="form-control" type="password" th:field="*{password}" required minlength="8" maxlength="100"
                oninput="checkPasswordMatch(document.getElementById('confirmPassword'))"
-               pattern="^(?=.*\d)(?=.*[a-zA-Z])(?!.*\s).*$"/>
+               pattern="^(?=.*\d)(?=.*[a-zA-Z])(?!.*\s).*$" placeholder="латиница и цифры от 8 до 100 символов"/>
     </div>
     <div class="formDiv">
         <label>Подтвердите пароль</label><br> <!--только латиница вместе с цифрами от 8 до 100 символов-->
         <input class="form-control" type="password" id="confirmPassword" required minlength="8" maxlength="100"
-               oninput="checkPasswordMatch(this)"
+               oninput="checkPasswordMatch(this)" placeholder="латиница и цифры от 8 до 100 символов"
                pattern="^(?=.*\d)(?=.*[a-zA-Z])(?!.*\s).*$"/>
     </div >
-    <button class="button" type="submit" th:text="Зарегистрироваться">submit</button>
+    <button class="button" type="submit" th:text="Познакомиться">submit</button>
 </form>
 </div>
 <div>    <!--отделить рамкой от основного блока-->

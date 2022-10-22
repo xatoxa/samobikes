@@ -88,6 +88,42 @@ public class PartController {
     }
 
     @GetMapping("/fine/{id_bike}")
+    public String setAllImpTrue(Model model, @PathVariable(value = "id_bike")Integer id,
+                             @Param("currentPage") String currentPage,
+                             @Param("sortField") String sortField,
+                             @Param("sortDir") String sortDir,
+                             @Param("commentSortField") String commentSortField,
+                             @Param("commentSortDir") String commentSortDir,
+                             @Param("keyword") String keyword) {
+
+        Bike bike = bikeService.getById(id);
+        List<Part> parts = bike.getParts();
+        parts.forEach(s -> {
+            if (s.getImportance() < 3) s.setStatus(true);
+        });
+        bike.setParts(parts);
+        bike.setStatus(true);
+        bikeService.save(bike);
+        model.addAttribute("bike", bike);
+        model.addAttribute("parts", parts);
+        model.addAttribute("comment", new Comment());
+        model.addAttribute("comments", bike.getComments());
+
+        String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
+        String commentReverseSortDir = commentSortDir.equals("asc") ? "desc" : "asc";
+
+        model.addAttribute("sortField", sortField);
+        model.addAttribute("sortDir", sortDir);
+        model.addAttribute("reverseSortDir", reverseSortDir);
+        model.addAttribute("commentSortField", commentSortField);
+        model.addAttribute("commentSortDir", commentSortDir);
+        model.addAttribute("commentReverseSortDir", commentReverseSortDir);
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("keyword", keyword);
+        return "redirect:/bikes/show/" + id + "?currentPage=" + currentPage + "&sortField=" + sortField + "&sortDir=" + sortDir + "&commentSortField=commentedAt&commentSortDir=" + commentSortDir + (keyword != null ? "&keyword=" + keyword : "");
+    }
+
+    @GetMapping("/fineAll/{id_bike}")
     public String setAllTrue(Model model, @PathVariable(value = "id_bike")Integer id,
                              @Param("currentPage") String currentPage,
                              @Param("sortField") String sortField,

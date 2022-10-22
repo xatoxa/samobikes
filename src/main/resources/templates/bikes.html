@@ -65,6 +65,7 @@
             <th th:replace="fragments :: columnLink('bikes', 'VIN', 'VIN')"/>
             <th th:replace="fragments :: columnLink('bikes', 'status', 'Статус')"/>
             <th>Описание</th>
+            <th><i class="iCom fa-solid fa-message"></i></th>
             <th sec:authorize="hasAnyRole('MANAGER', 'ADMIN')" class="textCenter">Кликай куда надо</th>
             <th sec:authorize="hasRole('USER')" class="textCenter"></th>
         </tr>
@@ -77,6 +78,7 @@
             <td th:text="${bike.VIN}"/>
             <td th:text="${bike.status == true ? 'Работает' : 'Сломан'}"/>
             <td th:text="${bike.description}"/>
+            <td th:text="${bike.comments.size}"/>
             <td class="textCenter">
                 <a class="aTab" th:href="@{'/bikes/show/' + ${bike.id} + '?currentPage=' + ${currentPage} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&commentSortField=commentedAt&commentSortDir=asc' + ${keyword != null ? '&keyword=' + keyword : ''}}"><i class="fa-solid fa-list"></i></a>
                 <a sec:authorize="hasAnyRole('MANAGER', 'ADMIN')" class="aTab"  th:href="@{'/bikes/management/edit/' + ${bike.id}}"><i class="fa-solid fa-pen"></i></a>

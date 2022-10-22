@@ -42,8 +42,8 @@
 </div>
 <!--сюда создать новое имя класса, функционал как partsDiv-->
 <div class="broken">
-    <div th:replace="fragments :: partsList(${brokenPartsLeft}, 'partsLeft')"/>
-    <div th:replace="fragments :: partsList(${brokenPartsRight}, 'partsRight')"/>
+    <div th:replace="fragments :: partsList(${brokenPartsLeft}, 'partsLeft', 'broken')"/>
+    <div th:replace="fragments :: partsList(${brokenPartsRight}, 'partsRight', 'broken')"/>
 </div>
 <br>
 <!-- кнопка для скрытия и открытия partsDiv -->
@@ -51,19 +51,16 @@
     <button id="toggleParts">Список деталей</button>
 </div>
 <br>
-
 <div class="partsDiv">
-    <div th:replace="fragments :: partsList(${workingPartsLeft}, 'partsLeft')"/>
-    <div th:replace="fragments :: partsList(${workingPartsRight}, 'partsRight')"/>
+    <div th:replace="fragments :: partsList(${workingPartsLeft}, 'partsLeft', 'working')"/>
+    <div th:replace="fragments :: partsList(${workingPartsRight}, 'partsRight', 'working')"/>
     <div class="emptiDiv">Ебать какой же тут костыль)</div> <!-- этот костыль я добавил чтобы блядсие <a> отображались нориально, потом изменю, но я хз с чем связано то, что ссылки тянет постоянно вверх -->
     <div class="divAdminButton">
-        <a sec:authorize="hasAnyRole('MANAGER', 'ADMIN')" th:href="@{'/parts/fine/' + ${bike.id} + '?currentPage=' + ${currentPage} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&commentSortField=commentedAt&commentSortDir=asc' + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="'Все части работают'" class="adminButton"/>
+        <a sec:authorize="hasAnyRole('MANAGER', 'ADMIN')" th:href="@{'/parts/fine/' + ${bike.id} + '?currentPage=' + ${currentPage} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&commentSortField=commentedAt&commentSortDir=asc' + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="'Важные части работают'" class="adminButton"/>
+        <a sec:authorize="hasAnyRole('MANAGER', 'ADMIN')" th:href="@{'/parts/fineAll/' + ${bike.id} + '?currentPage=' + ${currentPage} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&commentSortField=commentedAt&commentSortDir=asc' + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="'Все части работают'" class="adminButton"/>
         <a sec:authorize="hasAnyRole('MANAGER', 'ADMIN')" th:href="@{'/parts/edit/' + ${bike.id} + '?currentPage=' + ${currentPage} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&commentSortField=commentedAt&commentSortDir=asc' + ${keyword != null ? '&keyword=' + keyword : ''}}" th:text="'Изменить'" class="adminButton"/>
     </div>
 </div>
-
-
-
 <br>   
 <!--Комментарии-->
 <div class="comments">
@@ -98,7 +95,23 @@
             </thead>
         <!--Цикл foreach по всем комментариям-->
         <tr class="trTab" th:each="comment : ${comments}">
-            <td class="firstTd" th:text="${comment.getUser().getUsername()}"/>
+            <td class="firstTd">
+                <p th:if="${comment.getUser().getFirstName() != null && comment.getUser().getLastName() != null}"
+                   th:title="${comment.getUser().getFirstName() + ' ' + comment.getUser().getLastName()}">
+                    [[${comment.getUser().getUsername()}]]
+                </p>
+                <p th:if="${comment.getUser().getFirstName() == null && comment.getUser().getLastName() == null}">
+                    [[${comment.getUser().getUsername()}]]
+                </p>
+                <p th:if="${comment.getUser().getFirstName() == null && comment.getUser().getLastName() != null}"
+                   th:title="${comment.getUser().getLastName()}">
+                    [[${comment.getUser().getUsername()}]]
+                </p>
+                <p th:if="${comment.getUser().getFirstName() != null && comment.getUser().getLastName() == null}"
+                   th:title="${comment.getUser().getFirstName()}">
+                    [[${comment.getUser().getUsername()}]]
+                </p>
+            </td>
             <td th:text="${comment.commentText}"/>
             <td class="third" th:text="${#temporals.format(comment.commentedAt, 'HH:mm dd.MM.yy ')}"/>
         </tr>

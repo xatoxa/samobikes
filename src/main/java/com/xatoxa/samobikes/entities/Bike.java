@@ -144,7 +144,7 @@ public class Bike {
     public void checkWorks(){
         for (Part part:
              parts) {
-            if (!part.isStatus()){
+            if (!part.isStatus() && part.getImportance() < 3){
                 this.status = false;
                 return;
             }

@@ -28,7 +28,8 @@
     <input type="hidden" th:field="*{id}"/>
     <input type="hidden" th:field="*{username}"/>
     <div  class="input-group inp login">
-      <span>Логин - </span>
+      <span>Логин: </span>
+      <br>
       <span th:text="*{username}"></span>
     </div>
     <div  class="input-group inp">
@@ -62,9 +63,9 @@
       <input th:field="*{lastName}" placeholder="Фамилия (необязательно)" class="form-control form" maxlength="100"/>
     </div>
     <div  class="input-group inp login">
-      <label class="input-group-addon"><i class="glyphicon glyphicon-user">Мои роли:</i></label>
+      <span>Мои роли:</span>
       <br>
-      <span>[[${user.roles}]]</span>
+      <span>[[${user.rolesToString}]]</span>
     </div>
 
     <div class="form-group button">

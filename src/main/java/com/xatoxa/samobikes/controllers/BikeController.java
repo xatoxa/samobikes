@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -93,7 +94,7 @@ public class BikeController {
         bike.checkWorks();
         bikeService.save(bike);
 
-        List<Part> parts = bike.getParts();
+        List<Part> parts = bike.getParts().stream().sorted(Comparator.comparingInt(Part::getImportance)).toList();
         List<Part> brokenParts = parts.stream().filter(s -> !s.isStatus()).toList();
         List<Part> workingParts = parts.stream().filter(Part::isStatus).toList();
 

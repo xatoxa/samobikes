@@ -75,24 +75,25 @@
             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
             <input th:field="*{lastName}" placeholder="Фамилия (необязательно)" class="form-control form" maxlength="100"/>
         </div>
-    <div class="roles">
-        <div  class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-user">Роли:</i></span>
+        <div class="roles">
+            <div  class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user">Роли:</i></span>
+                <br>
+                <th:block th:each="role : ${roles}">
+                    <input type="checkbox"
+                           th:field="*{roles}"
+                           th:text="${role.toString}"
+                           th:value="${role.id}"
+                           class="form-control"
+                    />
+                </th:block>
+            </div>
             <br>
-            <th:block th:each="role : ${roles}">
-                <input type="checkbox"
-                       th:field="*{roles}"
-                       th:text="${role.name}"
-                       th:value="${role.id}"
-                       class="form-control"
-                />
-            </th:block>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-user">Активен</i></span>
+                <input type="checkbox" th:field="*{enabled}" />
+            </div>
         </div>
-        <div class="input-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-user">Активен</i></span>
-            <input type="checkbox" th:field="*{enabled}" />
-        </div>
-    </div>
         <div class="form-group button">
             <div>
                 <button type="submit" class="btn">Сохранить</button>
