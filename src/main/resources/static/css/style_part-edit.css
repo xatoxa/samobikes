@@ -89,7 +89,7 @@ input-group{
     padding-bottom: 20px;
     color: rgba(0, 0, 0, 0.0);
 }
-@media all and (max-width:850px){
+@media all and (max-width:900px){
     .partsLeft{
         width: 98%;
         float: none;

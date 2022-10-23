@@ -47,14 +47,14 @@
 <div class="container">
     <form th:action="@{/users/save}"
           th:object="${user}" method="post" class="form-vertical" onsubmit="return checkUsername(this)">
-
+        <span class="placeholder">Только латиница и цифры без пробелов от 2 до 20 символов</span>
         <input type="hidden" th:field="*{id}"/>
         <div  class="input-group inp"> <!--только латиница и цифры без пробелов от 2 до 20 символов-->
             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
             <input th:field="*{username}" placeholder="Логин" class="form-control form"
                    required minlength="3" maxlength="20" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$"/>
         </div>
-
+        <span class="placeholder">Только латиница вместе с цифрами от 8 до 100 символов</span>
         <div  class="input-group inp"> <!--только латиница вместе с цифрами от 8 до 100 символов-->
             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
             <input th:if="${user.id == null}" type="password" th:field="*{password}"
@@ -65,7 +65,6 @@
                    minlength="8" maxlength="100" pattern="^(?=.*\d)(?=.*[a-zA-Z])(?!.*\s).*$"/>
 
         </div>
-
         <div class="input-group inp">
             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
             <input th:field="*{firstName}" placeholder="Имя (необязательно)" class="form-control form" maxlength="100"/>

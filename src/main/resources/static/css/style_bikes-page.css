@@ -36,6 +36,9 @@ hr{
 	text-align: center;
 	color: rgb(254,12,106);
 }
+.textCenter{
+	text-align: center;
+}
 .broken{
 	margin-top: 2%;
 }
@@ -74,6 +77,9 @@ hr{
 	color: rgb(254,12,106);
 	padding: 8px 20px 10px 20px;
 	border-radius: 5px;
+}
+.adminButton2{
+	padding: 8px 36px 10px 36px;;
 }
 .divAdminButton{
 	margin-top: 2%;
@@ -161,13 +167,14 @@ img{
 .plcImg{
 	height: 200px;
 }
-@media all and (max-width:850px){
+@media all and (max-width:900px){
 	.partsLeft, .partsRight{
 		width: 98%;
 		float: none;
 	}
 	.home{
-		width: 100%;
+		padding-left: 100px;
+		padding-right: 100px;
 		float: none
 	}
 	.divAdminButtonOne{
@@ -176,11 +183,13 @@ img{
 	.emptiDiv{
 		display: none;
 	}
+	.adminButton{
+		margin-bottom: 20px;
+	}
 }
 .toggleParts{
 	text-align: center;
-	margin-top: 70px;
-	text-align: center;
+
 }
 #toggleParts{
 	color: rgb(254,12,106);
