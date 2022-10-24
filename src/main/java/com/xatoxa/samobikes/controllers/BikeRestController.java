@@ -15,7 +15,7 @@ public class BikeRestController {
         this.bikeService = bikeService;
     }
 
-    @PostMapping("/bikes/management/check_info")
+    @PostMapping("/check_bike_info")
     public String checkInfo(@Param("id")Integer id,
                             @Param("number")Integer number,
                             @Param("qrNumber")Integer qrNumber,

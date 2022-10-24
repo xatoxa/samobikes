@@ -10,6 +10,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/417822ee3c.js" crossorigin="anonymous"></script>
     <script type="text/javascript" th:src="@{/js/common.js}"></script>
+    <script type="text/javascript" th:src="@{/js/bike-edit.js}"></script>
     <link media="all" rel="stylesheet" type="text/css" th:href="@{/css/style_bikes-edit.css}"><!-- ссылка на css всегда должна быть самой последней -->
 </head>
 <body>
@@ -104,7 +105,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script type="text/javascript">
         function checkInfo(form){
-        url = "[[@{/bikes/management/check_info}]]";
+        url = "[[@{/check_bike_info}]]";
         number = $("#number").val();
         qrNumber = $("#qrNumber").val();
         VIN = $("#VIN").val();
@@ -139,27 +140,7 @@
     }
     </script>
 <script type="text/javascript">
-    $(document).ready(function() {
-        $("#fileImage").change(function() {
-            fileSize = this.files[0].size;
-            if (fileSize > 1048567) {
-                this.setCustomValidity("Файл должен быть меньше 1 МБ");
-                this.reportValidity();
-            } else {
-                this.setCustomValidity("");
-                showImageThumbnail(this);
-            }
-        });
-    });
 
-    function showImageThumbnail(fileInput){
-        var file = fileInput.files[0];
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            $("#thumbnail").attr("src", e.target.result);
-        };
-        reader.readAsDataURL(file);
-    }
 </script>
 
 </body>
