@@ -163,4 +163,10 @@ public class Bike {
     public void addComment(Comment comment){
         this.comments.add(comment);
     }
+
+    @Transient
+    public String getPhotoImagePath(){
+        if (this.id == null || this.photo == null || this.photo.equals("")) return "/img/default-bike.png";
+        return "/photos/bike-photos/"  + this.getId() + "/" + this.photo;
+    }
 }

@@ -1,5 +1,6 @@
 package com.xatoxa.samobikes.controllers;
 
+import com.xatoxa.samobikes.FileUploadUtil;
 import com.xatoxa.samobikes.entities.Bike;
 import com.xatoxa.samobikes.entities.Comment;
 import com.xatoxa.samobikes.entities.Part;
@@ -12,9 +13,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
@@ -146,12 +150,27 @@ public class BikeController {
 
     @PostMapping("/management/edit")
     public String saveBike (@ModelAttribute(value = "bike") Bike bike,
-                            RedirectAttributes redirectAttributes){
-        bikeService.save(bike);
+                            RedirectAttributes redirectAttributes,
+                            @RequestParam("image")MultipartFile multipartFile) throws IOException {
+        if (!multipartFile.isEmpty()){
+            String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+
+            bike.setPhoto(fileName);
+            bikeService.save(bike);
+
+            String uploadDir = "photos/bike-photos/" + bike.getId();
+            FileUploadUtil.cleanDir(uploadDir);
+            FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+
+        } else {
+            if (bike.getPhoto().isEmpty()) bike.setPhoto("");
+            bikeService.save(bike);
+        }
 
         redirectAttributes.addFlashAttribute(
                 "message",
                 "Велосипед " + bike.getNumber() + " | " + bike.getQrNumber() + " сохранён.");
+
         return "redirect:/bikes";
     }
 

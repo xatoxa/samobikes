@@ -36,8 +36,8 @@
         </div>
     </div>
     <div class="velPhoto">
-        <!--потом добавить как bike.photo-->
-        <img class="photo" th:src="@{/img/velo.png}">
+        <img th:if="${bike.photo == null || bike.photo == ''}" class="photo" th:src="@{/img/default-bike.png}">
+        <img th:if="${bike.photo != null && bike.photo != ''}" class="photo" th:src="@{${bike.photoImagePath}}">
     </div>
 </div>
 <!--сюда создать новое имя класса, функционал как partsDiv-->

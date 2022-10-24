@@ -39,7 +39,7 @@
 </div>
     <div class="container">
         <!--Форма редактирования велосипеда-->
-        <form th:action="@{/bikes/management/edit}"
+        <form th:action="@{/bikes/management/edit}" enctype="multipart/form-data"
               th:object="${bike}" method="post" class="form-vertical" onsubmit="return checkInfo(this)">
 
             <input type="hidden" th:field="*{id}" class="form-control" hidden/>
@@ -84,8 +84,9 @@
             </div>
 
             <div  class="input-group">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                <input th:field="*{photo}" class="form-control" hidden/>
+                <input type="hidden" th:field="*{photo}"/>
+                <input type="file" id="fileImage" name="image" accept="image/jpeg, image/png"/>
+                <img id="thumbnail" alt="Photos preview" th:src="@{${bike.photoImagePath}}"/>
             </div>
 
             <div class="form-group button">
@@ -137,5 +138,29 @@
         return false;
     }
     </script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#fileImage").change(function() {
+            fileSize = this.files[0].size;
+            if (fileSize > 1048567) {
+                this.setCustomValidity("Файл должен быть меньше 1 МБ");
+                this.reportValidity();
+            } else {
+                this.setCustomValidity("");
+                showImageThumbnail(this);
+            }
+        });
+    });
+
+    function showImageThumbnail(fileInput){
+        var file = fileInput.files[0];
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $("#thumbnail").attr("src", e.target.result);
+        };
+        reader.readAsDataURL(file);
+    }
+</script>
+
 </body>
 </html>
