@@ -9,16 +9,21 @@ import com.xatoxa.samobikes.services.BikeService;
 import com.xatoxa.samobikes.services.CommentService;
 import com.xatoxa.samobikes.services.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.integration.IntegrationProperties;
 import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
@@ -149,9 +154,18 @@ public class BikeController {
     }
 
     @PostMapping("/management/edit")
-    public String saveBike (@ModelAttribute(value = "bike") Bike bike,
-                            RedirectAttributes redirectAttributes,
-                            @RequestParam("image")MultipartFile multipartFile) throws IOException {
+    public String saveBike (Model model, @ModelAttribute(value = "bike") Bike bike,
+                                  RedirectAttributes redirectAttributes,
+                                  @RequestParam("image")MultipartFile multipartFile) throws IOException {
+        List<String> errors = new ArrayList<>();
+        errors = checkDuplicate(bike, errors);
+        if (!errors.isEmpty()){
+            model.addAttribute("bike", bike);
+            model.addAttribute("errors", errors);
+
+            return "bike-edit";
+        }
+
         if (!multipartFile.isEmpty()){
             String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
 
@@ -172,6 +186,14 @@ public class BikeController {
                 "Велосипед " + bike.getNumber() + " | " + bike.getQrNumber() + " сохранён.");
 
         return "redirect:/bikes";
+    }
+
+    private List<String> checkDuplicate(Bike bike, List<String> errors) {
+        if (!bikeService.isNumberUnique(bike.getId(), bike.getNumber())) errors.add("Такой номер уже существует");
+        if (!bikeService.isQRNumberUnique(bike.getId(), bike.getQrNumber())) errors.add("Такой QR номер уже существует");
+        if (!bikeService.isVINUnique(bike.getId(), bike.getVIN())) errors.add("Такой VIN уже существует");
+
+        return errors;
     }
 
     @GetMapping("/management/delete/{id}")

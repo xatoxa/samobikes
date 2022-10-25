@@ -41,10 +41,16 @@
     <div class="container">
         <!--Форма редактирования велосипеда-->
         <form th:action="@{/bikes/management/edit}" enctype="multipart/form-data"
-              th:object="${bike}" method="post" class="form-vertical" onsubmit="return checkInfo(this)">
+              th:object="${bike}" method="post" class="form-vertical">
 
             <input type="hidden" th:field="*{id}" class="form-control" hidden/>
             <input type="hidden" th:field="*{parts}" class="form-control" hidden/>
+
+            <div th:if="${errors != null}">
+                <th:block th:each="error: ${errors}">
+                    <p th:text="${error}"/>
+                </th:block>
+            </div>
 
             <div  class="input-group"><!--цифры-->
                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -103,45 +109,5 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script type="text/javascript">
-        function checkInfo(form){
-        url = "[[@{/check_bike_info}]]";
-        number = $("#number").val();
-        qrNumber = $("#qrNumber").val();
-        VIN = $("#VIN").val();
-        bikeId = $("#id").val();
-        csrfValue = $("input[name='_csrf']").val();
-        params = {id: bikeId, number: number, qrNumber: qrNumber, VIN: VIN, _csrf: csrfValue};
-        $.post(url, params, function(response){
-            if(response == "111"){
-                form.submit();
-            } else if(response == "001"){
-                alert("Есть другой велосипед с номером: " + number + " и QR номером: " + qrNumber);
-            } else if(response == "010"){
-                alert("Есть другой велосипед с номером: " + number + " и VIN: " + VIN);
-            } else if(response == "011"){
-                alert("Есть другой велосипед с номером: " + number);
-            } else if(response == "100"){
-                alert("Есть другой велосипед с QR номером: " + qrNumber + " и VIN: " + VIN);
-            } else if(response == "101"){
-                alert("Есть другой велосипед с QR номером: " + qrNumber);
-            } else if(response == "110"){
-                alert("Есть другой велосипед с VIN: " + VIN);
-            } else if(response == "000"){
-                alert("Есть другой велосипед с номером: " + number + ", QR номером: " + qrNumber+ " и VIN: " + VIN);
-            } else {
-                alert("Произошло что-то непонятное...");
-            }
-        }).fail(function(){
-            alert("Невозможно подключиться к серверу.");
-        });
-
-        return false;
-    }
-    </script>
-<script type="text/javascript">
-
-</script>
-
 </body>
 </html>
