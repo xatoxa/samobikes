@@ -16,7 +16,7 @@
 <body>
 <div class="header">
         <div class="firstHead">
-            <a class="home" th:href="@{/bikes}">На главную</a>
+            <a class="home" th:href="@{/bikes}"><i class="fa-sharp fa-solid fa-house"></i></a>
         </div>
         <div class="midleHead">
             <H1>Пользователи</H1>
@@ -76,7 +76,7 @@
                     <a th:if="${user.enabled == true}"  class="toogle fas fa-check-circle fa-2x"
                        th:href="@{'/users/' + ${user.id} + '/enabled/false?currentPage=' + ${currentPage} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}"
                        title="Выключить этого пользователя"/>
-                    <a th:if="${user.enabled == false}"  class=" fas fa-circle fa-2x" style="color: darkgray; border: none; background: none;"
+                    <a th:if="${user.enabled == false}"  class="fas fa-circle fa-2x" style="color: darkgray; border: none; background: none;"
                        th:href="@{'/users/' + ${user.id} + '/enabled/true?currentPage=' + ${currentPage} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}"
                        title="Включить этого пользователя"/>
                 </td>

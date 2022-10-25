@@ -22,6 +22,7 @@ button:hover{
 	box-shadow: 0 0 0 0.2rem rgba(254, 51, 96, 0.4);
 }
 a{
+	display: inline-block;
 	color: rgb(254,12,106);
 	text-decoration: none;
 }
@@ -51,10 +52,15 @@ hr{
 }
 .velPhoto{
 	width: 58%;
+	height: 100%;
 	display: inline-block;
 }
 .photo{
-	height: 100%;
+	border: 5px solid rgb(254,12,106);
+	border-radius: 5px;
+	height: 200px;
+	width: 300px;
+	box-sizing: border-box;
 }
 
 .home{
@@ -166,6 +172,7 @@ img{
 }
 .plcImg{
 	height: 200px;
+	width: 200px;
 }
 @media all and (max-width:900px){
 	.partsLeft, .partsRight{
@@ -183,8 +190,10 @@ img{
 	.emptiDiv{
 		display: none;
 	}
-	.adminButton{
-		margin-bottom: 20px;
+	.velInfo, .velPhoto{
+		display: block;
+		text-align: center;
+		width: 100%;
 	}
 }
 .toggleParts{
