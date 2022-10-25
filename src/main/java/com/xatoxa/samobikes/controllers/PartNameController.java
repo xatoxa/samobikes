@@ -54,7 +54,7 @@ public class PartNameController {
     }*/
 
     @PostMapping("/part-names/edit")
-    public String saveBike (@ModelAttribute(value = "partName") PartName partName,
+    public String savePartName (@ModelAttribute(value = "partName") PartName partName,
                             RedirectAttributes redirectAttributes,
                             @RequestParam("image") MultipartFile multipartFile) throws IOException {
 
