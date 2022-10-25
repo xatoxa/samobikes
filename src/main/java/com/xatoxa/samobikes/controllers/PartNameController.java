@@ -1,17 +1,18 @@
 package com.xatoxa.samobikes.controllers;
 
+import com.xatoxa.samobikes.FileUploadUtil;
 import com.xatoxa.samobikes.entities.PartName;
 import com.xatoxa.samobikes.services.PartNameService;
 import com.xatoxa.samobikes.services.PartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -54,9 +55,26 @@ public class PartNameController {
 
     @PostMapping("/part-names/edit")
     public String saveBike (@ModelAttribute(value = "partName") PartName partName,
-                            RedirectAttributes redirectAttributes){
-        partService.saveForAll(partName);
-        partNameService.save(partName);
+                            RedirectAttributes redirectAttributes,
+                            @RequestParam("image") MultipartFile multipartFile) throws IOException {
+
+        if (!multipartFile.isEmpty()){
+            String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+
+            partName.setDescription(fileName);
+            partService.saveForAll(partName);
+            partNameService.save(partName);
+
+            String uploadDir = "photos/part-photos/";
+            FileUploadUtil.cleanDir(uploadDir);
+            FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+
+        } else {
+            if (partName.getDescription().isEmpty()) partName.setDescription("");
+            partService.saveForAll(partName);
+            partNameService.save(partName);
+        }
+
         redirectAttributes.addFlashAttribute(
                 "message",
                 "Запчасть " + partName.getName()  + " сохранена для всех велосипедов.");

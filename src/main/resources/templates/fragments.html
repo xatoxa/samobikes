@@ -32,7 +32,10 @@
         </span>
         <span th:text="${part.name} + ${part.status == true ? ': Работает' : ': Сломано'}"/>
         <span class="tooltip"><img th:src="@{/img/logo.png}">
-            <span class="tooltiptext"><img class="plcImg" th:src="@{/img/logo.png}"></span>
+            <span class="tooltiptext">
+                <img class="plcImg" th:if="${part.description == null || part.description == ''}" th:src="@{/img/logo.png}">
+                <img class="plcImg" th:if="${part.description != null && part.description != ''}" th:src="@{${part.photoImagePath}}">
+            </span>
         </span>
         <br><hr>
     </th:block>

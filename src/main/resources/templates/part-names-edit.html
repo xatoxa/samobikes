@@ -8,6 +8,7 @@
     <!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/photo-onload.js}"></script>
     <script type="text/javascript" th:src="@{/js/common.js}"></script>
 </head>
 <body>
@@ -47,7 +48,7 @@
 </div>
 
 <!--Форма редактирования велосипеда-->
-<form th:action="@{/part-names/edit}"
+<form th:action="@{/part-names/edit}" enctype="multipart/form-data"
       th:object="${partName}" method="post" class="form-vertical" onsubmit="return checkInfo(this)">
 
     <input type="hidden" th:field="*{id}" class="form-control" hidden/>
@@ -56,10 +57,6 @@
         <input th:field="*{name}" placeholder="Наименование" class="form-control"
                required minlength="1" maxlength="255"/>
     </div>
-    <div  class="input-group">
-        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-        <input th:field="*{description}" placeholder="Описание" class="form-control"/>
-    </div>
     <div class="input-group select">
         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
         <select th:field="*{importance}" required>
@@ -67,6 +64,11 @@
             <option value="2">Средне</option>
             <option value="3">Не важно</option>
         </select>
+    </div>
+    <div  class="input-group">
+        <input type="hidden" th:field="*{description}"/>
+        <input type="file" id="fileImage" name="image" accept="image/jpeg, image/png"/>
+        <img id="thumbnail" alt="Photos preview" th:src="@{${partName.photoImagePath}}"/>
     </div>
     <div class="form-group button">
         <div>

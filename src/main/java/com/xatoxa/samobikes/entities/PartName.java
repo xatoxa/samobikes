@@ -57,4 +57,10 @@ public class PartName {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    @Transient
+    public String getPhotoImagePath(){
+        if (this.id == null || this.description == null || this.description.equals("")) return "/img/logo.png";
+        return "/photos/part-photos/" + this.description;
+    }
 }
