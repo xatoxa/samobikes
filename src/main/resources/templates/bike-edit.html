@@ -90,7 +90,7 @@
                        class="form-control"/>
             </div>
 
-            <div  class="input-group">
+            <div  class="input-group photo">
                 <input type="hidden" th:field="*{photo}"/>
                 <input type="file" id="fileImage" name="image" accept="image/jpeg, image/png"/>
                 <img id="thumbnail" alt="Photos preview" th:src="@{${bike.photoImagePath}}"/>

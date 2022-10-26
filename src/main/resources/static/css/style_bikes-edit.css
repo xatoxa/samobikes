@@ -22,12 +22,17 @@ h1{
 	text-align: center;
 	color: rgb(254,51,96);;
 }
+#thumbnail{
+	height: 200px;
+	margin: auto;
+}
 input{
-	font-size: 20px;
-	border: 2px solid grey;
+	
+	border: 1px solid  #ced4da;
 	width: 80%;
 	border-radius: 5px;
 	color: grey;
+	margin: auto;
 }
 
 button{
@@ -60,6 +65,11 @@ select{
 	border-color: rgb(254,51,96);
 	outline: 0;
 	box-shadow: 0 0 0 0.2rem rgba(254, 51, 96, 0.4);
+}
+.photo{
+	border: 1px solid #ced4da;
+	border-radius: 5px;
+	display: block;
 }
 option{
 	color: grey;
