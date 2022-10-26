@@ -99,7 +99,7 @@ public class PartController {
         Bike bike = bikeService.getById(id);
         List<Part> parts = bike.getParts();
         parts.forEach(s -> {
-            if (s.getImportance() < 3) s.setStatus(true);
+            if (s.getImportance() < 3 && !s.isStatus()) s.setStatus(true);
         });
         bike.setParts(parts);
         bike.setStatus(true);
@@ -134,7 +134,9 @@ public class PartController {
 
         Bike bike = bikeService.getById(id);
         List<Part> parts = bike.getParts();
-        parts.forEach(s -> s.setStatus(true));
+        parts.forEach(s -> {
+            if (!s.isStatus()) s.setStatus(true);
+        });
         bike.setParts(parts);
         bike.setStatus(true);
         bikeService.save(bike);
