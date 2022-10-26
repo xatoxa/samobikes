@@ -14,31 +14,46 @@ public class RepairHistory {
     @Column(name = "user_id")
     private Integer userId;
 
+    @Transient
+    private String username;
+
     @Column(name = "bike_id")
     private Integer bikeId;
 
-    @Column(name = "breakdown_date")
-    private LocalDateTime breakdownDate;
+    @Transient
+    private int number;
 
-    @Column(name = "repair_date")
-    private LocalDateTime repairDate;
+    @Transient
+    private int qrNumber;
+
+    @Transient
+    private String VIN;
+
+    @Column(name = "type")
+    private String type;
+
+    @Column(name = "date_point")
+    private LocalDateTime datePoint;
 
     public RepairHistory() {
     }
 
-    public RepairHistory(Integer id, Integer userId, Integer bikeId, LocalDateTime breakdownDate) {
-        this.id = id;
+    public RepairHistory(Integer userId, Integer bikeId, String type, LocalDateTime datePoint) {
         this.userId = userId;
         this.bikeId = bikeId;
-        this.breakdownDate = breakdownDate;
+        this.type = type;
+        this.datePoint = datePoint;
     }
 
-    public RepairHistory(Integer id, Integer userId, Integer bikeId, LocalDateTime breakdownDate, LocalDateTime repairDate) {
-        this.id = id;
+    public RepairHistory(Integer userId, String username, Integer bikeId, int number, int qrNumber, String VIN, String type, LocalDateTime datePoint) {
         this.userId = userId;
+        this.username = username;
         this.bikeId = bikeId;
-        this.breakdownDate = breakdownDate;
-        this.repairDate = repairDate;
+        this.number = number;
+        this.qrNumber = qrNumber;
+        this.VIN = VIN;
+        this.type = type;
+        this.datePoint = datePoint;
     }
 
     public Integer getId() {
@@ -57,6 +72,14 @@ public class RepairHistory {
         this.userId = userId;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public Integer getBikeId() {
         return bikeId;
     }
@@ -65,19 +88,44 @@ public class RepairHistory {
         this.bikeId = bikeId;
     }
 
-    public LocalDateTime getBreakdownDate() {
-        return breakdownDate;
+    public int getNumber() {
+        return number;
     }
 
-    public void setBreakdownDate(LocalDateTime breakdownDate) {
-        this.breakdownDate = breakdownDate;
+    public void setNumber(int number) {
+        this.number = number;
     }
 
-    public LocalDateTime getRepairDate() {
-        return repairDate;
+    public int getQrNumber() {
+        return qrNumber;
     }
 
-    public void setRepairDate(LocalDateTime repairDate) {
-        this.repairDate = repairDate;
+    public void setQrNumber(int qrNumber) {
+        this.qrNumber = qrNumber;
     }
+
+    public String getVIN() {
+        return VIN;
+    }
+
+    public void setVIN(String VIN) {
+        this.VIN = VIN;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public LocalDateTime getDatePoint() {
+        return datePoint;
+    }
+
+    public void setDatePoint(LocalDateTime datePoint) {
+        this.datePoint = datePoint;
+    }
+
 }

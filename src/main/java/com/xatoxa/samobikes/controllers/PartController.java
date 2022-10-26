@@ -1,17 +1,20 @@
 package com.xatoxa.samobikes.controllers;
 
-import com.xatoxa.samobikes.entities.Bike;
-import com.xatoxa.samobikes.entities.Comment;
-import com.xatoxa.samobikes.entities.Part;
+import com.xatoxa.samobikes.entities.*;
 import com.xatoxa.samobikes.DTO.PartListDTO;
 import com.xatoxa.samobikes.services.BikeService;
 import com.xatoxa.samobikes.services.PartService;
+import com.xatoxa.samobikes.services.RepairHistoryService;
+import com.xatoxa.samobikes.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -19,6 +22,10 @@ import java.util.List;
 public class PartController {
     private PartService partService;
     private BikeService bikeService;
+
+    private UserService userService;
+
+    private RepairHistoryService historyService;
 
     @Autowired
     public void setPartService (PartService partService){
@@ -28,6 +35,16 @@ public class PartController {
     @Autowired
     public void setBikeService (BikeService bikeService){
         this.bikeService = bikeService;
+    }
+
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
+    @Autowired
+    public void setHistoryService(RepairHistoryService historyService) {
+        this.historyService = historyService;
     }
 
     @GetMapping("/edit/{id_bike}")
@@ -73,9 +90,29 @@ public class PartController {
     }
 
     @PostMapping("/edit")
-    public String editPart (Model model, @ModelAttribute(value = "partList") PartListDTO partListDTO){
+    public String editPart (Model model,
+                            @ModelAttribute(value = "partList") PartListDTO partListDTO,
+                            @AuthenticationPrincipal SamUserDetails loggedUser){
         Bike bike = bikeService.getById(partListDTO.getBikeId());
         List<Part> parts = bike.getParts();
+
+        List<List<Part>> doubleParts = new ArrayList<>();
+        doubleParts.add(parts);
+        doubleParts.add(partListDTO.getParts());
+        int userId = userService.findByUserName(loggedUser.getUsername()).getId();
+        for(int i = 0; i < parts.size(); i ++){
+            //если переключение на сломан
+            if (doubleParts.get(0).get(i).isStatus() && !doubleParts.get(1).get(i).isStatus()) {
+                RepairHistory rowHistory = new RepairHistory(userId, bike.getId(), "поломка", LocalDateTime.now());
+                historyService.save(rowHistory);
+            }
+            //если переключение на работает
+            if (!doubleParts.get(0).get(i).isStatus() && doubleParts.get(1).get(i).isStatus()) {
+                RepairHistory rowHistory = new RepairHistory(userId, bike.getId(), "ремонт", LocalDateTime.now());
+                historyService.save(rowHistory);
+            }
+        }
+
         parts.clear();
         parts.addAll(partListDTO.getParts());
         bike.checkWorks();
@@ -89,18 +126,27 @@ public class PartController {
 
     @GetMapping("/fine/{id_bike}")
     public String setAllImpTrue(Model model, @PathVariable(value = "id_bike")Integer id,
-                             @Param("currentPage") String currentPage,
-                             @Param("sortField") String sortField,
-                             @Param("sortDir") String sortDir,
-                             @Param("commentSortField") String commentSortField,
-                             @Param("commentSortDir") String commentSortDir,
-                             @Param("keyword") String keyword) {
+                                @AuthenticationPrincipal SamUserDetails loggedUser,
+                                @Param("currentPage") String currentPage,
+                                @Param("sortField") String sortField,
+                                @Param("sortDir") String sortDir,
+                                @Param("commentSortField") String commentSortField,
+                                @Param("commentSortDir") String commentSortDir,
+                                @Param("keyword") String keyword) {
+
+        int userId = userService.findByUserName(loggedUser.getUsername()).getId();
 
         Bike bike = bikeService.getById(id);
         List<Part> parts = bike.getParts();
+
         parts.forEach(s -> {
-            if (s.getImportance() < 3 && !s.isStatus()) s.setStatus(true);
+            if (s.getImportance() < 3 && !s.isStatus()) {
+                s.setStatus(true);
+                RepairHistory rowHistory = new RepairHistory(userId, bike.getId(), "ремонт", LocalDateTime.now());
+                historyService.save(rowHistory);
+            }
         });
+
         bike.setParts(parts);
         bike.setStatus(true);
         bikeService.save(bike);
@@ -125,6 +171,7 @@ public class PartController {
 
     @GetMapping("/fineAll/{id_bike}")
     public String setAllTrue(Model model, @PathVariable(value = "id_bike")Integer id,
+                             @AuthenticationPrincipal SamUserDetails loggedUser,
                              @Param("currentPage") String currentPage,
                              @Param("sortField") String sortField,
                              @Param("sortDir") String sortDir,
@@ -132,11 +179,19 @@ public class PartController {
                              @Param("commentSortDir") String commentSortDir,
                              @Param("keyword") String keyword) {
 
+        int userId = userService.findByUserName(loggedUser.getUsername()).getId();
+
         Bike bike = bikeService.getById(id);
         List<Part> parts = bike.getParts();
+
         parts.forEach(s -> {
-            if (!s.isStatus()) s.setStatus(true);
+            if (!s.isStatus()) {
+                s.setStatus(true);
+                RepairHistory rowHistory = new RepairHistory(userId, bike.getId(), "ремонт", LocalDateTime.now());
+                historyService.save(rowHistory);
+            }
         });
+
         bike.setParts(parts);
         bike.setStatus(true);
         bikeService.save(bike);
