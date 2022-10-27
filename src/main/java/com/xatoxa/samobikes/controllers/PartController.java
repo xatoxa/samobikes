@@ -103,12 +103,12 @@ public class PartController {
         for(int i = 0; i < parts.size(); i ++){
             //если переключение на сломан
             if (doubleParts.get(0).get(i).isStatus() && !doubleParts.get(1).get(i).isStatus()) {
-                RepairHistory rowHistory = new RepairHistory(userId, bike.getId(), "поломка", LocalDateTime.now());
+                RepairHistory rowHistory = new RepairHistory(userId, bike.getId(), "поломка: " + parts.get(i).getName(), LocalDateTime.now());
                 historyService.save(rowHistory);
             }
             //если переключение на работает
             if (!doubleParts.get(0).get(i).isStatus() && doubleParts.get(1).get(i).isStatus()) {
-                RepairHistory rowHistory = new RepairHistory(userId, bike.getId(), "ремонт", LocalDateTime.now());
+                RepairHistory rowHistory = new RepairHistory(userId, bike.getId(), "ремонт: " + parts.get(i).getName(), LocalDateTime.now());
                 historyService.save(rowHistory);
             }
         }
@@ -142,7 +142,7 @@ public class PartController {
         parts.forEach(s -> {
             if (s.getImportance() < 3 && !s.isStatus()) {
                 s.setStatus(true);
-                RepairHistory rowHistory = new RepairHistory(userId, bike.getId(), "ремонт", LocalDateTime.now());
+                RepairHistory rowHistory = new RepairHistory(userId, bike.getId(), "ремонт: " + s.getName(), LocalDateTime.now());
                 historyService.save(rowHistory);
             }
         });
@@ -187,7 +187,7 @@ public class PartController {
         parts.forEach(s -> {
             if (!s.isStatus()) {
                 s.setStatus(true);
-                RepairHistory rowHistory = new RepairHistory(userId, bike.getId(), "ремонт", LocalDateTime.now());
+                RepairHistory rowHistory = new RepairHistory(userId, bike.getId(), "ремонт: " + s.getName(), LocalDateTime.now());
                 historyService.save(rowHistory);
             }
         });
