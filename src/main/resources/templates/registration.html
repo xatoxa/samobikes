@@ -7,10 +7,14 @@
   <!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
   <link media="all" rel="stylesheet" type="text/css" th:href="@{/css/style_registration.css}"><!-- ссылка на css всегда должна быть самой последней -->
 </head>
 <body>
 <h1  th:text="Регистрация"/></h1>
+<div class="message" th:if="${message != null}">
+    [[${message}]]
+</div>
 <div class="formReg">
 <form th:action="@{/register-user}" th:object="${user}" method="POST" enctype="utf8" onsubmit="return checkUsername(this)">
     <div class="formDiv">
@@ -20,11 +24,11 @@
     </div>
     <div class="formDiv">
         <label>Имя</label><br>
-        <input class="form-control" th:field="*{firstName}" maxlength="100" placeholder="необязательно, но заполни а то чё ты как лох"/>
+        <input class="form-control" th:field="*{firstName}" maxlength="100" placeholder="необязательно, но заполни, а то чё ты..."/>
     </div>
     <div class="formDiv">
         <label>Фамилия</label><br>
-        <input class="form-control" th:field="*{lastName}" maxlength="100" placeholder="необязательно, но заполни а то чё ты как лох"/>
+        <input class="form-control" th:field="*{lastName}" maxlength="100" placeholder="необязательно, но заполни, а то чё ты..."/>
     </div>
     <div class="formDiv">
         <label>Пароль</label><br> <!--только латиница вместе с цифрами от 8 до 100 символов-->
@@ -37,8 +41,10 @@
         <input class="form-control" type="password" id="confirmPassword" required minlength="8" maxlength="100"
                oninput="checkPasswordMatch(this)" placeholder="латиница и цифры от 8 до 100 символов"
                pattern="^(?=.*\d)(?=.*[a-zA-Z])(?!.*\s).*$"/>
-    </div >
-    <button class="button" type="submit" th:text="Познакомиться">submit</button>
+    </div>
+    <div class="formDiv g-recaptcha"
+         th:attr="data-sitekey=${@captchaSettings.getSite()}"></div>
+    <button class="button" type="submit" th:text="Представиться">submit</button>
 </form>
 </div>
 <div>    <!--отделить рамкой от основного блока-->

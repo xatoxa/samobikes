@@ -1,29 +1,38 @@
 package com.xatoxa.samobikes.controllers;
 
+import com.xatoxa.samobikes.configuration.CaptchaSettings;
 import com.xatoxa.samobikes.entities.Role;
 import com.xatoxa.samobikes.entities.User;
 import com.xatoxa.samobikes.DTO.UserDTO;
+import com.xatoxa.samobikes.services.RecaptchaService;
 import com.xatoxa.samobikes.services.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class UserController {
     private UserServiceImpl userService;
 
+    private RecaptchaService recaptchaService;
+
     @Autowired
     public void setUserService(UserServiceImpl userService) {
         this.userService = userService;
+    }
+
+    @Autowired
+    public void setRecaptchaService(RecaptchaService recaptchaService) {
+        this.recaptchaService = recaptchaService;
     }
 
     @GetMapping("/users")
@@ -108,8 +117,22 @@ public class UserController {
     }
 
     @PostMapping("/register-user")
-    public String registerUserAccount(@ModelAttribute(value = "user")UserDTO userDTO,
+    public String registerUserAccount(Model model,
+                                      @ModelAttribute(value = "user")UserDTO userDTO,
+                                      @RequestParam(name="g-recaptcha-response") String recaptchaResponse,
+                                      HttpServletRequest request,
                                       RedirectAttributes redirectAttributes){
+        String ip = request.getRemoteAddr();
+        String captchaVerifyMessage =
+                recaptchaService.verifyRecaptcha(ip, recaptchaResponse);
+
+        if (!captchaVerifyMessage.isEmpty()) {
+            Map<String, Object> response = new HashMap<>();
+            model.addAttribute("message", "А Вы точно не робот? " + captchaVerifyMessage);
+            model.addAttribute("user", userDTO);
+            return "registration";
+        }
+
         userService.registerNewUserAccount(userDTO);
         redirectAttributes.addFlashAttribute("message", "Ваш аккаунт зарегистрирован, можете войти в систему.");
         return "redirect:/login";
