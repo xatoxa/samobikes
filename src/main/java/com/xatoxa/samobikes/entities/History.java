@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "repair_history")
-public class RepairHistory {
+public class History {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -35,17 +35,17 @@ public class RepairHistory {
     @Column(name = "date_point")
     private LocalDateTime datePoint;
 
-    public RepairHistory() {
+    public History() {
     }
 
-    public RepairHistory(Integer userId, Integer bikeId, String type, LocalDateTime datePoint) {
+    public History(Integer userId, Integer bikeId, String type, LocalDateTime datePoint) {
         this.userId = userId;
         this.bikeId = bikeId;
         this.type = type;
         this.datePoint = datePoint;
     }
 
-    public RepairHistory(Integer userId, String username, Integer bikeId, int number, int qrNumber, String VIN, String type, LocalDateTime datePoint) {
+    public History(Integer userId, String username, Integer bikeId, int number, int qrNumber, String VIN, String type, LocalDateTime datePoint) {
         this.userId = userId;
         this.username = username;
         this.bikeId = bikeId;

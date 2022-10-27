@@ -1,15 +1,12 @@
 package com.xatoxa.samobikes.controllers;
 
 import com.xatoxa.samobikes.entities.Bike;
-import com.xatoxa.samobikes.entities.RepairHistory;
-import com.xatoxa.samobikes.entities.User;
+import com.xatoxa.samobikes.entities.History;
 import com.xatoxa.samobikes.services.BikeService;
-import com.xatoxa.samobikes.services.RepairHistoryService;
-import com.xatoxa.samobikes.services.UserService;
+import com.xatoxa.samobikes.services.HistoryService;
 import com.xatoxa.samobikes.services.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,15 +15,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.util.List;
 
 @Controller
-public class RepairHistoryController {
-    private RepairHistoryService historyService;
+public class HistoryController {
+    private HistoryService historyService;
 
     private UserServiceImpl userService;
 
     private BikeService bikeService;
 
     @Autowired
-    public void setHistoryService(RepairHistoryService historyService) {
+    public void setHistoryService(HistoryService historyService) {
         this.historyService = historyService;
     }
 
@@ -48,8 +45,8 @@ public class RepairHistoryController {
     @GetMapping("/history/page/{pageNum}")
     public String showHistoryByPage(Model model,
                                   @PathVariable(name = "pageNum") int pageNum){
-        Page<RepairHistory> page = historyService.getAllByPage(pageNum);
-        List<RepairHistory> historyList = page.getContent();
+        Page<History> page = historyService.getAllByPage(pageNum);
+        List<History> historyList = page.getContent();
         historyList.forEach(s -> {
             s.setUsername(userService.getById(s.getUserId()).getUsername());
             Bike bike = bikeService.getById(s.getBikeId());

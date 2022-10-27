@@ -4,7 +4,7 @@ import com.xatoxa.samobikes.entities.*;
 import com.xatoxa.samobikes.DTO.PartListDTO;
 import com.xatoxa.samobikes.services.BikeService;
 import com.xatoxa.samobikes.services.PartService;
-import com.xatoxa.samobikes.services.RepairHistoryService;
+import com.xatoxa.samobikes.services.HistoryService;
 import com.xatoxa.samobikes.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -25,7 +25,7 @@ public class PartController {
 
     private UserService userService;
 
-    private RepairHistoryService historyService;
+    private HistoryService historyService;
 
     @Autowired
     public void setPartService (PartService partService){
@@ -43,7 +43,7 @@ public class PartController {
     }
 
     @Autowired
-    public void setHistoryService(RepairHistoryService historyService) {
+    public void setHistoryService(HistoryService historyService) {
         this.historyService = historyService;
     }
 
@@ -103,12 +103,12 @@ public class PartController {
         for(int i = 0; i < parts.size(); i ++){
             //если переключение на сломан
             if (doubleParts.get(0).get(i).isStatus() && !doubleParts.get(1).get(i).isStatus()) {
-                RepairHistory rowHistory = new RepairHistory(userId, bike.getId(), "поломка: " + parts.get(i).getName(), LocalDateTime.now());
+                History rowHistory = new History(userId, bike.getId(), "поломка: " + parts.get(i).getName(), LocalDateTime.now());
                 historyService.save(rowHistory);
             }
             //если переключение на работает
             if (!doubleParts.get(0).get(i).isStatus() && doubleParts.get(1).get(i).isStatus()) {
-                RepairHistory rowHistory = new RepairHistory(userId, bike.getId(), "ремонт: " + parts.get(i).getName(), LocalDateTime.now());
+                History rowHistory = new History(userId, bike.getId(), "ремонт: " + parts.get(i).getName(), LocalDateTime.now());
                 historyService.save(rowHistory);
             }
         }
@@ -142,7 +142,7 @@ public class PartController {
         parts.forEach(s -> {
             if (s.getImportance() < 3 && !s.isStatus()) {
                 s.setStatus(true);
-                RepairHistory rowHistory = new RepairHistory(userId, bike.getId(), "ремонт: " + s.getName(), LocalDateTime.now());
+                History rowHistory = new History(userId, bike.getId(), "ремонт: " + s.getName(), LocalDateTime.now());
                 historyService.save(rowHistory);
             }
         });
@@ -187,7 +187,7 @@ public class PartController {
         parts.forEach(s -> {
             if (!s.isStatus()) {
                 s.setStatus(true);
-                RepairHistory rowHistory = new RepairHistory(userId, bike.getId(), "ремонт: " + s.getName(), LocalDateTime.now());
+                History rowHistory = new History(userId, bike.getId(), "ремонт: " + s.getName(), LocalDateTime.now());
                 historyService.save(rowHistory);
             }
         });

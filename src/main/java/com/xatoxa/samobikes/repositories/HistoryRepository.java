@@ -1,9 +1,9 @@
 package com.xatoxa.samobikes.repositories;
 
-import com.xatoxa.samobikes.entities.RepairHistory;
+import com.xatoxa.samobikes.entities.History;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RepairHistoryRepository extends PagingAndSortingRepository<RepairHistory, Integer> {
+public interface HistoryRepository extends PagingAndSortingRepository<History, Integer> {
 }
