@@ -1,33 +1,25 @@
 package com.xatoxa.samobikes.controllers;
 
-import com.xatoxa.samobikes.FileUploadUtil;
+import com.xatoxa.samobikes.Utils.FileUploadUtil;
 import com.xatoxa.samobikes.entities.Bike;
 import com.xatoxa.samobikes.entities.Comment;
 import com.xatoxa.samobikes.entities.Part;
-import com.xatoxa.samobikes.entities.User;
 import com.xatoxa.samobikes.services.BikeService;
 import com.xatoxa.samobikes.services.CommentService;
-import com.xatoxa.samobikes.services.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.integration.IntegrationProperties;
 import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/bikes")

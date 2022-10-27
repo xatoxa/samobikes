@@ -1,4 +1,4 @@
-package com.xatoxa.samobikes;
+package com.xatoxa.samobikes.Utils;
 
 import java.util.HashMap;
 import java.util.Map;

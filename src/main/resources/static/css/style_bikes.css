@@ -1,6 +1,6 @@
 /*пока пишу все через имена тегов, если что потом добавлю классы или ид*/
 body{
-	background-image: url("../img/background.jpg");
+	background-image: url("../img/background-transparent.jpg");
 	background-repeat:no-repeat;
     background-attachment:fixed;
     background-position:center center;

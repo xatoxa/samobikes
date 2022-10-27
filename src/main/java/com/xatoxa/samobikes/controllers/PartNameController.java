@@ -1,6 +1,6 @@
 package com.xatoxa.samobikes.controllers;
 
-import com.xatoxa.samobikes.FileUploadUtil;
+import com.xatoxa.samobikes.Utils.FileUploadUtil;
 import com.xatoxa.samobikes.entities.PartName;
 import com.xatoxa.samobikes.services.PartNameService;
 import com.xatoxa.samobikes.services.PartService;

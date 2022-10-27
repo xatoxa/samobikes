@@ -1,9 +1,9 @@
 body{
-	background-image: url("../img/background.jpg");
+	background-image: url("../img/background-transparent.jpg");
 	background-repeat:no-repeat;
     background-attachment:fixed;
-    background-position:center;
-    font-family: 'Averia Serif Libre', cursive;
+    background-position:center center;
+    background-size: cover;    font-family: 'Averia Serif Libre', cursive;
     
 }
 H1{

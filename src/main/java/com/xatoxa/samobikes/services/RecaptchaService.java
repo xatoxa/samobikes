@@ -1,6 +1,6 @@
 package com.xatoxa.samobikes.services;
 
-import com.xatoxa.samobikes.RecaptchaUtil;
+import com.xatoxa.samobikes.Utils.RecaptchaUtil;
 import com.xatoxa.samobikes.configuration.CaptchaSettings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
