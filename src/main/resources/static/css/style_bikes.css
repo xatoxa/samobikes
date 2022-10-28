@@ -1,6 +1,7 @@
 /*пока пишу все через имена тегов, если что потом добавлю классы или ид*/
 body{
-	background-image: url("../img/background-transparent.png");
+	background: #000 url("../img/background-transparent.png");
+	color: #fff;
 	background-repeat:no-repeat;
     background-attachment:fixed;
     background-position:center center;
