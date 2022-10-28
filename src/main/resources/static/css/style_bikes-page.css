@@ -60,7 +60,6 @@ hr{
 	border: 5px solid rgb(254,12,106);
 	border-radius: 5px;
 	height: 200px;
-	width: 300px;
 	box-sizing: border-box;
 }
 
@@ -101,7 +100,7 @@ hr{
 	border-color: rgb(254,12,106);
 }
 .emptiDiv{
-	padding-bottom: 20px;
+	padding-bottom: 30px;
 	color: rgba(0, 0, 0, 0.0);
 }
 .lastVelInfo{
@@ -204,4 +203,6 @@ img{
 #toggleParts{
 	color: rgb(254,12,106);
 	font-size: 16px;
+	display: block;
+	margin: auto;
 }
