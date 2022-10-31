@@ -25,7 +25,7 @@
         <span th:text="${'VIN: ' + bike.VIN}"/><br>
         <span th:text="${bike.status == true ? 'Работает' : 'Сломан'}"/><br>
         <span th:text="${'Описание: ' + bike.description}"/><br>
-        <span class="lastVelInfo" sec:authorize="hasAnyRole('MANAGER', 'ADMIN')" th:text="${'Ссылка на ELMA: '}"/><a th:href="@{${bike.qrLink}}" target="_blank" th:text="${'>тык<'}" /><br>
+        <span class="lastVelInfo" th:text="${'Ссылка на ELMA: '}"/><a th:href="@{${bike.qrLink}}" target="_blank" th:text="${'>тык<'}" /><br>
         <div class="divAdminButton">
             <div class="divAdminButtonOne">
                 <a sec:authorize="hasAnyRole('MANAGER', 'ADMIN')" th:href="@{'/bikes/management/edit/' + ${bike.id}}" th:text="'Изменить'" class="adminButton" />
