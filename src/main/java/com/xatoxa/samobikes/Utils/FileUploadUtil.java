@@ -12,6 +12,10 @@ import java.nio.file.StandardCopyOption;
 public class FileUploadUtil {
     public static  void saveFile(String uploadDir, String fileName, MultipartFile multipartFile) throws IOException {
         Path uploadPath = Paths.get(uploadDir);
+        if (System.getProperty("os.name").contains("Linux")){
+            uploadPath = Paths.get(System.getProperty("user.home"), "/samobikes_app/samobikes/", uploadDir);
+        }
+
         if (!Files.exists(uploadPath)){
             Files.createDirectories(uploadPath);
         }
@@ -26,6 +30,9 @@ public class FileUploadUtil {
 
     public static void cleanDir(String dir){
         Path dirPath = Paths.get(dir);
+        if (System.getProperty("os.name").contains("Linux")){
+            dirPath = Paths.get(System.getProperty("user.home"), "/samobikes_app/samobikes/", dir);
+        }
 
         try{
             Files.list(dirPath).forEach(file -> {

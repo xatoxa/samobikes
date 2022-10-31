@@ -21,8 +21,14 @@ public class MvcConfig implements WebMvcConfigurer {
         String partPhotosPath = partPhotosDir.toFile().getAbsolutePath();
 
         registry.addResourceHandler("/" + dirBikeName + "/**")
-                .addResourceLocations("file:/" + bikePhotosPath + "/");
+                .addResourceLocations(
+                        "file:/" + bikePhotosPath + "/",
+                        "file:/home/samobikes/samobikes_app/samobikes/" + dirBikeName + "/"
+                );
         registry.addResourceHandler("/" + dirPartName + "/**")
-                .addResourceLocations("file:/" + partPhotosPath + "/");
+                .addResourceLocations(
+                        "file:/" + partPhotosPath + "/",
+                        "file:/home/samobikes/samobikes_app/samobikes/" + dirPartName + "/"
+                );
     }
 }
