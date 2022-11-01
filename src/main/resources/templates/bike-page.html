@@ -89,37 +89,40 @@
         </a>
         <span th:class="${commentSortDir == 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}"/>
     </div>
-    <table id="table">
-        <tbody>
-            <thead>
-                <th class="third"><i class="iCom fa-solid fa-user"></i></th>
-                <th><i class="iCom fa-solid fa-message"></i></th>
-                <th class="third"><i class="iCom fa-solid fa-calendar"></i></th>
-            </thead>
-        <!--Цикл foreach по всем комментариям-->
-        <tr class="trTab" th:each="comment : ${comments}">
-            <td class="third">
-                <p th:if="${comment.getUser().getFirstName() != null && comment.getUser().getLastName() != null}"
-                   th:title="${comment.getUser().getFirstName() + ' ' + comment.getUser().getLastName()}">
-                    [[${comment.getUser().getUsername()}]]
-                </p>
-                <p th:if="${comment.getUser().getFirstName() == null && comment.getUser().getLastName() == null}">
-                    [[${comment.getUser().getUsername()}]]
-                </p>
-                <p th:if="${comment.getUser().getFirstName() == null && comment.getUser().getLastName() != null}"
-                   th:title="${comment.getUser().getLastName()}">
-                    [[${comment.getUser().getUsername()}]]
-                </p>
-                <p th:if="${comment.getUser().getFirstName() != null && comment.getUser().getLastName() == null}"
-                   th:title="${comment.getUser().getFirstName()}">
-                    [[${comment.getUser().getUsername()}]]
-                </p>
-            </td>
-            <td th:text="${comment.commentText}"/>
-            <td class="third" th:text="${#temporals.format(comment.commentedAt, 'HH:mm dd.MM.yy ')}"/>
-        </tr>
-        </tbody>
-    </table>
+
+
+    <div th:each="comment : ${comments}">
+        <span>
+            <p th:if="${comment.getUser().getFirstName() != null && comment.getUser().getLastName() != null}"
+                   th:title="${comment.getUser().getFirstName() + ' ' + comment.getUser().getLastName()}"
+                   th:text = "${comment.getUser().getUsername()}">
+            </p>
+            <p th:if="${comment.getUser().getFirstName() == null && comment.getUser().getLastName() == null} "
+                th:text = "${comment.getUser().getUsername()}">
+            </p>
+            <p th:if="${comment.getUser().getFirstName() == null && comment.getUser().getLastName() != null}"
+               th:title="${comment.getUser().getLastName()}"
+               th:text = "${comment.getUser().getUsername()}">
+            </p>
+            <p th:if="${comment.getUser().getFirstName() != null && comment.getUser().getLastName() == null}"
+               th:title="${comment.getUser().getFirstName()}"
+               th:text = "${comment.getUser().getUsername()}">
+            </p>
+        </span>
+        <span>
+            <p th:text = "${comment.commentText}"></p>
+        </span>
+        <span>
+            <p th:text = "${#temporals.format(comment.commentedAt, 'HH:mm dd.MM.yy ')}"></p>
+        </span>
+    </div>
+
+
+
+
+
+
+   
 </div>
 <script>
     $("#toggleParts").on('click', function(){
