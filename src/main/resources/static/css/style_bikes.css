@@ -9,19 +9,20 @@ body{
 }
 .content{
 	padding: 2%;
+	margin: auto;
 }
 h1{
 	color: rgb(254,51,96);
 	text-align: center;
 	padding: 2%;
 	padding-bottom: 2%;
-	padding-left: 20%;
 }
 
 thead{
 	color: rgb(254,12,106);
 }
 td{
+	text-align: center;
 	border-bottom: 2px solid rgb(254,12,106);
 	border-right: 2px solid rgba(254,12,106,0.3);
 	padding-top: 12px;
@@ -44,7 +45,7 @@ table{
 }
 
 th{
-	text-align: left;
+	text-align: center;
 	border-top: 2px solid rgb(254,12,106);
 	border-bottom: 2px solid rgb(254,12,106);
 	border-right: 2px solid rgba(254,12,106,0.3);
@@ -194,14 +195,15 @@ ul{
 	
 }
 .firstHead, .midleHead, .lastHead{
-	display: inline-flex;
+	display: inline-block;
 	flex-direction: column;
 }
 .firstHead{
-
+	width: 15%;
+	flex-direction: column-reverse;
 }
 .midleHead{
-	width: 85%;
+	width: 70%;
 }
 .lastHead{
 	width: 15%;
@@ -242,7 +244,7 @@ ul{
 .dropdown-toggle{
 	margin-bottom: 22px;
 }
-@media all and (max-width:768px){
+@media (min-width:200px) and (max-width:768px){
 	.aTab{
 		padding: 4px;
 	}

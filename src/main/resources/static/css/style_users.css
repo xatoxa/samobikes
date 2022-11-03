@@ -236,25 +236,33 @@ button:hover{
     float: right;
     align-items: center;
 }
+.btn, .btn:hover, .btn:focus{
+    color: white;
+}
 .btn-secondary{
+    color: white;
     width: auto;
 }
 .btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show>.btn-secondary.dropdown-toggle{
+    color: white;
     background: rgb(254,12,106);
     box-shadow: 0 0 0 0.2rem rgba(254, 12, 106, 0.4);
     border-color: rgb(254,51,96);
 }
 .btn:hover, .btn-secondary:hover{
+    color: white;
     background: rgb(254,12,106);
     box-shadow: 0 0 0 0.2rem rgba(254, 12, 106, 0.4);
     border-color: rgb(254,51,96);
 }
 .btn:focus, .btn-secondary:focus{
+    color: white;
     background: rgb(254,12,106);
     box-shadow: 0 0 0 0.2rem rgba(254, 12, 106, 0.4);
     border-color: rgb(254,51,96);
 }
 .btn:active, .btn-secondary:active{
+    color: white;
     background: rgb(254,12,106);
     box-shadow: 0 0 0 0.2rem rgba(254, 12, 106, 0.4);
     border-color: rgb(254,51,96);
@@ -269,6 +277,9 @@ button:hover{
 }
 .dropdown-toggle{
     margin-bottom: 22px;
+}
+a:not([href]):not([tabindex]), a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover{
+    color: white;
 }
 @media all and (max-width:768px){
     .aTab{

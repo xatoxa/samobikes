@@ -41,9 +41,7 @@ hr{
 .textCenter{
 	text-align: center;
 }
-.broken{
-	margin-top: 2%;
-}
+
 .velInfo{
 	width: 30%;
 	display: inline-block;
@@ -62,7 +60,9 @@ hr{
 	height: 200px;
 	box-sizing: border-box;
 }
-
+.broken{
+	margin-top: 2%;
+}
 .home{
 	border: 2px solid rgb(254,12,106);
 	background: rgb(254,12,106);
@@ -100,7 +100,7 @@ hr{
 	border-color: rgb(254,12,106);
 }
 .emptiDiv{
-	padding-bottom: 30px;
+	padding-bottom: 60px;
 	color: rgba(0, 0, 0, 0.0);
 }
 .lastVelInfo{
@@ -174,7 +174,7 @@ img{
 	height: 200px;
 	width: 200px;
 }
-@media all and (max-width:900px){
+@media only screen and (max-device-width: 600px){
 	.partsLeft, .partsRight{
 		width: 98%;
 		float: none;
@@ -184,8 +184,30 @@ img{
 		padding-right: 100px;
 		float: none
 	}
-	.divAdminButtonOne{
-		margin-bottom: 20px;
+	.divAdminButton{
+		margin-bottom: 2%;
+	}
+	.emptiDiv{
+		display: none;
+	}
+	.velInfo, .velPhoto{
+		display: block;
+		text-align: center;
+		width: 100%;
+	}
+}
+@media all and (max-width: 700px){
+	.partsLeft, .partsRight{
+		width: 98%;
+		float: none;
+	}
+	.home{
+		padding-left: 100px;
+		padding-right: 100px;
+		float: none
+	}
+	.divAdminButton{
+		margin-bottom: 2%;
 	}
 	.emptiDiv{
 		display: none;
@@ -204,5 +226,63 @@ img{
 	color: rgb(254,12,106);
 	font-size: 16px;
 	display: block;
-	margin: auto;
+	margin: 2% auto;
 }
+.inputSearch{
+	font-size: 17px;
+	margin: auto;
+	font-family: 'Averia Serif Libre', cursive;
+	color: white;
+	background: rgb(254,12,106);
+	border-radius: 5px;
+	border: 2px solid rgb(254,12,106);
+	padding: 5px 8px;
+}
+.inputSearch:hover{
+	border: 2px solid rgb(254,12,106);
+	box-shadow: 0 0 0 0.2rem rgba(254, 51, 96, 0.4);
+}
+.search{
+	padding: 3px;
+	width: 30%;
+	margin: auto;
+	font-family: 'Averia Serif Libre', cursive;
+	font-size: 20px;
+	border: 2px solid grey;
+	border-radius: 5px;
+	color: grey;
+}
+.search:focus{
+	color: rgb(254,12,106);
+	background-color: #fff;
+	border-color: rgb(254,12,106);
+	outline: 0;
+	box-shadow: 0 0 0 0.2rem rgba(254, 12,106, 0.4);
+}
+.fas, .fa-user{
+	color: rgb(254,12,106);
+}
+.fa-user{
+	font-size: 30px;
+	padding: 5px;
+}
+.input-comments{
+	text-align: center;
+}
+.underline{
+	text-decoration: underline;
+}
+.comments{
+	text-align: left;
+	border-radius: 5px;
+	border: 2px solid rgb(254,12,106);
+	margin-bottom: 1%;
+	padding-bottom: 5px;
+}
+.data{
+	float: right;
+	border-radius: 5px;
+	border: 2px solid rgb(254,12,106);
+	text-align: center;
+}
+
