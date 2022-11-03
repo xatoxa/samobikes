@@ -17,13 +17,10 @@
 <body>
 <div class="content">
     <div class="header">
-        <div class="firstHead">
-            <span th:text="${'Всего: ' + count_all_bikes}"/><br>
-            <span th:text="${'Cломано: ' + count_broken_bikes}"/><br>
-            <span th:text="${'Работают: ' + count_working_bikes}"/>
-        </div><div class="midleHead">
+        <div class="midleHead">
             <H1>Каталог велосипедов</H1>
-        </div><div sec:authorize="isAuthenticated()" class="lastHead">
+        </div>
+        <div sec:authorize="isAuthenticated()" class="lastHead">
             <form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
                 <input type="submit"/>
             </form>
@@ -68,6 +65,7 @@
             <th th:replace="fragments :: columnLink('bikes', 'qrNumber', 'QR номер')"/>
             <th th:replace="fragments :: columnLink('bikes', 'VIN', 'VIN')"/>
             <th th:replace="fragments :: columnLink('bikes', 'status', 'Статус')"/>
+            <th>Описание</th>
             <th><i class="iCom fa-solid fa-message"></i></th>
             <th sec:authorize="hasAnyRole('MANAGER', 'ADMIN')" class="textCenter">Кликай куда надо</th>
             <th sec:authorize="hasRole('USER')" class="textCenter"></th>
@@ -80,6 +78,7 @@
             <td th:text="${bike.qrNumber}"/>
             <td th:text="${bike.VIN}"/>
             <td th:text="${bike.status == true ? 'Работает' : 'Сломан'}"/>
+            <td th:text="${bike.description}"/>
             <td th:text="${bike.comments.size}"/>
             <td class="textCenter">
                 <a class="aTab" th:href="@{'/bikes/show/' + ${bike.id} + '?currentPage=' + ${currentPage} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&commentSortField=commentedAt&commentSortDir=asc' + ${keyword != null ? '&keyword=' + keyword : ''}}"><i class="fa-solid fa-list"></i></a>
@@ -89,11 +88,6 @@
         </tr>
         </tbody>
     </table>
-    <div th:if="${totalItems > 0}">
-        <span class="textCenter">
-            Велосипеды с [[${startCount}]] по [[${endCount}]] из [[${totalItems}]].
-        </span>
-    </div>
     <br>
         <nav th:if="${totalPages > 1}">
             <ul class="pagination">
@@ -115,15 +109,20 @@
                 </li>
             </ul>
         </nav>
-    
     <br>
     <div sec:authorize="hasAnyRole('MANAGER', 'ADMIN')" class="divBtn">
         <a th:href="@{'/bikes/management/add/'}" th:text="Добавить" class="aAdd" />
     </div>
     <br>
-    
+    <span th:text="${'Всего: ' + count_all_bikes}"/><br>
+    <span th:text="${'Cломано: ' + count_broken_bikes}"/><br>
+    <span th:text="${'Работают: ' + count_working_bikes}"/><br>
 
-    
+    <div th:if="${totalItems > 0}">
+        <span>
+            Велосипеды с [[${startCount}]] по [[${endCount}]] из [[${totalItems}]].
+        </span>
+    </div>
     <div th:unless="${totalItems > 0}">
         <span>
             Велосипеды не найдены.
