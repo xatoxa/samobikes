@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Controller
 public class HistoryController {
@@ -49,10 +50,16 @@ public class HistoryController {
         List<History> historyList = page.getContent();
         historyList.forEach(s -> {
             s.setUsername(userService.getById(s.getUserId()).getUsername());
-            Bike bike = bikeService.getById(s.getBikeId());
-            s.setNumber(bike.getNumber());
-            s.setQrNumber(bike.getQrNumber());
-            s.setVIN(bike.getVIN());
+            try{
+                Bike bike = bikeService.getById(s.getBikeId());
+                s.setNumber(String.valueOf(bike.getNumber()));
+                s.setQrNumber(String.valueOf(bike.getQrNumber()));
+                s.setVIN(bike.getVIN());
+            }catch (NoSuchElementException ex){
+                s.setNumber("Удалён");
+                s.setQrNumber("Удалён");
+                s.setVIN("Удалён");
+            }
         });
 
         model.addAttribute("history", historyList);

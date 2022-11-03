@@ -21,10 +21,10 @@ public class History {
     private Integer bikeId;
 
     @Transient
-    private int number;
+    private String number;
 
     @Transient
-    private int qrNumber;
+    private String qrNumber;
 
     @Transient
     private String VIN;
@@ -45,7 +45,7 @@ public class History {
         this.datePoint = datePoint;
     }
 
-    public History(Integer userId, String username, Integer bikeId, int number, int qrNumber, String VIN, String type, LocalDateTime datePoint) {
+    public History(Integer userId, String username, Integer bikeId, String number, String qrNumber, String VIN, String type, LocalDateTime datePoint) {
         this.userId = userId;
         this.username = username;
         this.bikeId = bikeId;
@@ -88,19 +88,19 @@ public class History {
         this.bikeId = bikeId;
     }
 
-    public int getNumber() {
+    public String getNumber() {
         return number;
     }
 
-    public void setNumber(int number) {
+    public void setNumber(String number) {
         this.number = number;
     }
 
-    public int getQrNumber() {
+    public String getQrNumber() {
         return qrNumber;
     }
 
-    public void setQrNumber(int qrNumber) {
+    public void setQrNumber(String qrNumber) {
         this.qrNumber = qrNumber;
     }
 
