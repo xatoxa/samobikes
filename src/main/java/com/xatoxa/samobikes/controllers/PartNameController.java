@@ -66,7 +66,7 @@ public class PartNameController {
             partNameService.save(partName);
 
             String uploadDir = "photos/part-photos/";
-            FileUploadUtil.cleanDir(uploadDir);
+            FileUploadUtil.deleteFile(uploadDir, partName.getDescription());
             FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
 
         } else {
@@ -85,6 +85,10 @@ public class PartNameController {
     public String deletePartName(@PathVariable(value = "id") Integer id,
                              RedirectAttributes redirectAttributes){
         PartName partName = partNameService.getById(id);
+
+        String deleteDir = "photos/part-photos/";
+        FileUploadUtil.deleteFile(deleteDir, partName.getDescription());
+
         partNameService.deleteById(id);
         partService.deleteByName(partName.getName());
         redirectAttributes.addFlashAttribute(

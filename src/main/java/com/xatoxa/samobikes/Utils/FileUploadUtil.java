@@ -48,4 +48,17 @@ public class FileUploadUtil {
             System.out.println("Невозможно найти местоположение файла " + dirPath);
         }
     }
+
+    public static void deleteFile(String dir, String fileName){
+        Path dirPath = Paths.get(dir, fileName);
+        if (System.getProperty("os.name").contains("Linux")){
+            dirPath = Paths.get(System.getProperty("user.home"), "/samobikes_app/samobikes/", dir, fileName);
+        }
+
+        try{
+            Files.delete(dirPath);
+        }catch (IOException e){
+            System.out.println("Невозможно найти местоположение файла " + dirPath);
+        }
+    }
 }
