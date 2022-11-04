@@ -17,7 +17,11 @@
 <div class="container">
     <form th:action="@{/login}" method="post">
         <div th:if="${param.error}">
-            <p>[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
+            <th:block th:switch="${session.SPRING_SECURITY_LAST_EXCEPTION.message}">
+                <p th:case="'Bad credentials'">Неправильный логин или пароль</p>
+                <p th:case="'User is disabled'">Ваш аккаунт заблокирован. Обратитесь к администратору.</p>
+                <p th:case="*">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
+            </th:block>
         </div>
         <div th:if="${param.logout}">
             <p>Вы вышли из учётной записи.</p>
