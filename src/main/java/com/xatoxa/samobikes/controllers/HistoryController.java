@@ -49,7 +49,11 @@ public class HistoryController {
         Page<History> page = historyService.getAllByPage(pageNum);
         List<History> historyList = page.getContent();
         historyList.forEach(s -> {
-            s.setUsername(userService.getById(s.getUserId()).getUsername());
+            try{
+                s.setUsername(userService.getById(s.getUserId()).getUsername());
+            }catch (NoSuchElementException ex){
+                s.setUsername("Удалён");
+            }
             try{
                 Bike bike = bikeService.getById(s.getBikeId());
                 s.setNumber(String.valueOf(bike.getNumber()));
