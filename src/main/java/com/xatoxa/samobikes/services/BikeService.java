@@ -38,7 +38,7 @@ public class BikeService {
     }
 
     public Page<Bike> getAllByPage(int pageNum, String sortField, String sortDir, String keyword){
-        Sort sort = Sort.by(sortField);
+        Sort sort = Sort.by(sortField, "number");
         if (sortDir.equals("asc")){
             sort = sort.ascending();
         } else{
