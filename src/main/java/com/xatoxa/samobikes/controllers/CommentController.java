@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDateTime;
@@ -87,5 +84,42 @@ public class CommentController {
 
 
         return "redirect:/bikes/show/" + id + "?currentPage=" + currentPage + "&sortField=" + sortField + "&sortDir=" + sortDir + "&commentSortField=commentedAt&commentSortDir=" + commentSortDir + (keyword != null ? "&keyword=" + keyword : "");
+    }
+
+    @GetMapping("/comment/delete/{id}")
+    public String deleteComment(Model model, @PathVariable(value = "id") Integer id,
+                             @RequestParam(value = "currentPage") String currentPage,
+                             @RequestParam(value = "sortField") String sortField,
+                             @RequestParam(value = "sortDir") String sortDir,
+                             @RequestParam(value = "commentSortField") String commentSortField,
+                             @RequestParam(value = "commentSortDir") String commentSortDir,
+                             @RequestParam(value = "keyword") String keyword){
+        Comment comment = commentService.getById(id);
+        Bike bike = comment.getBike();
+
+        commentService.deleteById(id);
+
+        Comment newComment = new Comment();
+        List<Part> parts = bike.getParts();
+
+        model.addAttribute("comment", newComment);
+        model.addAttribute("comments", commentService.findByBikeId(bike.getId(), "commentedAt", sortDir));
+        model.addAttribute("bike", bike);
+        model.addAttribute("parts", parts);
+
+        String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
+        String commentReverseSortDir = commentSortDir.equals("asc") ? "desc" : "asc";
+
+        model.addAttribute("sortField", sortField);
+        model.addAttribute("sortDir", sortDir);
+        model.addAttribute("reverseSortDir", reverseSortDir);
+        model.addAttribute("commentSortField", commentSortField);
+        model.addAttribute("commentSortDir", commentSortDir);
+        model.addAttribute("commentReverseSortDir", commentReverseSortDir);
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("keyword", keyword);
+
+
+        return "redirect:/bikes/show/" + bike.getId() + "?currentPage=" + currentPage + "&sortField=" + sortField + "&sortDir=" + sortDir + "&commentSortField=commentedAt&commentSortDir=" + commentSortDir + (keyword != null ? "&keyword=" + keyword : "");
     }
 }

@@ -94,24 +94,25 @@
     <div th:each="comment : ${comments}"  class="comments">
         <div>
             <i class="fa-solid fa-user"></i>
-
             <span class="underline" 
                    th:text = " ' ' + ${comment.getUser().getUsername()}">
             </span>
-
             <span th:if="${comment.getUser().getFirstName() != null}"
                    th:text = " ' ' + ${comment.getUser().getFirstName()}">
             </span>
             <span th:if="${comment.getUser().getLastName() != null}"
                    th:text = " ' ' + ${comment.getUser().getLastName()}">
             </span>
-
         </div>
-        <span class="comment-text" th:text = "${comment.commentText}">
-
+        <span class="comment-text"
+              th:text = "${comment.commentText}">
         </span>
-        <span class="data" th:text = "${#temporals.format(comment.commentedAt, 'HH:mm dd.MM.yy ')}">
-            
+        <a sec:authorize="hasAnyRole('ADMIN')"
+           th:href="@{'/comment/delete/' + ${comment.id} + '?currentPage=' + ${currentPage} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&commentSortField=commentedAt&commentSortDir=' + ${commentReverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">
+            <i class="fa-solid fa-delete-left"></i>
+        </a>
+        <span class="data"
+              th:text = "${#temporals.format(comment.commentedAt, 'HH:mm dd.MM.yy ')}">
         </span>  
     </div>
 

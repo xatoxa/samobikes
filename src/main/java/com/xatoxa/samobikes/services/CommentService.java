@@ -35,5 +35,13 @@ public class CommentService {
     public void insert(Integer userId,Integer bikeId,String commentText,LocalDateTime commentedAt){
         commentRepository.insert(userId, bikeId, commentText, commentedAt);
     }
+
+    public void deleteById(Integer id){
+        commentRepository.deleteById(id);
+    }
+
+    public Comment getById(Integer id){
+        return commentRepository.findById(id).get();
+    }
 }
 
