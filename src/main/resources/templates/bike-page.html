@@ -5,8 +5,13 @@
     <meta charset="utf-8"/>
     <title>Страница велоспеда</title>
     <link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre&display=swap" rel="stylesheet"><!-- ссылка на шрифт -->
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> -->
+<!--
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<!--
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
+-->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/417822ee3c.js" crossorigin="anonymous"></script>
     <script type="text/javascript" th:src="@{/js/common.js}"></script>
@@ -27,10 +32,14 @@
         <span class="lastVelInfo" th:text="${'Ссылка на ELMA: '}"/><a th:href="@{${bike.qrLink}}" target="_blank" th:text="${'>тык<'}" /><br>
         <div class="divAdminButton">
             <div class="divAdminButtonOne">
-                <a sec:authorize="hasAnyRole('MANAGER', 'ADMIN')" th:href="@{'/bikes/management/edit/' + ${bike.id}}" th:text="'Изменить'" class="adminButton" />
+                <a sec:authorize="hasAnyRole('MANAGER', 'ADMIN')"
+                   th:href="@{'/bikes/management/edit/' + ${bike.id}}" th:text="'Изменить'"
+                   class="adminButton" />
             </div>
             <div class="divAdminButtonOne">
-                <a sec:authorize="hasAnyRole('MANAGER', 'ADMIN')" th:href="@{'/bikes/management/delete/' + ${bike.id}}" th:text="'Удалить'" class="adminButton"/>
+                <a sec:authorize="hasAnyRole('MANAGER', 'ADMIN')"
+                   th:href="@{'/bikes/management/delete/' + ${bike.id}}" th:text="'Удалить'"
+                   class="adminButton link-delete"/>
             </div>
         </div>
     </div>
@@ -39,13 +48,11 @@
         <img th:if="${bike.photo != null && bike.photo != ''}" class="photo" th:src="@{${bike.photoImagePath}}">
     </div>
 </div>
-<!--сюда создать новое имя класса, функционал как partsDiv-->
 <div class="broken">
     <div th:replace="fragments :: partsList(${brokenPartsLeft}, 'partsLeft', 'broken')"/>
     <div th:replace="fragments :: partsList(${brokenPartsRight}, 'partsRight', 'broken')"/><div class="emptiDiv">Ебать какой же тут костыль)</div>
 </div>
 <!-- кнопка для скрытия и открытия partsDiv -->
-
 <div class="toggleParts">
     <button id="toggleParts">Список всех деталей</button>
 </div>
@@ -67,6 +74,7 @@
 <!--Комментарии-->
 <div class="input-comments">
     <h3>Комментарии ([[${comments.size}]])</h3>
+    <span sec:authorize="isAnonymous()"><b>Чтобы оставлять и просматривать комментарии, войдите в свой аакаунт.</b></span><br>
     <form sec:authorize="isAuthenticated()" th:action="@{'/comment/save/' + ${bike.id}}" method="post" >
         <input type="hidden" th:name="currentPage" th:value="${currentPage}"/>
         <input type="hidden" th:name="sortField" th:value="${sortField}"/>
@@ -77,8 +85,7 @@
         <input type="text" placeholder="Написать сообщение..." th:name="text" required class="search" />
         <button class="inputSearch" type="submit">Отправить</button>
     </form>
-    <span sec:authorize="isAnonymous()"><b>Чтобы оставить комментарий, войдите в свой аакаунт.</b></span><br>
-    <div class="upDown">
+    <div th:if="${comments != null && #lists.size(comments) > 0}" sec:authorize="isAuthenticated()"  class="upDown">
         <a class="" th:if="${commentSortDir == 'asc'}"
            th:href="@{'/bikes/show/' + ${bike.id} + '?currentPage=' + ${currentPage} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&commentSortField=commentedAt&commentSortDir=' + ${commentReverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">
             Сначала старые
@@ -89,9 +96,7 @@
         </a>
         <span th:class="${commentSortDir == 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}"/>
     </div>
-
-
-    <div th:each="comment : ${comments}"  class="comments">
+    <div sec:authorize="isAuthenticated()"  th:each="comment : ${comments}"  class="comments">
         <div>
             <i class="fa-solid fa-user"></i>
             <span class="underline" 
@@ -116,17 +121,48 @@
         </span>  
     </div>
 
-
-
-
-
-
-   
+    <!--<div class="modal fade text-center" id="confirmModal">
+        <div class="modalDialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Внимание</h4>
+                    <a type="button" class="close" href="">&times;</a>
+                </div>
+                <div class="modal-body">
+                    <span>Вы точно хотите удалить этот велосипед из базы?</span>
+                </div>
+                <div class="modal-footer">
+                    <a type="button" class="btn btn-success" href="" id="yesButton">Да</a>
+                    <a type="button" class="btn btn-danger" href="">Нет</a>
+                </div>
+            </div>
+        </div>
+    </div>-->
 </div>
+<!--<script type="text/javascript">
+    $(document).ready(function() {
+        $(".link-delete").on("click", function(e) {
+            e.preventDefault();
+            link = $(this);
+            $("#yesButton").attr("href", link.attr("href"));
+            $("#confirmModal").modal();
+
+        });
+    });
+</script>-->
 <script>
     $("#toggleParts").on('click', function(){
         $(".partsDiv").last().fadeToggle( "fast", function(){});
     });
 </script>
+<!--<script type="text/javascript">
+    $(document).ready(function(){
+$('span[data-toggle="tooltip"]').tooltip({
+animated: 'fade',
+placement: 'left',
+html: true
+});
+});
+</script>-->
 </body>
 </html>
