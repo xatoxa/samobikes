@@ -50,15 +50,22 @@ public class HistoryController {
         List<History> historyList = page.getContent();
         historyList.forEach(s -> {
             try{
-                s.setUsername(userService.getById(s.getUserId()).getUsername());
+                if (s.getUserId() == -1) s.setUsername("Нет данных");
+                else s.setUsername(userService.getById(s.getUserId()).getUsername());
             }catch (NoSuchElementException ex){
                 s.setUsername("Удалён");
             }
             try{
-                Bike bike = bikeService.getById(s.getBikeId());
-                s.setNumber(String.valueOf(bike.getNumber()));
-                s.setQrNumber(String.valueOf(bike.getQrNumber()));
-                s.setVIN(bike.getVIN());
+                if (s.getBikeId() == -1) {
+                    s.setNumber("Нет данных");
+                    s.setQrNumber("Нет данных");
+                    s.setVIN("Нет данных");
+                } else {
+                    Bike bike = bikeService.getById(s.getBikeId());
+                    s.setNumber(String.valueOf(bike.getNumber()));
+                    s.setQrNumber(String.valueOf(bike.getQrNumber()));
+                    s.setVIN(bike.getVIN());
+                }
             }catch (NoSuchElementException ex){
                 s.setNumber("Удалён");
                 s.setQrNumber("Удалён");

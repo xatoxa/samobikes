@@ -1,20 +1,25 @@
 package com.xatoxa.samobikes.controllers;
 
 import com.xatoxa.samobikes.configuration.CaptchaSettings;
+import com.xatoxa.samobikes.entities.History;
 import com.xatoxa.samobikes.entities.Role;
+import com.xatoxa.samobikes.entities.SamUserDetails;
 import com.xatoxa.samobikes.entities.User;
 import com.xatoxa.samobikes.DTO.UserDTO;
+import com.xatoxa.samobikes.services.HistoryService;
 import com.xatoxa.samobikes.services.RecaptchaService;
 import com.xatoxa.samobikes.services.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +30,8 @@ public class UserController {
 
     private RecaptchaService recaptchaService;
 
+    private HistoryService historyService;
+
     @Autowired
     public void setUserService(UserServiceImpl userService) {
         this.userService = userService;
@@ -33,6 +40,11 @@ public class UserController {
     @Autowired
     public void setRecaptchaService(RecaptchaService recaptchaService) {
         this.recaptchaService = recaptchaService;
+    }
+
+    @Autowired
+    public void setHistoryService(HistoryService historyService) {
+        this.historyService = historyService;
     }
 
     @GetMapping("/users")
@@ -97,8 +109,17 @@ public class UserController {
 
     @PostMapping("/users/save")
     public String saveUser(@ModelAttribute(value = "user") User user,
+                           @AuthenticationPrincipal SamUserDetails loggedUser,
                            RedirectAttributes redirectAttributes){
         userService.save(user);
+
+        History history = new History(
+                userService.findByUserName(loggedUser.getUsername()).getId(),
+                -1,
+                "Пользователь " + user.getUsername() + " добавлен/изменён",
+                LocalDateTime.now());
+        historyService.save(history);
+
         redirectAttributes.addFlashAttribute(
                 "message",
                 "Пользователь " + user.getUsername() + " сохранён.");
@@ -107,9 +128,18 @@ public class UserController {
 
     @GetMapping("/users/delete/{id}")
     public String deleteUser(@PathVariable(value = "id") Integer id,
+                             @AuthenticationPrincipal SamUserDetails loggedUser,
                              RedirectAttributes redirectAttributes){
         String username = userService.getById(id).getUsername();
         userService.deleteById(id);
+
+        History history = new History(
+                userService.findByUserName(loggedUser.getUsername()).getId(),
+                -1,
+                "Пользователь " + username + " удалён",
+                LocalDateTime.now());
+        historyService.save(history);
+
         redirectAttributes.addFlashAttribute(
                 "message",
                 "Пользователь " + username + " удалён.");
@@ -134,12 +164,21 @@ public class UserController {
         }
 
         userService.registerNewUserAccount(userDTO);
+
+        History history = new History(
+                userService.findByUserName(userDTO.getUsername()).getId(),
+                -1,
+                "Пользователь " + userDTO.getUsername() + " зарегистрировался",
+                LocalDateTime.now());
+        historyService.save(history);
+
         redirectAttributes.addFlashAttribute("message", "Ваш аккаунт зарегистрирован, можете войти в систему.");
         return "redirect:/login";
     }
 
     @GetMapping("/users/{id}/enabled/{status}")
     public String setEnabledById (Model model,
+                                  @AuthenticationPrincipal SamUserDetails loggedUser,
                                   @PathVariable(value = "id") Integer id,
                                   @PathVariable(value = "status") boolean enabled,
                                   @Param("currentPage") String currentPage,
@@ -148,6 +187,14 @@ public class UserController {
                                   @Param("keyword") String keyword,
                                   RedirectAttributes redirectAttributes){
         userService.setEnabledById(id, enabled);
+
+        History history = new History(
+                userService.findByUserName(loggedUser.getUsername()).getId(),
+                -1,
+                "Пользователь " + userService.getById(id).getUsername() + (enabled ? " активирован" : " деактивирован"),
+                LocalDateTime.now());
+        historyService.save(history);
+
         redirectAttributes.addFlashAttribute("message",
                 "Пользователь " +
                         userService.getById(id).getUsername() + " теперь" +
