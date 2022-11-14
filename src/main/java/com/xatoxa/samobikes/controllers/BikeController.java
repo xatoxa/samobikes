@@ -1,14 +1,15 @@
 package com.xatoxa.samobikes.controllers;
 
 import com.xatoxa.samobikes.Utils.FileUploadUtil;
-import com.xatoxa.samobikes.entities.Bike;
-import com.xatoxa.samobikes.entities.Comment;
-import com.xatoxa.samobikes.entities.Part;
+import com.xatoxa.samobikes.entities.*;
 import com.xatoxa.samobikes.services.BikeService;
 import com.xatoxa.samobikes.services.CommentService;
+import com.xatoxa.samobikes.services.HistoryService;
+import com.xatoxa.samobikes.services.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -17,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -26,6 +28,10 @@ import java.util.List;
 public class BikeController {
     private BikeService bikeService;
     private CommentService commentService;
+
+    private UserServiceImpl userService;
+
+    private HistoryService historyService;
 
     @Autowired
     public void setBikeService(BikeService bikeService) {
@@ -37,7 +43,16 @@ public class BikeController {
         this.commentService = commentService;
     }
 
-    //добавить варианты сортировки
+    @Autowired
+    public void setUserService(UserServiceImpl userService) {
+        this.userService = userService;
+    }
+
+    @Autowired
+    public void setHistoryService(HistoryService historyService) {
+        this.historyService = historyService;
+    }
+
     @GetMapping
     public String showBikes(Model model){
         return showBikesByPage(model, 1, "number", "asc", null);
@@ -146,9 +161,11 @@ public class BikeController {
     }
 
     @PostMapping("/management/edit")
-    public String saveBike (Model model, @ModelAttribute(value = "bike") Bike bike,
-                                  RedirectAttributes redirectAttributes,
-                                  @RequestParam("image")MultipartFile multipartFile) throws IOException {
+    public String saveBike (Model model,
+                            @AuthenticationPrincipal SamUserDetails loggedUser,
+                            @ModelAttribute(value = "bike") Bike bike,
+                            RedirectAttributes redirectAttributes,
+                            @RequestParam("image")MultipartFile multipartFile) throws IOException {
         List<String> errors = new ArrayList<>();
         errors = checkDuplicate(bike, errors);
         if (!errors.isEmpty()){
@@ -173,6 +190,13 @@ public class BikeController {
             bikeService.save(bike);
         }
 
+        History history = new History(
+                userService.findByUserName(loggedUser.getUsername()).getId(),
+                bike.getId(),
+                "Вело " + bike.getNumber() + " | " + bike.getQrNumber() + " | " + bike.getVIN() + " сохранён/изменён",
+                LocalDateTime.now());
+        historyService.save(history);
+
         redirectAttributes.addFlashAttribute(
                 "message",
                 "Велосипед " + bike.getNumber() + " | " + bike.getQrNumber() + " сохранён.");
@@ -190,10 +214,21 @@ public class BikeController {
 
     @GetMapping("/management/delete/{id}")
     public String deleteBike(@PathVariable(value = "id") Integer id,
+                             @AuthenticationPrincipal SamUserDetails loggedUser,
                              RedirectAttributes redirectAttributes){
-        Integer number = bikeService.getById(id).getNumber();
-        Integer qrNumber = bikeService.getById(id).getQrNumber();
+        Bike bike = bikeService.getById(id);
+        Integer number = bike.getNumber();
+        Integer qrNumber = bike.getQrNumber();
+        String VIN = bike.getVIN();
+
         bikeService.deleteById(id);
+
+        History history = new History(
+                userService.findByUserName(loggedUser.getUsername()).getId(),
+                id,
+                "Вело " + number + " | " + qrNumber + " | " + VIN + " удалён",
+                LocalDateTime.now());
+        historyService.save(history);
 
         redirectAttributes.addFlashAttribute(
                 "message",

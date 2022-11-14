@@ -1,6 +1,5 @@
 package com.xatoxa.samobikes.controllers;
 
-import com.xatoxa.samobikes.configuration.CaptchaSettings;
 import com.xatoxa.samobikes.entities.History;
 import com.xatoxa.samobikes.entities.Role;
 import com.xatoxa.samobikes.entities.SamUserDetails;
