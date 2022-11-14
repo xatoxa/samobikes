@@ -51,11 +51,9 @@ public class RecaptchaService {
             List<String> errorCodes =
                     (List)responseBody.get("error-codes");
 
-            String errorMessage = errorCodes.stream()
-                    .map(s -> RecaptchaUtil.RECAPTCHA_ERROR_CODE.get(s))
+            return errorCodes.stream()
+                    .map(RecaptchaUtil.RECAPTCHA_ERROR_CODE::get)
                     .collect(Collectors.joining(", "));
-
-            return errorMessage;
         }else {
             return "";
         }

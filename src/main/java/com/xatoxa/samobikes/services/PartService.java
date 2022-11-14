@@ -3,7 +3,6 @@ package com.xatoxa.samobikes.services;
 import com.xatoxa.samobikes.entities.Bike;
 import com.xatoxa.samobikes.entities.Part;
 import com.xatoxa.samobikes.entities.PartName;
-import com.xatoxa.samobikes.repositories.PartNameRepository;
 import com.xatoxa.samobikes.repositories.PartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -72,10 +72,6 @@ public class UserServiceImpl implements UserService{
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
     }
 
-    /*public List<User> getAllUsers(){
-        return userRepository.findAll();
-    }*/
-
     public Page<User> getAllByPage(int pageNum, String sortField, String sortDir, String keyword){
         Sort sort = Sort.by(sortField);
         if (sortDir.equals("asc")){
@@ -110,7 +106,7 @@ public class UserServiceImpl implements UserService{
                 return false;
             }
         }else {
-            if (user.getId() != id){
+            if (!user.getId().equals(id)){
                 return false;
             }
         }
@@ -132,7 +128,7 @@ public class UserServiceImpl implements UserService{
         userRepository.save(user);
     }
 
-    public User updateAccount(User oldUser){
+    public void updateAccount(User oldUser){
         User newUser = userRepository.findOneByUsername(oldUser.getUsername());
 
         if (!oldUser.getPassword().isEmpty()) {
@@ -143,7 +139,7 @@ public class UserServiceImpl implements UserService{
         newUser.setFirstName(oldUser.getFirstName());
         newUser.setLastName(oldUser.getLastName());
 
-        return userRepository.save(newUser);
+        userRepository.save(newUser);
     }
 
     private void encodePassword(User user){
