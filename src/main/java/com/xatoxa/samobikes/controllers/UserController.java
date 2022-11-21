@@ -23,6 +23,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.xatoxa.samobikes.Utils.StringUtil.reverseSortDir;
+
 @Controller
 public class UserController {
     private UserServiceImpl userService;
@@ -72,11 +74,9 @@ public class UserController {
         model.addAttribute("startCount", startCount);
         model.addAttribute("endCount", endCount);
         model.addAttribute("totalItems", page.getTotalElements());
-
-        String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
         model.addAttribute("sortField", sortField);
         model.addAttribute("sortDir", sortDir);
-        model.addAttribute("reverseSortDir", reverseSortDir);
+        model.addAttribute("reverseSortDir", reverseSortDir(sortDir));
 
         model.addAttribute("keyword", keyword);
 
@@ -94,7 +94,6 @@ public class UserController {
         return "user-edit";
     }
 
-    //возможно добавить exception на несуществующий id
     @GetMapping("/users/edit/{id}")
     public String editUser(Model model, @PathVariable(value = "id") Integer id){
         User user = userService.getById(id);

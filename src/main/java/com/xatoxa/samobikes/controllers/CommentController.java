@@ -14,6 +14,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static com.xatoxa.samobikes.Utils.StringUtil.reverseSortDir;
+
 @Controller
 public class CommentController {
     CommentService commentService;
@@ -69,19 +71,14 @@ public class CommentController {
         model.addAttribute("comments", commentService.findByBikeId(id, "commentedAt", sortDir));
         model.addAttribute("bike", bike);
         model.addAttribute("parts", parts);
-
-        String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
-        String commentReverseSortDir = commentSortDir.equals("asc") ? "desc" : "asc";
-
         model.addAttribute("sortField", sortField);
         model.addAttribute("sortDir", sortDir);
-        model.addAttribute("reverseSortDir", reverseSortDir);
+        model.addAttribute("reverseSortDir", reverseSortDir(sortDir));
         model.addAttribute("commentSortField", commentSortField);
         model.addAttribute("commentSortDir", commentSortDir);
-        model.addAttribute("commentReverseSortDir", commentReverseSortDir);
+        model.addAttribute("commentReverseSortDir", reverseSortDir(commentSortDir));
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("keyword", keyword);
-
 
         return "redirect:/bikes/show/" + id + "?currentPage=" + currentPage + "&sortField=" + sortField + "&sortDir=" + sortDir + "&commentSortField=commentedAt&commentSortDir=" + commentSortDir + (keyword != null ? "&keyword=" + keyword : "");
     }
@@ -106,19 +103,14 @@ public class CommentController {
         model.addAttribute("comments", commentService.findByBikeId(bike.getId(), "commentedAt", sortDir));
         model.addAttribute("bike", bike);
         model.addAttribute("parts", parts);
-
-        String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
-        String commentReverseSortDir = commentSortDir.equals("asc") ? "desc" : "asc";
-
         model.addAttribute("sortField", sortField);
         model.addAttribute("sortDir", sortDir);
-        model.addAttribute("reverseSortDir", reverseSortDir);
+        model.addAttribute("reverseSortDir", reverseSortDir(sortDir));
         model.addAttribute("commentSortField", commentSortField);
         model.addAttribute("commentSortDir", commentSortDir);
-        model.addAttribute("commentReverseSortDir", commentReverseSortDir);
+        model.addAttribute("commentReverseSortDir", reverseSortDir(commentSortDir));
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("keyword", keyword);
-
 
         return "redirect:/bikes/show/" + bike.getId() + "?currentPage=" + currentPage + "&sortField=" + sortField + "&sortDir=" + sortDir + "&commentSortField=commentedAt&commentSortDir=" + commentSortDir + (keyword != null ? "&keyword=" + keyword : "");
     }

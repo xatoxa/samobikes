@@ -46,13 +46,6 @@ public class PartNameController {
         return "part-names-edit";
     }
 
-    /*@GetMapping("/part-names/edit/{id}")
-    public String showEditBikeForm(Model model, @PathVariable(value = "id") Integer id){
-        PartName partName = partNameService.getById(id);
-        model.addAttribute("partName", partName);
-        return "part-names-edit";
-    }*/
-
     @PostMapping("/part-names/edit")
     public String savePartName (@ModelAttribute(value = "partName") PartName partName,
                             RedirectAttributes redirectAttributes,

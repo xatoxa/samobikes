@@ -13,7 +13,7 @@ public class Bike {
     @Column(name = "id")
     private Integer id;
 
-    @OneToMany(mappedBy = "bike", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "bike", cascade = CascadeType.ALL)
     private List<Part> parts;
 
     @OneToMany(mappedBy = "bike")
@@ -166,7 +166,7 @@ public class Bike {
 
     @Transient
     public String getPhotoImagePath(){
-        if (this.id == null || this.photo == null || this.photo.equals("")) return "/img/default-bike.png";
+        if (this.id == null || this.photo == null || "".equals(this.photo)) return "/img/default-bike.png";
         return "/photos/bike-photos/"  + this.getId() + "/" + this.photo;
     }
 }

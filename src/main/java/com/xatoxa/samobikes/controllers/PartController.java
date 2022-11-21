@@ -17,10 +17,13 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.xatoxa.samobikes.Utils.StringUtil.reverseSortDir;
+
 @Controller
 @RequestMapping("/parts")
 public class PartController {
     private PartService partService;
+
     private BikeService bikeService;
 
     private UserService userService;
@@ -62,7 +65,6 @@ public class PartController {
         partListDTO.setParams(id + "?currentPage=" + currentPage + "&sortField=" + sortField + "&sortDir=" + sortDir + "&commentSortField=commentedAt&commentSortDir=" + commentSortDir + (keyword != null ? "&keyword=" + keyword : ""));
 
         int temp = 0;
-
         if (parts.size() % 2 != 0) temp = 1;
 
         List<Part> partsLeft = parts.subList(0, parts.size() / 2 + temp);
@@ -73,16 +75,12 @@ public class PartController {
         model.addAttribute("partList", partListDTO);
         model.addAttribute("parts", parts);
         model.addAttribute("bike", bike);
-
-        String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
-        String commentReverseSortDir = commentSortDir.equals("asc") ? "desc" : "asc";
-
         model.addAttribute("sortField", sortField);
         model.addAttribute("sortDir", sortDir);
-        model.addAttribute("reverseSortDir", reverseSortDir);
+        model.addAttribute("reverseSortDir", reverseSortDir(sortDir));
         model.addAttribute("commentSortField", commentSortField);
         model.addAttribute("commentSortDir", commentSortDir);
-        model.addAttribute("commentReverseSortDir", commentReverseSortDir);
+        model.addAttribute("commentReverseSortDir", reverseSortDir(sortDir));
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("keyword", keyword);
 
@@ -154,16 +152,12 @@ public class PartController {
         model.addAttribute("parts", parts);
         model.addAttribute("comment", new Comment());
         model.addAttribute("comments", bike.getComments());
-
-        String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
-        String commentReverseSortDir = commentSortDir.equals("asc") ? "desc" : "asc";
-
         model.addAttribute("sortField", sortField);
         model.addAttribute("sortDir", sortDir);
-        model.addAttribute("reverseSortDir", reverseSortDir);
+        model.addAttribute("reverseSortDir", reverseSortDir(sortDir));
         model.addAttribute("commentSortField", commentSortField);
         model.addAttribute("commentSortDir", commentSortDir);
-        model.addAttribute("commentReverseSortDir", commentReverseSortDir);
+        model.addAttribute("commentReverseSortDir", reverseSortDir(commentSortDir));
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("keyword", keyword);
         return "redirect:/bikes/show/" + id + "?currentPage=" + currentPage + "&sortField=" + sortField + "&sortDir=" + sortDir + "&commentSortField=commentedAt&commentSortDir=" + commentSortDir + (keyword != null ? "&keyword=" + keyword : "");
@@ -199,16 +193,12 @@ public class PartController {
         model.addAttribute("parts", parts);
         model.addAttribute("comment", new Comment());
         model.addAttribute("comments", bike.getComments());
-
-        String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
-        String commentReverseSortDir = commentSortDir.equals("asc") ? "desc" : "asc";
-
         model.addAttribute("sortField", sortField);
         model.addAttribute("sortDir", sortDir);
-        model.addAttribute("reverseSortDir", reverseSortDir);
+        model.addAttribute("reverseSortDir", reverseSortDir(sortDir));
         model.addAttribute("commentSortField", commentSortField);
         model.addAttribute("commentSortDir", commentSortDir);
-        model.addAttribute("commentReverseSortDir", commentReverseSortDir);
+        model.addAttribute("commentReverseSortDir", reverseSortDir(commentSortDir));
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("keyword", keyword);
         return "redirect:/bikes/show/" + id + "?currentPage=" + currentPage + "&sortField=" + sortField + "&sortDir=" + sortDir + "&commentSortField=commentedAt&commentSortDir=" + commentSortDir + (keyword != null ? "&keyword=" + keyword : "");

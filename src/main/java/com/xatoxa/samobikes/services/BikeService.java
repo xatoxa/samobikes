@@ -15,10 +15,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class BikeService {
-    public static final int BIKES_PER_PAGE = 6;
+    public static final int BIKES_PER_PAGE = 10;
     private BikeRepository bikeRepository;
     private PartService partService;
 
@@ -39,7 +40,7 @@ public class BikeService {
 
     public Page<Bike> getAllByPage(int pageNum, String sortField, String sortDir, String keyword){
         Sort sort = Sort.by(sortField, "number");
-        if (sortDir.equals("asc")){
+        if ("asc".equals(sortDir)){
             sort = sort.ascending();
         } else{
             sort = sort.descending();
@@ -105,17 +106,10 @@ public class BikeService {
     }
 
     private boolean checkUniqueness(Integer id, Bike bike){
-        //если создаётся
         if(id == null){
-            if (bike != null) {
-                return false;
-            }
+            return bike == null;
         }else {
-            if (bike.getId() != id){
-                return false;
-            }
+            return Objects.equals(bike.getId(), id);
         }
-
-        return true;
     }
 }

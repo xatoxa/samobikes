@@ -60,7 +60,7 @@ public class PartName {
 
     @Transient
     public String getPhotoImagePath(){
-        if (this.id == null || this.description == null || this.description.equals("")) return "/img/logo.png";
+        if (this.id == null || this.description == null || "".equals(this.description)) return "/img/logo.png";
         return "/photos/part-photos/" + this.description;
     }
 }

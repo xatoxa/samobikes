@@ -48,6 +48,24 @@ public class HistoryController {
                                   @PathVariable(name = "pageNum") int pageNum){
         Page<History> page = historyService.getAllByPage(pageNum);
         List<History> historyList = page.getContent();
+        prepareHistoryList(historyList);
+
+        model.addAttribute("history", historyList);
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("currentPage", pageNum);
+        model.addAttribute("totalItems", page.getTotalElements());
+
+        return "repair-history";
+    }
+
+    @GetMapping("/history/clean")
+    public String cleanHistory(){
+        historyService.clean();
+
+        return "redirect:/history";
+    }
+
+    private void prepareHistoryList(List<History> historyList){
         historyList.forEach(s -> {
             try{
                 if (s.getUserId() == -1) s.setUsername("Нет данных");
@@ -72,28 +90,5 @@ public class HistoryController {
                 s.setVIN("Удалён");
             }
         });
-
-        model.addAttribute("history", historyList);
-
-        long startCount = (long) (pageNum - 1) * UserServiceImpl.USERS_PER_PAGE + 1;
-        long endCount = startCount + UserServiceImpl.USERS_PER_PAGE - 1;
-        if (endCount > page.getTotalElements()){
-            endCount = page.getTotalElements();
-        }
-        model.addAttribute("totalPages", page.getTotalPages());
-        model.addAttribute("currentPage", pageNum);
-        model.addAttribute("startCount", startCount);
-        model.addAttribute("endCount", endCount);
-        model.addAttribute("totalItems", page.getTotalElements());
-
-        return "repair-history";
     }
-
-    @GetMapping("/history/clean")
-    public String cleanHistory(){
-        historyService.clean();
-
-        return "redirect:/history";
-    }
-
 }

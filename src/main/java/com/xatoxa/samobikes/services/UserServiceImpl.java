@@ -74,7 +74,7 @@ public class UserServiceImpl implements UserService{
 
     public Page<User> getAllByPage(int pageNum, String sortField, String sortDir, String keyword){
         Sort sort = Sort.by(sortField);
-        if (sortDir.equals("asc")){
+        if ("asc".equals(sortDir)){
             sort = sort.ascending();
         } else{
             sort = sort.descending();
@@ -98,20 +98,13 @@ public class UserServiceImpl implements UserService{
     public boolean isUsernameUnique(Integer id, String username){
         User user = userRepository.findOneByUsername(username);
 
-        if (user == null) return true;
-
-        //если создаётся
-        if(id == null){
-            if (user != null) {
+        if (user == null)
+            return true;
+        else
+            if (id == null)
                 return false;
-            }
-        }else {
-            if (!user.getId().equals(id)){
-                return false;
-            }
-        }
-
-        return true;
+            else
+                return user.getId().equals(id);
     }
 
     public void save(User user){

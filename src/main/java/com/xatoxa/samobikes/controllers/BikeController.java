@@ -19,9 +19,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
+
+import static com.xatoxa.samobikes.Utils.StringUtil.reverseSortDir;
 
 @Controller
 @RequestMapping("/bikes")
@@ -85,12 +85,9 @@ public class BikeController {
         model.addAttribute("startCount", startCount);
         model.addAttribute("endCount", endCount);
         model.addAttribute("totalItems", page.getTotalElements());
-
-        String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
         model.addAttribute("sortField", sortField);
         model.addAttribute("sortDir", sortDir);
-        model.addAttribute("reverseSortDir", reverseSortDir);
-
+        model.addAttribute("reverseSortDir", reverseSortDir(sortDir));
         model.addAttribute("keyword", keyword);
 
         return "bikes";
@@ -104,8 +101,6 @@ public class BikeController {
                               @Param("commentSortField") String commentSortField,
                               @Param("commentSortDir") String commentSortDir,
                               @Param("keyword") String keyword){
-        Comment comment = new Comment();
-
         Bike bike = bikeService.getById(id);
         bike.checkWorks();
         bikeService.save(bike);
@@ -114,35 +109,22 @@ public class BikeController {
         List<Part> brokenParts = parts.stream().filter(s -> !s.isStatus()).toList();
         List<Part> workingParts = parts.stream().filter(Part::isStatus).toList();
 
-        int wTemp = 0, bTemp = 0;
-
-        if (brokenParts.size() % 2 != 0) bTemp = 1;
-        if (workingParts.size() % 2 != 0) wTemp = 1;
-
-        List<Part> brokenPartsLeft = brokenParts.subList(0, brokenParts.size() / 2 + bTemp);
-        List<Part> brokenPartsRight = brokenParts.subList(brokenParts.size() / 2 + bTemp, brokenParts.size());
-        List<Part> workingPartsLeft = workingParts.subList(0, workingParts.size() / 2 + wTemp);
-        List<Part> workingPartsRight = workingParts.subList(workingParts.size() / 2 + wTemp, workingParts.size());
-
-        model.addAttribute("comment", comment);
+        model.addAttribute("comment", new Comment());
         model.addAttribute("comments", commentService.findByBikeId(id, commentSortField, commentSortDir));
         model.addAttribute("bike", bike);
-        model.addAttribute("brokenPartsLeft", brokenPartsLeft);
-        model.addAttribute("brokenPartsRight", brokenPartsRight);
-        model.addAttribute("workingPartsLeft", workingPartsLeft);
-        model.addAttribute("workingPartsRight", workingPartsRight);
-
-        String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
-        String commentReverseSortDir = commentSortDir.equals("asc") ? "desc" : "asc";
-
+        model.addAttribute("brokenPartsLeft", makeSubList(true, brokenParts));
+        model.addAttribute("brokenPartsRight", makeSubList(false, brokenParts));
+        model.addAttribute("workingPartsLeft", makeSubList(true, workingParts));
+        model.addAttribute("workingPartsRight", makeSubList(false, workingParts));
         model.addAttribute("sortField", sortField);
         model.addAttribute("sortDir", sortDir);
-        model.addAttribute("reverseSortDir", reverseSortDir);
+        model.addAttribute("reverseSortDir", reverseSortDir(sortDir));
         model.addAttribute("commentSortField", commentSortField);
         model.addAttribute("commentSortDir", commentSortDir);
-        model.addAttribute("commentReverseSortDir", commentReverseSortDir);
+        model.addAttribute("commentReverseSortDir", reverseSortDir(commentSortDir));
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("keyword", keyword);
+
         return "bike-page";
     }
 
@@ -204,14 +186,6 @@ public class BikeController {
         return "redirect:/bikes";
     }
 
-    private List<String> checkDuplicate(Bike bike, List<String> errors) {
-        if (!bikeService.isNumberUnique(bike.getId(), bike.getNumber())) errors.add("Такой номер уже существует");
-        if (!bikeService.isQRNumberUnique(bike.getId(), bike.getQrNumber())) errors.add("Такой QR номер уже существует");
-        if (!bikeService.isVINUnique(bike.getId(), bike.getVIN())) errors.add("Такой VIN уже существует");
-
-        return errors;
-    }
-
     @GetMapping("/management/delete/{id}")
     public String deleteBike(@PathVariable(value = "id") Integer id,
                              @AuthenticationPrincipal SamUserDetails loggedUser,
@@ -234,5 +208,28 @@ public class BikeController {
                 "message",
                 "Велосипед " + number + " | " + qrNumber + " удалён.");
         return "redirect:/bikes";
+    }
+
+    private List<String> checkDuplicate(Bike bike, List<String> errors) {
+        if (!bikeService.isNumberUnique(bike.getId(), bike.getNumber()))
+            errors.add("Такой номер уже существует");
+        if (!bikeService.isQRNumberUnique(bike.getId(), bike.getQrNumber()))
+            errors.add("Такой QR номер уже существует");
+        if (!bikeService.isVINUnique(bike.getId(), bike.getVIN()))
+            errors.add("Такой VIN уже существует");
+
+        return errors;
+    }
+
+    private List<Part> makeSubList(boolean left, List<Part> parts){
+        int temp = 0;
+
+        if (parts.size() % 2 != 0) temp = 1;
+
+        if (left)
+            return parts.subList(0, parts.size() / 2 + temp);
+        else
+            return parts.subList(parts.size() / 2 + temp, parts.size());
+
     }
 }
