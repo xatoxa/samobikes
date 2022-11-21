@@ -112,7 +112,7 @@
         <span class="comment-text"
               th:text = "${comment.commentText}">
         </span>
-        <a sec:authorize="hasAnyRole('ADMIN')"
+        <a class="delete" sec:authorize="hasAnyRole('ADMIN')"
            th:href="@{'/comment/delete/' + ${comment.id} + '?currentPage=' + ${currentPage} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&commentSortField=commentedAt&commentSortDir=' + ${commentReverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">
             <i class="fa-solid fa-delete-left"></i>
         </a>
