@@ -23,7 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.xatoxa.samobikes.Utils.StringUtil.makeHistoryUserType;
+import static com.xatoxa.samobikes.Utils.StringUtil.makeHistoryType;
 import static com.xatoxa.samobikes.Utils.StringUtil.reverseSortDir;
 
 @Controller
@@ -112,7 +112,7 @@ public class UserController {
                            RedirectAttributes redirectAttributes){
         userService.save(user);
 
-        String message = makeHistoryUserType(user.getUsername(), " добавлен/изменён");
+        String message = makeHistoryType(user.getUsername(), " добавлен/изменён");
 
         History history = new History(
                 userService.findByUserName(loggedUser.getUsername()).getId(),
@@ -131,7 +131,7 @@ public class UserController {
     public String deleteUser(@PathVariable(value = "id") Integer id,
                              @AuthenticationPrincipal SamUserDetails loggedUser,
                              RedirectAttributes redirectAttributes){
-        String message = makeHistoryUserType(userService.getById(id).getUsername(), " удалён");
+        String message = makeHistoryType(userService.getById(id).getUsername(), " удалён");
 
         userService.deleteById(id);
 
@@ -167,7 +167,7 @@ public class UserController {
 
         userService.registerNewUserAccount(userDTO);
 
-        String message = makeHistoryUserType(userDTO.getUsername(), " зарегистрировался");
+        String message = makeHistoryType(userDTO.getUsername(), " зарегистрировался");
 
         History history = new History(
                 userService.findByUserName(userDTO.getUsername()).getId(),
@@ -192,7 +192,7 @@ public class UserController {
                                   RedirectAttributes redirectAttributes){
         userService.setEnabledById(id, enabled);
 
-        String message = makeHistoryUserType(userService.getById(id).getUsername(), enabled ? " активирован" : " деактивирован");
+        String message = makeHistoryType(userService.getById(id).getUsername(), enabled ? " активирован" : " деактивирован");
 
         History history = new History(
                 userService.findByUserName(loggedUser.getUsername()).getId(),

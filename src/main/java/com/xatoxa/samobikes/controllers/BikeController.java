@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.*;
 
-import static com.xatoxa.samobikes.Utils.StringUtil.makeHistoryBikeType;
+import static com.xatoxa.samobikes.Utils.StringUtil.makeHistoryType;
 import static com.xatoxa.samobikes.Utils.StringUtil.reverseSortDir;
 
 @Controller
@@ -177,7 +177,7 @@ public class BikeController {
             bikeService.save(bike);
         }
 
-        String message = makeHistoryBikeType(bike, " сохранён/изменён");
+        String message = makeHistoryType(bike, " сохранён/изменён");
 
         History history = new History(
                 userService.findByUserName(loggedUser.getUsername()).getId(),
@@ -199,7 +199,7 @@ public class BikeController {
                              RedirectAttributes redirectAttributes){
         Bike bike = bikeService.getById(id);
 
-        String message = makeHistoryBikeType(bike, " удалён");
+        String message = makeHistoryType(bike, " удалён");
 
         bikeService.deleteById(id);
 

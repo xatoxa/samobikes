@@ -7,7 +7,7 @@ public final class StringUtil {
         return sortDir.equals("asc") ? "desc" : "asc";
     }
 
-    public static String makeHistoryBikeType(Bike bike, String msg){
+    public static String makeHistoryType(Bike bike, String msg){
         StringBuilder type = new StringBuilder();
         type
                 .append("Велосипед ")
@@ -21,7 +21,7 @@ public final class StringUtil {
         return type.toString();
     }
 
-    public static String makeHistoryUserType(String username, String msg){
+    public static String makeHistoryType(String username, String msg){
         StringBuilder type = new StringBuilder();
         type
                 .append("Пользователь ")
