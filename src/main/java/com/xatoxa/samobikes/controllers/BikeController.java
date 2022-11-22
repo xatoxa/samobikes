@@ -1,6 +1,7 @@
 package com.xatoxa.samobikes.controllers;
 
 import com.xatoxa.samobikes.Utils.FileUploadUtil;
+import com.xatoxa.samobikes.Utils.StringUtil.*;
 import com.xatoxa.samobikes.entities.*;
 import com.xatoxa.samobikes.services.BikeService;
 import com.xatoxa.samobikes.services.CommentService;
@@ -21,6 +22,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.*;
 
+import static com.xatoxa.samobikes.Utils.StringUtil.makeHistoryBikeType;
 import static com.xatoxa.samobikes.Utils.StringUtil.reverseSortDir;
 
 @Controller
@@ -149,7 +151,7 @@ public class BikeController {
                             RedirectAttributes redirectAttributes,
                             @RequestParam("image")MultipartFile multipartFile) throws IOException {
         List<String> errors = new ArrayList<>();
-        errors = checkDuplicate(bike, errors);
+        checkDuplicate(bike, errors);
         if (!errors.isEmpty()){
             model.addAttribute("bike", bike);
             model.addAttribute("errors", errors);
@@ -163,25 +165,30 @@ public class BikeController {
             bike.setPhoto(fileName);
             bikeService.save(bike);
 
-            String uploadDir = "photos/bike-photos/" + bike.getId();
-            FileUploadUtil.cleanDir(uploadDir);
-            FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+            StringBuilder uploadDir = new StringBuilder();
+            uploadDir
+                    .append("photos/bike-photos/")
+                    .append(bike.getId());
+            FileUploadUtil.cleanDir(uploadDir.toString());
+            FileUploadUtil.saveFile(uploadDir.toString(), fileName, multipartFile);
 
         } else {
             if (bike.getPhoto().isEmpty()) bike.setPhoto("");
             bikeService.save(bike);
         }
 
+        String message = makeHistoryBikeType(bike, " сохранён/изменён");
+
         History history = new History(
                 userService.findByUserName(loggedUser.getUsername()).getId(),
                 bike.getId(),
-                "Вело " + bike.getNumber() + " | " + bike.getQrNumber() + " | " + bike.getVIN() + " сохранён/изменён",
+                message,
                 LocalDateTime.now());
         historyService.save(history);
 
         redirectAttributes.addFlashAttribute(
                 "message",
-                "Велосипед " + bike.getNumber() + " | " + bike.getQrNumber() + " сохранён.");
+                message);
 
         return "redirect:/bikes";
     }
@@ -191,34 +198,31 @@ public class BikeController {
                              @AuthenticationPrincipal SamUserDetails loggedUser,
                              RedirectAttributes redirectAttributes){
         Bike bike = bikeService.getById(id);
-        Integer number = bike.getNumber();
-        Integer qrNumber = bike.getQrNumber();
-        String VIN = bike.getVIN();
+
+        String message = makeHistoryBikeType(bike, " удалён");
 
         bikeService.deleteById(id);
 
         History history = new History(
                 userService.findByUserName(loggedUser.getUsername()).getId(),
                 id,
-                "Вело " + number + " | " + qrNumber + " | " + VIN + " удалён",
+                message,
                 LocalDateTime.now());
         historyService.save(history);
 
         redirectAttributes.addFlashAttribute(
                 "message",
-                "Велосипед " + number + " | " + qrNumber + " удалён.");
+                message);
         return "redirect:/bikes";
     }
 
-    private List<String> checkDuplicate(Bike bike, List<String> errors) {
+    private void checkDuplicate(Bike bike, List<String> errors) {
         if (!bikeService.isNumberUnique(bike.getId(), bike.getNumber()))
             errors.add("Такой номер уже существует");
         if (!bikeService.isQRNumberUnique(bike.getId(), bike.getQrNumber()))
             errors.add("Такой QR номер уже существует");
         if (!bikeService.isVINUnique(bike.getId(), bike.getVIN()))
             errors.add("Такой VIN уже существует");
-
-        return errors;
     }
 
     private List<Part> makeSubList(boolean left, List<Part> parts){

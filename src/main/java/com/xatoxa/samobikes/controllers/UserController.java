@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.xatoxa.samobikes.Utils.StringUtil.makeHistoryUserType;
 import static com.xatoxa.samobikes.Utils.StringUtil.reverseSortDir;
 
 @Controller
@@ -111,16 +112,18 @@ public class UserController {
                            RedirectAttributes redirectAttributes){
         userService.save(user);
 
+        String message = makeHistoryUserType(user.getUsername(), " добавлен/изменён");
+
         History history = new History(
                 userService.findByUserName(loggedUser.getUsername()).getId(),
                 -1,
-                "Пользователь " + user.getUsername() + " добавлен/изменён",
+                message,
                 LocalDateTime.now());
         historyService.save(history);
 
         redirectAttributes.addFlashAttribute(
                 "message",
-                "Пользователь " + user.getUsername() + " сохранён.");
+                message);
         return "redirect:/users";
     }
 
@@ -128,19 +131,20 @@ public class UserController {
     public String deleteUser(@PathVariable(value = "id") Integer id,
                              @AuthenticationPrincipal SamUserDetails loggedUser,
                              RedirectAttributes redirectAttributes){
-        String username = userService.getById(id).getUsername();
+        String message = makeHistoryUserType(userService.getById(id).getUsername(), " удалён");
+
         userService.deleteById(id);
 
         History history = new History(
                 userService.findByUserName(loggedUser.getUsername()).getId(),
                 -1,
-                "Пользователь " + username + " удалён",
+                message,
                 LocalDateTime.now());
         historyService.save(history);
 
         redirectAttributes.addFlashAttribute(
                 "message",
-                "Пользователь " + username + " удалён.");
+                message);
         return "redirect:/users";
     }
 
@@ -163,10 +167,12 @@ public class UserController {
 
         userService.registerNewUserAccount(userDTO);
 
+        String message = makeHistoryUserType(userDTO.getUsername(), " зарегистрировался");
+
         History history = new History(
                 userService.findByUserName(userDTO.getUsername()).getId(),
                 -1,
-                "Пользователь " + userDTO.getUsername() + " зарегистрировался",
+                message,
                 LocalDateTime.now());
         historyService.save(history);
 
@@ -186,18 +192,28 @@ public class UserController {
                                   RedirectAttributes redirectAttributes){
         userService.setEnabledById(id, enabled);
 
+        String message = makeHistoryUserType(userService.getById(id).getUsername(), enabled ? " активирован" : " деактивирован");
+
         History history = new History(
                 userService.findByUserName(loggedUser.getUsername()).getId(),
                 -1,
-                "Пользователь " + userService.getById(id).getUsername() + (enabled ? " активирован" : " деактивирован"),
+                message,
                 LocalDateTime.now());
         historyService.save(history);
 
         redirectAttributes.addFlashAttribute("message",
-                "Пользователь " +
-                        userService.getById(id).getUsername() + " теперь" +
-                        (enabled ? " активен" : " не активен"));
+                message);
 
-        return "redirect:/users/page/" + currentPage + "?sortField=" + sortField + "&sortDir=" + sortDir + (keyword != null ? "&keyword=" + keyword : "");
+        StringBuilder redirectLink = new StringBuilder();
+        redirectLink
+                .append("redirect:/users/page/")
+                .append(currentPage)
+                .append("?sortField=")
+                .append(sortField)
+                .append("&sortDir=")
+                .append(sortDir)
+                .append(keyword != null ? "&keyword=" + keyword : "");
+
+        return redirectLink.toString();
     }
 }

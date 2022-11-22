@@ -1,19 +1,21 @@
 package com.xatoxa.samobikes.controllers;
 
+
 import com.xatoxa.samobikes.entities.*;
 import com.xatoxa.samobikes.services.BikeService;
 import com.xatoxa.samobikes.services.CommentService;
 import com.xatoxa.samobikes.services.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static com.xatoxa.samobikes.Utils.StringUtil.createBikePageRedirectLink;
 import static com.xatoxa.samobikes.Utils.StringUtil.reverseSortDir;
 
 @Controller
@@ -80,17 +82,17 @@ public class CommentController {
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("keyword", keyword);
 
-        return "redirect:/bikes/show/" + id + "?currentPage=" + currentPage + "&sortField=" + sortField + "&sortDir=" + sortDir + "&commentSortField=commentedAt&commentSortDir=" + commentSortDir + (keyword != null ? "&keyword=" + keyword : "");
+        return createBikePageRedirectLink(bike.getId(), currentPage, sortField, sortDir, commentSortDir, keyword);
     }
 
     @GetMapping("/comment/delete/{id}")
     public String deleteComment(Model model, @PathVariable(value = "id") Integer id,
-                             @RequestParam(value = "currentPage") String currentPage,
-                             @RequestParam(value = "sortField") String sortField,
-                             @RequestParam(value = "sortDir") String sortDir,
-                             @RequestParam(value = "commentSortField") String commentSortField,
-                             @RequestParam(value = "commentSortDir") String commentSortDir,
-                             @RequestParam(value = "keyword") String keyword){
+                             @Param(value = "currentPage") String currentPage,
+                             @Param(value = "sortField") String sortField,
+                             @Param(value = "sortDir") String sortDir,
+                             @Param(value = "commentSortField") String commentSortField,
+                             @Param(value = "commentSortDir") String commentSortDir,
+                             @Param(value = "keyword") String keyword){
         Comment comment = commentService.getById(id);
         Bike bike = comment.getBike();
 
@@ -112,6 +114,6 @@ public class CommentController {
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("keyword", keyword);
 
-        return "redirect:/bikes/show/" + bike.getId() + "?currentPage=" + currentPage + "&sortField=" + sortField + "&sortDir=" + sortDir + "&commentSortField=commentedAt&commentSortDir=" + commentSortDir + (keyword != null ? "&keyword=" + keyword : "");
+        return createBikePageRedirectLink(bike.getId(), currentPage, sortField, sortDir, commentSortDir, keyword);
     }
 }

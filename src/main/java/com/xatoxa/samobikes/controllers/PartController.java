@@ -17,6 +17,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.xatoxa.samobikes.Utils.StringUtil.createBikePageRedirectLink;
 import static com.xatoxa.samobikes.Utils.StringUtil.reverseSortDir;
 
 @Controller
@@ -99,12 +100,12 @@ public class PartController {
         doubleParts.add(partListDTO.getParts());
         int userId = userService.findByUserName(loggedUser.getUsername()).getId();
         for(int i = 0; i < parts.size(); i ++){
-            //если переключение на сломан
+            //если переключение на "сломан"
             if (doubleParts.get(0).get(i).isStatus() && !doubleParts.get(1).get(i).isStatus()) {
                 History rowHistory = new History(userId, bike.getId(), "поломка: " + parts.get(i).getName(), LocalDateTime.now());
                 historyService.save(rowHistory);
             }
-            //если переключение на работает
+            //если переключение на "работает"
             if (!doubleParts.get(0).get(i).isStatus() && doubleParts.get(1).get(i).isStatus()) {
                 History rowHistory = new History(userId, bike.getId(), "ремонт: " + parts.get(i).getName(), LocalDateTime.now());
                 historyService.save(rowHistory);
@@ -119,6 +120,7 @@ public class PartController {
         model.addAttribute("bike", bike);
         model.addAttribute("comment", new Comment());
         model.addAttribute("comments", bike.getComments());
+
         return "redirect:/bikes/show/" + partListDTO.getParams();
     }
 
@@ -160,7 +162,8 @@ public class PartController {
         model.addAttribute("commentReverseSortDir", reverseSortDir(commentSortDir));
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("keyword", keyword);
-        return "redirect:/bikes/show/" + id + "?currentPage=" + currentPage + "&sortField=" + sortField + "&sortDir=" + sortDir + "&commentSortField=commentedAt&commentSortDir=" + commentSortDir + (keyword != null ? "&keyword=" + keyword : "");
+
+        return createBikePageRedirectLink(bike.getId(), currentPage, sortField, sortDir, commentSortDir, keyword);
     }
 
     @GetMapping("/fineAll/{id_bike}")
@@ -201,6 +204,7 @@ public class PartController {
         model.addAttribute("commentReverseSortDir", reverseSortDir(commentSortDir));
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("keyword", keyword);
-        return "redirect:/bikes/show/" + id + "?currentPage=" + currentPage + "&sortField=" + sortField + "&sortDir=" + sortDir + "&commentSortField=commentedAt&commentSortDir=" + commentSortDir + (keyword != null ? "&keyword=" + keyword : "");
+
+        return createBikePageRedirectLink(bike.getId(), currentPage, sortField, sortDir, commentSortDir, keyword);
     }
 }
