@@ -1,0 +1,29 @@
+@import url("style.css");
+
+h1{
+	margin: 0;
+}
+a{
+	color: rgb(254,12,106);
+	text-decoration: none;
+}
+a:hover{
+	color: rgb(254,12,106);
+}
+table{
+	width: 100%;
+}
+thead{
+	color: rgb(254,12,106);
+}
+th{
+	text-align: center;
+	border-top: 2px solid rgb(254,12,106);
+	border-bottom: 2px solid rgb(254,12,106);
+	border-right: 2px solid rgba(254,12,106,0.3);
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+.add{
+	margin: 2%;
+}

@@ -5,47 +5,44 @@
     <meta charset="UTF-8">
     <title>Редактор запчастей</title>
     <link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre&display=swap" rel="stylesheet"><!-- ссылка на шрифт -->
-    <!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> -->
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <script type="text/javascript" th:src="@{/js/photo-onload.js}"></script>
     <script type="text/javascript" th:src="@{/js/common.js}"></script>
+    <link media="all" rel="stylesheet" type="text/css" th:href="@{/css/style_part-names-edit.css}"> <!-- ссылка на css всегда должна быть самой последней -->
 </head>
 <body>
 <div>
     <form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
         <input type="submit"/>
     </form>
-    <div>
+    <div class="header-three">
+        <div class="homeBut">
+            <a class="btn btn-secondary" th:href="@{'/bikes'}" th:text="'На главную'"/>
+        </div>
+        <div class="homeBut">
+            <a class="btn btn-secondary" th:href="@{'/part-names'}" th:text="'Назад'"/>
+        </div>
+    </div><div class="header-two">
+        <h1  th:text="${partName.id == null ? 'Глобальное добавление запчастей' : 'Глобальное изменение запчасти ' + partName.name}"/></h1>
+    </div><div class="dropdown header-one">
         <span class="fas fa-light fa-user fa-2x"></span>
-    </div>
-    <div class="dropdown">
-        <a class="link dropdown-toggle" data-toggle="dropdown"
-           sec:authentication="principal.username"></a>
-        <div>
-            <a th:href="@{/account}">Мой аккаунт</a>
-        </div>
-        <div>
-            <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/users}">Пользователи</a>
-        </div>
-        <div>
-            <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/part-names}">Запчасти</a>
-        </div>
-        <div>
-            <a id="logoutLink" th:href="@{/logout}">Выйти</a>
+        <a sec:authentication="principal.username" class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <div>
+                <a class="dropdown-item" th:href="@{/account}">Мой аккаунт</a>
+            </div>
+            <div>
+                <a class="dropdown-item" id="logoutLink" th:href="@{/logout}">Выйти</a>
+            </div>
         </div>
     </div>
 </div>
 
-<div class="midleHead">
-    <h1  th:text="${partName.id == null ? 'Глобальное добавление запчастей' : 'Глобальное изменение запчасти ' + partName.name}"/></h1>
-</div>
-<div class="homeBut">
-    <button class="home"><a class="home" th:href="@{'/bikes'}" th:text="'На главную'"/></button>
-</div>
-<div class="homeBut">
-    <button class="home"><a class="home" th:href="@{'/part-names'}" th:text="'Назад'"/></button>
-</div>
+
+
 
 <!--Форма редактирования велосипеда-->
 <form th:action="@{/part-names/edit}" enctype="multipart/form-data"
@@ -70,12 +67,14 @@
         <input type="file" id="fileImage" name="image" accept="image/jpeg, image/png"/>
         <img id="thumbnail" alt="Photos preview" th:src="@{${partName.photoImagePath}}"/>
     </div>
-    <div class="form-group button">
+    <div class="form-group button textCenter">
         <div>
             <button type="submit" class="btn">Сохранить</button>
         </div>
     </div>
 </form>
-
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
 </html>

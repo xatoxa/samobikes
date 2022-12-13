@@ -1,0 +1,100 @@
+body{
+    background-image: url("../img/background-transparent.png");
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+    background-position:center center;
+    background-size: cover;
+    font-family: 'Averia Serif Libre', cursive;
+    margin: 0;
+}
+.btn, .btn-secondary{
+    color: white;
+    background: rgb(254,12,106);
+    border: 2px solid rgb(254,12,106);
+}
+h1{
+    text-align: center;
+    color: rgb(254,12,106);
+}
+.textCenter{
+    text-align: center;
+}
+.dropdown-toggle{
+    color: white;
+}
+#dropdownMenuButton{
+    color: white;
+}
+.btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show>.btn-secondary.dropdown-toggle{
+    background: rgb(254,12,106);
+    box-shadow: 0 0 0 0.2rem rgba(254, 12, 106, 0.4);
+    border-color: rgb(254,51,96);
+}
+.btn:hover, .btn-secondary:hover{
+    background: rgb(254,12,106);
+    box-shadow: 0 0 0 0.2rem rgba(254, 12, 106, 0.4);
+    border-color: rgb(254,51,96);
+}
+.btn:focus, .btn-secondary:focus{
+    background: rgb(254,12,106);
+    box-shadow: 0 0 0 0.2rem rgba(254, 12, 106, 0.4);
+    border-color: rgb(254,51,96);
+}
+.btn:active, .btn-secondary:active{
+    background: rgb(254,12,106);
+    box-shadow: 0 0 0 0.2rem rgba(254, 12, 106, 0.4);
+    border-color: rgb(254,51,96);
+}
+.dropdown-item:hover{
+    color: white;
+    background: rgb(254,12,106);
+}
+.dropdown-item:active{
+    color: white;
+    background: rgb(254,12,106);
+}
+.header-one, .header-two, .header-three{
+    display: inline-block;
+    margin: 2% 0;
+}
+.header-one, .header-three{
+    width: 20%;
+}
+.header-one{
+    text-align: right;
+}
+.header-two{
+    width: 60%;
+}
+.page-link{
+    color: rgb(254,12,106);
+}
+.page-link:hover{
+    color: white;
+    background: rgb(254,12,106);
+}
+.page-link:focus{
+    box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0);
+}
+.page-link:not{
+    color: white;
+    background: rgb(254,12,106);
+}
+.page-link:active{
+    color: white;
+    background: rgb(254,12,106);
+}
+nav{
+    text-align: center;
+}
+ul{
+    flex: 100%;
+}
+.pagination{
+    justify-content: center;
+}
+.page-item.active .page-link{
+    color: white;
+    background: rgb(254,12,106);
+    border: 1px solid rgb(254,12,106);
+}

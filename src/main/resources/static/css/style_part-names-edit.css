@@ -1,0 +1,17 @@
+@import url("style.css");
+.homeBut{
+	display: inline-block;
+}
+.input-group{
+	width: 80%;
+	margin: 1% auto;
+}
+.form-control:focus{
+    color: rgb(254,12,106);
+    border: 2px solid rgb(254,12,106);
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(254, 12,106, 0.4);
+}
+.homeBut a{
+	margin: 1% ;
+}

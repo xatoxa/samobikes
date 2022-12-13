@@ -11,25 +11,19 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/417822ee3c.js" crossorigin="anonymous"></script>
     <script type="text/javascript" th:src="@{/js/common.js}"></script>
+    <link media="all" rel="stylesheet" type="text/css" th:href="@{/css/style_repair-history.css}"> <!-- ссылка на css всегда должна быть самой последней -->
 </head>
 <body>
 <div class="container-fluid">
-    <div class="row">
-        <a class="col-sm" th:href="@{/bikes}"><i class="fa-sharp fa-solid fa-house fa-2x"></i></a>
-
-        <div class="col-sm">
-            <form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
-                <input type="submit"/>
-            </form>
-        </div>
-        <div class="col-sm">
+    
+        <form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
+            <input type="submit"/>
+        </form>
+        <div class="header-three">
+            <a class="col-sm" th:href="@{/bikes}"><i class="fa-sharp fa-solid fa-house fa-2x"></i></a>
+        </div><div class="header-two textCenter">
             <a th:href="@{/history/clean}" class="btn btn-danger" role="button" aria-pressed="true">Очистить историю</a>
-        </div>
-        <div class="col-sm container">
-            <div class="row">
-                <div class="col order-1">
-                    <span class="fas fa-light fa-user fa-2x justify-content-end"></span>
-                </div>
+        </div><div class="header-one">
                 <div class="col order-2 justify-content-start">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <a sec:authentication="principal.username">
@@ -42,16 +36,14 @@
                         <a class="dropdown-item" id="logoutLink" th:href="@{/logout}">Выйти</a>
                     </div>
                 </div>
-
             </div>
-        </div>
 
-    </div>
+    
 </div>
 <br>
 <div>
-    <table class="table table-bordered table-striped table-hover table-responsive-xL">
-        <thead class="thead-dark">
+    <table class="table table-bordered">
+        <thead>
         <tr>
             <th>ID</th>
             <th>Пользователь</th>

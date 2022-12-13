@@ -1,15 +1,4 @@
-body{
-	background-image: url("../img/background-transparent.png");
-	background-repeat:no-repeat;
-    background-attachment:fixed;
-    background-position:center center;
-    background-size: cover;    font-family: 'Averia Serif Libre', cursive;
-    
-}
-H1{
-    text-align: center;
-    color: rgb(254,51,96);
-}
+@import url("style.css");
 .form{
     color: grey;
     font-size: 20px;

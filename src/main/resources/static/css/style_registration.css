@@ -1,10 +1,4 @@
-body{
-	background-image: url("../img/background-transparent.png");
-	background-repeat:no-repeat;
-    background-attachment:fixed;
-    background-position:center center;
-    background-size: cover;    font-family: 'Averia Serif Libre', cursive;
-}
+@import url("style.css");
 form{
     font-size: 20px;
     text-align: center;

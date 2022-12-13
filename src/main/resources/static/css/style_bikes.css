@@ -1,19 +1,10 @@
 /*пока пишу все через имена тегов, если что потом добавлю классы или ид*/
-body{
-	background-image: url("../img/background-transparent.png");
-	background-repeat:no-repeat;
-    background-attachment:fixed;
-    background-position:center center;
-    background-size: cover;
-    font-family: 'Averia Serif Libre', cursive;
-}
+@import url("style.css");
 .content{
 	padding: 2%;
 	margin: auto;
 }
 h1{
-	color: rgb(254,51,96);
-	text-align: center;
 	padding: 2%;
 	padding-bottom: 2%;
 }
@@ -53,7 +44,6 @@ th{
 	padding-bottom: 5px;
 }
 .textCenter{
-	text-align: center;
 	border-right: none;
 }
 .aTab{
@@ -71,12 +61,7 @@ th{
 	border: 2px solid white;
 	box-shadow: 0 0 0 0.2rem rgba(225, 225, 225, 0.6);
 }
-.dropdown-toggle{
-	color: white;
-}
-#dropdownMenuButton{
-	color: white;
-}
+
 button{
 	font-family: 'Averia Serif Libre', cursive;
 	appearance: none;
@@ -134,38 +119,7 @@ button:focus{
 i{
 	color: rgb(254,12,106);
 }
-.page-link{
-	color: rgb(254,12,106);
-}
-.page-link:hover{
-	color: white;
-	background: rgb(254,12,106);
-}
-.page-link:focus{
-	box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0);
-}
-.page-link:not{
-	color: white;
-	background: rgb(254,12,106);
-}
-.page-link:active{
-	color: white;
-	background: rgb(254,12,106);
-}
-nav{
-	text-align: center;
-}
-ul{
-	flex: 100%;
-}
-.pagination{
-	justify-content: center;
-}
-.page-item.active .page-link{
-	color: white;
-	background: rgb(254,12,106);
-	border: 1px solid rgb(254,12,106);
-}
+
 .inputSearch{
 	color: white;
 	background: rgb(254,12,106);
@@ -210,34 +164,7 @@ ul{
 	float: right;
 	align-items: center;
 }
-.btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show>.btn-secondary.dropdown-toggle{
-	background: rgb(254,12,106);
-	box-shadow: 0 0 0 0.2rem rgba(254, 12, 106, 0.4);
-	border-color: rgb(254,51,96);
-}
-.btn:hover, .btn-secondary:hover{
-	background: rgb(254,12,106);
-	box-shadow: 0 0 0 0.2rem rgba(254, 12, 106, 0.4);
-	border-color: rgb(254,51,96);
-}
-.btn:focus, .btn-secondary:focus{
-	background: rgb(254,12,106);
-	box-shadow: 0 0 0 0.2rem rgba(254, 12, 106, 0.4);
-	border-color: rgb(254,51,96);
-}
-.btn:active, .btn-secondary:active{
-	background: rgb(254,12,106);
-	box-shadow: 0 0 0 0.2rem rgba(254, 12, 106, 0.4);
-	border-color: rgb(254,51,96);
-}
-.dropdown-item:hover{
-	color: white;
-	background: rgb(254,12,106);
-}
-.dropdown-item:active{
-	color: white;
-	background: rgb(254,12,106);
-}
+
 .fas{
 	color: grey;
 }

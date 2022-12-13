@@ -1,11 +1,4 @@
-body{
-	background-image: url("../img/background-transparent.png");
-	background-repeat:no-repeat;
-    background-attachment:fixed;
-    background-position:center center;
-    background-size: cover;
-    font-family: 'Averia Serif Libre', cursive;
-}
+@import url("style.css");
 
 button{
 	font-family: 'Averia Serif Libre', cursive;
@@ -37,9 +30,6 @@ hr{
 	border: 2px solid rgb(254,12,106);
 	text-align: center;
 	color: rgb(254,12,106);
-}
-.textCenter{
-	text-align: center;
 }
 
 .velInfo{

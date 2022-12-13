@@ -1,11 +1,4 @@
-body{
-	background-image: url("../img/background-transparent.png");
-	background-repeat:no-repeat;
-    background-attachment:fixed;
-    background-position:center center;
-    background-size: cover;    font-family: 'Averia Serif Libre', cursive;
-    font-size: 15px;
-}
+@import url("style.css");
 select{
     font-size: 15px;
     background-repeat:no-repeat;
@@ -14,8 +7,6 @@ select{
     font-family: 'Averia Serif Libre', cursive;
 }
 h1{
-    text-align: center;
-    color: rgb(254,12,106);
     margin-top: 1%;
 }
 a{
