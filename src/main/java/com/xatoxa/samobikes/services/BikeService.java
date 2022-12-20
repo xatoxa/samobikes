@@ -19,7 +19,7 @@ import java.util.Objects;
 
 @Service
 public class BikeService {
-    public static final int BIKES_PER_PAGE = 10;
+    public static final int BIKES_PER_PAGE = 20;
     private BikeRepository bikeRepository;
     private PartService partService;
 
