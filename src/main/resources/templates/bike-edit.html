@@ -84,13 +84,6 @@
                 <input th:field="*{description}" placeholder="Описание вело" class="form-control"/>
             </div>
 
-            <div  class="input-group">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                <input th:field="*{qrLink}"
-                       placeholder="Ссылка на страницу в ELMA (ссылка по QR)"
-                       class="form-control"/>
-            </div>
-
             <div  class="input-group photo">
                 <input type="hidden" th:field="*{photo}"/>
                 <input type="file" id="fileImage" name="image" accept="image/jpeg, image/png"/>
