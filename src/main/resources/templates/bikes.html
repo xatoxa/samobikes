@@ -74,7 +74,6 @@
         <tr>
             <th th:replace="fragments :: columnLink('bikes', 'number', 'Номер')"/>
             <th th:replace="fragments :: columnLink('bikes', 'qrNumber', 'QR номер')"/>
-            <th th:replace="fragments :: columnLink('bikes', 'VIN', 'VIN')" class="none" />
             <th th:replace="fragments :: columnLink('bikes', 'status', 'Статус')"/>
             <th><i class="iCom fa-solid fa-message"></i></th>
             <th class="textCenter"></th>
@@ -86,7 +85,6 @@
             th:attr="onclick=|rowClicked('${bike.id}', '${currentPage}', '${sortField}', '${sortDir}', '${keyword != null ? '&keyword=' + keyword : ''}') |">
             <td th:text="${bike.number}"/>
             <td th:text="${bike.qrNumber}"/>
-            <td th:text="${bike.VIN}" class="none"/>
             <td th:text="${bike.status == true ? 'Работает' : 'Сломан'}"/>
             <td th:text="${bike.comments.size}"/>
             <td class="textCenter">
