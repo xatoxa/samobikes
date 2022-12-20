@@ -29,6 +29,8 @@ a:hover{
     color: white;
 }
 .aTab{
+    display: inline-block;
+    margin-top: 1rem;
     border: 2px solid rgb(254,12,106);
     background: white;
     appearance: none;

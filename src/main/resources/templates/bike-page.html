@@ -109,6 +109,9 @@
             <span th:if="${comment.getUser().getLastName() != null}"
                    th:text = " ' ' + ${comment.getUser().getLastName()}">
             </span>
+            <span class="data"
+              th:text = "${#temporals.format(comment.commentedAt, 'HH:mm dd.MM.yy ')}">
+            </span>
         </div>
         <a class="delete" sec:authorize="hasAnyRole('ADMIN')"
            th:href="@{'/comment/delete/' + ${comment.id} + '?currentPage=' + ${currentPage} + '&sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + '&commentSortField=commentedAt&commentSortDir=' + ${commentReverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">
@@ -118,9 +121,7 @@
               th:text = "${comment.commentText}">
         </span>
         
-        <span class="data"
-              th:text = "${#temporals.format(comment.commentedAt, 'HH:mm dd.MM.yy ')}">
-        </span>  
+          
     </div>
 
     <!--<div class="modal fade text-center" id="confirmModal">

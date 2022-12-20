@@ -10,7 +10,7 @@ thead{
 }
 
 .table-bordered th, .table thead th{
-	font-size: 20px;
+	vertical-align: top;
 	text-align: center;
 	border-top: 2px solid rgb(254,12,106);
 	border-bottom: 2px solid rgb(254,12,106);

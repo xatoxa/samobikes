@@ -50,7 +50,7 @@
             <th>Пользователь</th>
             <th>№ вело</th>
             <th>QR вело</th>
-            <th>VIN вело</th>
+            <th class="none">VIN вело</th>
             <th>Тип действия</th>
             <th>Дата</th>
         </tr>
@@ -61,7 +61,7 @@
             <td th:text="${row.username}"/>
             <td th:text="${row.number}"/>
             <td th:text="${row.qrNumber}"/>
-            <td th:text="${row.VIN}"/>
+            <td th:text="${row.VIN}" class="none"/>
             <td th:text="${row.type}"/>
             <td th:text="${#temporals.format(row.datePoint, 'HH:mm dd.MM.yy ')}"/>
         </tr>

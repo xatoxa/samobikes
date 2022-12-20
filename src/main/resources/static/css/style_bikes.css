@@ -153,10 +153,12 @@ i{
 	flex-direction: column;
 }
 .firstHead{
+	vertical-align: top;
 	width: 15%;
 	flex-direction: column-reverse;
 }
 .midleHead{
+	vertical-align: top;
 	width: 70%;
 }
 .lastHead{

@@ -1,6 +1,6 @@
 @import url("style.css");
 form{
-    font-size: 20px;
+    
     text-align: center;
     margin-top: 5%;
     margin-left: 20%;
@@ -11,7 +11,6 @@ form{
     width: 100%;
     margin: auto;
     color: grey;
-    font-size: 20px;
     font-family: 'Averia Serif Libre', cursive;
     border: 2px solid grey;
     border-radius: 5px;
@@ -46,7 +45,6 @@ H1{
     color: white;
     text-align: center;
     border-radius: 5px;
-    font-size: 20px;
     font-family: 'Averia Serif Libre', cursive;
 }
 .button:hover{

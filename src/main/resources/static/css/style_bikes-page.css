@@ -6,7 +6,6 @@ button{
 	border: 0;
 	border-radius: 5px;
 	padding: 8px 16px;
-	font-size: 16px;
 	border: 2px solid rgb(254,12,106);
 	background: white;
 	margin-top: 2%;
@@ -214,19 +213,19 @@ img{
 }
 #toggleParts{
 	color: rgb(254,12,106);
-	font-size: 16px;
+	
 	display: block;
 	margin: 2% auto;
 }
 .inputSearch{
-	font-size: 17px;
-	margin: auto;
 	font-family: 'Averia Serif Libre', cursive;
 	color: white;
-	background: rgb(254,12,106);
-	border-radius: 5px;
-	border: 2px solid rgb(254,12,106);
-	padding: 5px 8px;
+  background: rgb(254,12,106);
+  border-radius: 5px;
+  border: 2px solid rgb(254,12,106);
+  margin-left: 1%;
+  padding: 0.5%;
+}
 }
 .inputSearch:hover{
 	border: 2px solid rgb(254,12,106);
@@ -270,11 +269,10 @@ img{
 	padding-bottom: 5px;
 }
 .data{
-	float: right;
 	border-radius: 5px;
 	border: 2px solid rgb(254,12,106);
 	text-align: right;
-	display: block;
+	display: inline-block;
 	position: relative;
 	left: 30px;
 }
@@ -286,7 +284,6 @@ img{
 	left: -5px;
 }
 .delete i{
-	font-size: 30px;
 	border-radius: 5px;
 }
 .delete i:hover{

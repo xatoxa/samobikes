@@ -98,3 +98,34 @@ ul{
     background: rgb(254,12,106);
     border: 1px solid rgb(254,12,106);
 }
+button{
+    font-size: 16px;
+}
+.form, .delete i{
+    font-size: 20px;
+}
+
+@media only screen and (max-device-width: 600px){
+    body, button, .btn, select, .dropdown-item, .form, .password, .form-control, .search {
+        font-size: 2rem;
+    }
+    .none{
+        display: none;
+    }
+    .search{
+        height: 4rem;
+    }
+    .aTab{
+        width: 5rem;
+    }
+    .h1, h1{
+        font-size: 4rem;
+    }
+    .firstHead{
+        font-size: 1.6rem;
+    }
+    .delete i{
+        font-size: 80px;
+    }
+    
+}

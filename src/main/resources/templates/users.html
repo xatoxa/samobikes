@@ -28,7 +28,6 @@
             </form>
 
             <div class="dropdown">
-                <span class="fas fa-light fa-user fa-2x"></span>
                 <a sec:authentication="principal.username" class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" th:href="@{/account}">Мой аккаунт</a>
