@@ -76,10 +76,74 @@
         <li th:class="${currentPage > 1 ? 'page-item': 'page-item disabled'}" >
             <a th:replace="fragments :: pageLink('history', ${currentPage - 1}, '☚ Туда')"/>
         </li>
-        <li th:class="${currentPage != i ? 'page-item' : 'page-item active'}"
-            th:each="i: ${#numbers.sequence(1, totalPages)}">
-            <a th:replace="fragments :: pageLink('history', ${i}, ${i})"/>
-        </li>
+        <!--Если страниц меньше 6-->
+        <th:block th:if="${totalPages < 6}">
+            <li th:class="${currentPage != i ? 'page-item' : 'page-item active'}"
+                th:each="i: ${#numbers.sequence(1, totalPages)}">
+                <a th:replace="fragments :: pageLink('history', ${i}, ${i})"/>
+            </li>
+        </th:block>
+        <!--Если страниц больше 5-->
+        <th:block th:if="${totalPages >= 6}">
+            <th:block th:if="${currentPage == 1}">
+                <li th:class="${currentPage != i ? 'page-item' : 'page-item active'}"
+                    th:each="i: ${#numbers.sequence(1, currentPage + 2)}">
+                    <a th:replace="fragments :: pageLink('history', ${i}, ${i})"/>
+                </li>
+                <li class="page-item disabled" >
+                    <a th:replace="fragments :: pageLink('history', 0, '..')"/>
+                </li>
+            </th:block>
+            <th:block th:if="${currentPage == 2}">
+                <li class="page-item" >
+                    <a th:replace="fragments :: pageLink('history', 1, '1')"/>
+                </li>
+                <li th:class="${currentPage != i ? 'page-item' : 'page-item active'}"
+                    th:each="i: ${#numbers.sequence(2, currentPage + 2)}">
+                    <a th:replace="fragments :: pageLink('history', ${i}, ${i})"/>
+                </li>
+                <li class="page-item disabled" >
+                    <a th:replace="fragments :: pageLink('history', 0, '..')"/>
+                </li>
+            </th:block>
+            <th:block th:if="${currentPage == totalPages}">
+                <li class="page-item disabled" >
+                    <a th:replace="fragments :: pageLink('history', 0, '..')"/>
+                </li>
+                <li th:class="${currentPage != i ? 'page-item' : 'page-item active'}"
+                    th:each="i: ${#numbers.sequence(currentPage - 2, totalPages)}">
+                    <a th:replace="fragments :: pageLink('history', ${i}, ${i})"/>
+                </li>
+            </th:block>
+            <th:block th:if="${currentPage == totalPages - 1}">
+                <li class="page-item disabled" >
+                    <a th:replace="fragments :: pageLink('history', 0, '..')"/>
+                </li>
+                <li th:class="${currentPage != i ? 'page-item' : 'page-item active'}"
+                    th:each="i: ${#numbers.sequence(currentPage - 2, currentPage)}">
+                    <a th:replace="fragments :: pageLink('history', ${i}, ${i})"/>
+                </li>
+                <li class="page-item" >
+                    <a th:replace="fragments :: pageLink('history', ${totalPages}, ${totalPages})"/>
+                </li>
+            </th:block>
+            <th:block th:if="${currentPage > 2 && currentPage < totalPages - 1}">
+                <li th:if="${currentPage > 3}" class="page-item disabled" >
+                    <a th:replace="fragments :: pageLink('history', 0, '..')"/>
+                </li>
+                <li th:class="${currentPage != i ? 'page-item' : 'page-item active'}"
+                    th:each="i: ${#numbers.sequence(currentPage - 2, currentPage)}">
+                    <a th:replace="fragments :: pageLink('history', ${i}, ${i})"/>
+                </li>
+                <li th:class="${currentPage != i ? 'page-item' : 'page-item active'}"
+                    th:each="i: ${#numbers.sequence(currentPage + 1, currentPage + 2)}">
+                    <a th:replace="fragments :: pageLink('history', ${i}, ${i})"/>
+                </li>
+                <li th:if="${currentPage + 2 < totalPages}" class="page-item disabled" >
+                    <a th:replace="fragments :: pageLink('history', 0, '..')"/>
+                </li>
+            </th:block>
+        </th:block>
         <li th:class="${currentPage < totalPages ? 'page-item': 'page-item disabled'}">
             <a th:replace="fragments :: pageLink('history', ${currentPage + 1}, 'Сюда ☛')"/>
         </li>
