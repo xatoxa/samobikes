@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,8 +21,9 @@ public class HistoryService {
     }
 
     public Page<History> getAllByPage(int pageNum){
-
-        Pageable pageable = PageRequest.of(pageNum - 1, ROWS_PER_PAGE);
+        Sort sort = Sort.by("datePoint");
+        sort = sort.descending();
+        Pageable pageable = PageRequest.of(pageNum - 1, ROWS_PER_PAGE, sort);
 
         return historyRepository.findAll(pageable);
     }
