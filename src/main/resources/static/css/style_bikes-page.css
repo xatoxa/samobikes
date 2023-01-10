@@ -1,5 +1,5 @@
 @import url("style.css");
-
+@import url("style-md.css");
 button{
 	font-family: 'Averia Serif Libre', cursive;
 	appearance: none;
@@ -67,6 +67,7 @@ hr{
 	border-color: rgb(254,12,106);
 }
 .adminButton{
+	display: inline-block;
 	border: 2px solid rgb(254,12,106);
 	background: white;
 	color: rgb(254,12,106);
