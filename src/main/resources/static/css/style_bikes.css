@@ -145,27 +145,6 @@ i{
 	outline: 0;
 	box-shadow: 0 0 0 0.2rem rgba(254, 51, 96, 0.4);
 }
-.header{
-	
-}
-.firstHead, .midleHead, .lastHead{
-	display: inline-block;
-	flex-direction: column;
-}
-.firstHead{
-	vertical-align: top;
-	width: 15%;
-	flex-direction: column-reverse;
-}
-.midleHead{
-	vertical-align: top;
-	width: 70%;
-}
-.lastHead{
-	width: 15%;
-	float: right;
-	align-items: center;
-}
 
 .fas{
 	color: grey;

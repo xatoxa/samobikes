@@ -76,6 +76,8 @@ th{
     padding: 10px;
     border-radius: 5px;
     color: white;
+    display: inline-block;
+    width: 100%
 
 }
 .home:hover{
@@ -214,19 +216,9 @@ button:hover{
 .header{
     margin-top: 1%;
 }
-.firstHead, .midleHead, .lastHead{
-    display: inline-flex;
-    flex-direction: column;
-}
 .firstHead{
-    text-align: center;
-    width: 13%;
-}
-.midleHead{
-    width: 70%;
-}
+    text-align: center;}
 .lastHead{
-    width: 15%;
     float: right;
     align-items: center;
 }

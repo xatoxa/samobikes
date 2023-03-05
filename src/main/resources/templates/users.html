@@ -20,11 +20,9 @@
 <div class="header">
         <div class="firstHead">
             <a class="home" th:href="@{/bikes}"><i class="fa-sharp fa-solid fa-house"></i></a>
-        </div>
-        <div class="midleHead">
+        </div><div class="midleHead">
             <H1>Пользователи</H1>
-        </div>
-        <div class="lastHead">
+        </div><div class="lastHead">
             <form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
                 <input type="submit"/>
             </form>
