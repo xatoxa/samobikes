@@ -1,7 +1,6 @@
 /*пока пишу все через имена тегов, если что потом добавлю классы или ид*/
 @import url("style.css");
 .content{
-	padding: 2%;
 	margin: auto;
 }
 h1{

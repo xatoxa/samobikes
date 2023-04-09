@@ -6,6 +6,7 @@ body{
     background-size: cover;
     font-family: 'Averia Serif Libre', cursive;
     margin: 0;
+    padding: 2%;
 }
 .btn, .btn-secondary{
     color: white;
