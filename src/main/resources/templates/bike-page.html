@@ -35,7 +35,7 @@
                 <a sec:authorize="hasAnyRole('MANAGER', 'ADMIN')"
                    th:href="@{'/bikes/management/edit/' + ${bike.id}}" th:text="'Изменить'"
                    class="adminButton" />
-                <a href="#0" class="cd-btn adminButton" id="modal-trigger" data-type="cd-modal-trigger">Удалить</a>
+                <a sec:authorize="hasAnyRole('MANAGER', 'ADMIN')" href="#0" class="cd-btn adminButton" id="modal-trigger" data-type="cd-modal-trigger">Удалить</a>
             </div>
         </div>
     </div>
