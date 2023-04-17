@@ -92,6 +92,8 @@ public class BikeController {
         model.addAttribute("reverseSortDir", reverseSortDir(sortDir));
         model.addAttribute("keyword", keyword);
 
+        System.gc();
+
         return "bikes";
     }
 
